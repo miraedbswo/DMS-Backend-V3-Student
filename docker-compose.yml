@@ -1,0 +1,37 @@
+version: '2.1'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_ID}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PW}
+
+    volumes:
+      - /home/ubuntu/data:/data/db
+
+    networks:
+      - dms-net
+
+  app:
+    build: .
+    ports:
+      - "80:80"
+
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      MONGO_ROOT_ID: ${MONGO_ROOT_ID}
+      MONGO_ROOT_PW: ${MONGO_ROOT_PW}
+
+    depends_on:
+      - mongo
+    links:
+      - mongo
+
+    networks:
+      - dms-net
+
+networks:
+  dms-net:
