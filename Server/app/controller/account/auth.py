@@ -1,7 +1,7 @@
 from app.controller.base_resource import AccountResource
 
 
-class SignupView(AccountResource):
+class AuthView(AccountResource):
 
     def post(self):
-        return '', 201
+        pass
