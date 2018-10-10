@@ -6,11 +6,11 @@ apply_blueprint = Blueprint('apply', __name__, url_prefix='/apply')
 api = Api(apply_blueprint)
 
 
-from .extension import Extension
-api.add_resource(Extension, '/extension/<int:time>')
+from .extension import ExtensionView
+api.add_resource(ExtensionView, '/extension/<int:time>')
 
-from .goingout import Goingout
-api.add_resource(Goingout, '/goingout/<day>')
+from .goingout import GoingoutView
+api.add_resource(GoingoutView, '/goingout/<day>')
 
-from .stay import Stay
-api.add_resource(Stay, '/stay')
+from .stay import StayView
+api.add_resource(StayView, '/stay')

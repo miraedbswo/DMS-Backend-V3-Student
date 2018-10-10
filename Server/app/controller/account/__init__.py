@@ -6,14 +6,14 @@ account_blueprint = Blueprint('account', __name__, url_prefix='/account')
 api = Api(account_blueprint)
 
 
-from .auth import Auth
-api.add_resource(Auth, '/auth')
+from .auth import AuthView
+api.add_resource(AuthView, '/auth')
 
-from .info import Info
-api.add_resource(Info, '/info/<type>')
+from .info import InfoView
+api.add_resource(InfoView, '/info/<type>')
 
-from .manage import ChangePassword
-api.add_resource(ChangePassword, '/password')
+from .manage import ChangePasswordView
+api.add_resource(ChangePasswordView, '/password')
 
-from .signup import Signup
-api.add_resource(Signup, '/signup')
+from .signup import SignupView
+api.add_resource(SignupView, '/signup')

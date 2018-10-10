@@ -1,7 +1,7 @@
 from app.controller.base_resource import SurveyResource
 
 
-class Survey(SurveyResource):
+class SurveyView(SurveyResource):
 
     def get(self, survey_id):
         pass

@@ -1,7 +1,7 @@
 from app.controller.base_resource import AccountResource
 
 
-class Auth(AccountResource):
+class AuthView(AccountResource):
 
     def post(self):
         pass

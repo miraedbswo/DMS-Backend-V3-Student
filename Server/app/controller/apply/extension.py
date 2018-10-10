@@ -1,7 +1,7 @@
 from app.controller.base_resource import ApplyResource
 
 
-class Extension(ApplyResource):
+class ExtensionView(ApplyResource):
 
     def get(self, time):
         pass
