@@ -1,6 +1,7 @@
 from app.docs import JWT_ACCESS_TOKEN
 
-CHANGE_PW_POST = {
+
+CHANGE_PW_PATCH = {
     'tags': ['Account'],
     'description': '비밀번호 변경',
     'parameters': [
@@ -21,14 +22,15 @@ CHANGE_PW_POST = {
         }
     ],
     'responses': {
-        '200': {
+        '201': {
             'description': '비밀번호 변경 성공'
+        },
+        '205': {
+            'description': '현재 비밀번호와 새 비밀번호가 동일함'
         },
         '403': {
             'description': '비밀번호 변경 실패(틀린 비밀번호), 또는 권한 없음'
-        },
-        '409': {
-            'description': '현재 비밀번호와 새 비밀번호가 동일함'
         }
     }
 }
+
