@@ -31,7 +31,7 @@ SIGNUP_POST = {
         '204': {
             'description': '가입 불가능(유효하지 않은 UUID)'
         },
-        '409': {
+        '205': {
             'description': '가입 불가능(중복된 ID)'
         }
     }

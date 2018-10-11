@@ -29,9 +29,9 @@ APPLY_INFO_GET = {
 }
 
 
-MY_PAGE_GET = {
+BASIC_INFO_GET = {
     'tags': ['Account'],
-    'description': '학생 자신의 마이페이지 정보(이름, 학번, 상벌점 상태)를 조회합니다.',
+    'description': '학생 자신의 기본 정보(이름, 학번, 상벌점)를 조회합니다.',
     'parameters': [JWT_ACCESS_TOKEN],
     'responses': {
         '200': {

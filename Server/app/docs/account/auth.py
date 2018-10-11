@@ -20,7 +20,7 @@ AUTH_POST = {
         }
     ],
     'responses': {
-        '201': {
+        '200': {
             'description': '로그인 성공',
             'examples': {
                 '': {
