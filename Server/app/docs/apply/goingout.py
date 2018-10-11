@@ -1,7 +1,7 @@
 from app.docs import JWT_ACCESS_TOKEN
 
 GOINGOUT_GET = {
-    'tags': ['Apply Goingout'],
+    'tags': ['Apply'],
     'description': '학생 자신의 외출신청 정보를 조회합니다.',
     'parameters': [JWT_ACCESS_TOKEN],
     'responses': {
@@ -24,7 +24,7 @@ GOINGOUT_GET = {
 }
 
 GOINGOUT_POST = {
-    'tags': ['Apply Goingout'],
+    'tags': ['Apply'],
     'description': '''외출신청
     
     신청 가능 시간: 월요일 00:00 - 금요일 22:00

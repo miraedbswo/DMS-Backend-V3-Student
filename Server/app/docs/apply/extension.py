@@ -1,7 +1,7 @@
 from app.docs import JWT_ACCESS_TOKEN
 
 EXTENSION_GET = {
-    'tags': ['Apply Extension'],
+    'tags': ['Apply'],
     'description': '학생 자신의 연장신청 정보를 조회합니다.',
     'parameters': [JWT_ACCESS_TOKEN],
     'responses': {
@@ -24,7 +24,7 @@ EXTENSION_GET = {
 }
 
 EXTENSION_POST = {
-    'tags': ['Apply Extension'],
+    'tags': ['Apply'],
     'description': '''연장신청
     11시 연장 신청 가능 시간: 17:30 - 20:30
     12시 연장 신청 가능 시간: 17:30 - 22:00
@@ -62,7 +62,7 @@ EXTENSION_POST = {
         '204': {
             'description': '연장신청 실패(신청 가능 시간 아님)'
         },
-        '400': {
+        '205': {
             'description': '이미 신청된 자리거나, 신청할 수 없는 곳(범위를 넘어섬)'
         },
         '403': {
@@ -72,7 +72,7 @@ EXTENSION_POST = {
 }
 
 EXTENSION_DELETE = {
-    'tags': ['Apply Extension'],
+    'tags': ['Apply'],
     'description': '''연장 신청을 취소합니다.
     
     11시 연장 신청 취소 가능 시간: 17:30 - 20:30
@@ -93,10 +93,9 @@ EXTENSION_DELETE = {
 }
 
 EXTENSION_MAP_GET = {
-    'tags': ['Apply Extension'],
+    'tags': ['Apply'],
     'description': '연장신청 지도를 조회합니다. 해당 class에 대한 신청 여부, 신청되어 있다면 자리까지 response합니다. 신청되어 있지 않으면 자리는 0입니다.',
     'parameters': [
-        JWT_ACCESS_TOKEN,
         {
             'name': 'classNum',
             'description': '지도를 조회할 학습실 번호',

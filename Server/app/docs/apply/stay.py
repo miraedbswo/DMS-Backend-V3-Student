@@ -1,7 +1,7 @@
 from app.docs import JWT_ACCESS_TOKEN
 
 STAY_GET = {
-    'tags': ['Apply Stay'],
+    'tags': ['Apply'],
     'description': '학생 자신의 잔류신청 정보를 조회합니다.',
     'parameters': [JWT_ACCESS_TOKEN],
     'responses': {
@@ -20,7 +20,7 @@ STAY_GET = {
 }
 
 STAY_POST = {
-    'tags': ['Apply Stay'],
+    'tags': ['Apply'],
     'description': '''잔류신청
     
     신청 가능 시간: 일요일 20:30 - 목요일 22:00
