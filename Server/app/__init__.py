@@ -1,5 +1,5 @@
 from flask import Flask
-from Server.app.controller import Router
+from Server.app.view import Router
 
 
 def create_app():
