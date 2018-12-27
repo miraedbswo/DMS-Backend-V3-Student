@@ -75,9 +75,6 @@ POINT_HISTORY_GET = {
                 ]
             }
         },
-        '204': {
-            'description': '존재하지 않는 학생 ID'
-        },
         '403': {
             'description': '권한 없음'
         }
