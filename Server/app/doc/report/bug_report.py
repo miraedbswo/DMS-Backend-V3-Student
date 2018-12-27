@@ -8,7 +8,7 @@ BUG_REPORT_POST = {
         {
             'name': 'platform',
             'description': '버그 신고를 한 플랫폼 타입(1: Web, 2: Android, 3: iOS)',
-            'in': 'json',
+            'in': 'url',
             'type': 'int',
             'required': True
         },
