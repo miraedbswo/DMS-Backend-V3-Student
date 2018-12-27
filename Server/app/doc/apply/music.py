@@ -10,62 +10,62 @@ MUSIC_GET = {
                 '': {
                     'mon': [
                         {
-                            'student_name': '누구누구',
+                            'studentName': '누구누구',
                             'singer': 'aaa',
-                            'music_name': 'aaa'
+                            'musicName': 'aaa'
                         },
                         {
-                            'student_name': '누구누구',
+                            'studentName': '누구누구',
                             'singer': 'aaa',
-                            'music_name': 'aaa'
+                            'musicName': 'aaa'
                         }
                     ],
                     'tue': [
                         {
-                            'student_name': '누구누구',
+                            'studentName': '누구누구',
                             'singer': 'aaa',
-                            'music_name': 'aaa'
+                            'musicName': 'aaa'
                         },
                         {
-                            'student_name': '누구누구',
+                            'studentName': '누구누구',
                             'singer': 'aaa',
-                            'music_name': 'aaa'
+                            'musicName': 'aaa'
                         }
                     ],
                     'wed': [
                         {
-                            'student_name': '누구누구',
+                            'studentName': '누구누구',
                             'singer': 'aaa',
-                            'music_name': 'aaa'
+                            'musicName': 'aaa'
                         },
                         {
-                            'student_name': '누구누구',
+                            'studentName': '누구누구',
                             'singer': 'aaa',
-                            'music_name': 'aaa'
+                            'musicName': 'aaa'
                         }
                     ],
                     'thu': [
                         {
-                            'student_name': '누구누구',
+                            'studentName': '누구누구',
                             'singer': 'aaa',
-                            'music_name': 'aaa'
+                            'musicName': 'aaa'
                         },
                         {
-                            'student_name': '누구누구',
+                            'studentName': '누구누구',
                             'singer': 'aaa',
-                            'music_name': 'aaa'
+                            'musicName': 'aaa'
                         }
                     ],
                     'fri': [
                         {
-                            'student_name': '누구누구',
+                            'studentName': '누구누구',
                             'singer': 'aaa',
-                            'music_name': 'aaa'
+                            'musicName': 'aaa'
                         },
                         {
-                            'student_name': '누구누구',
+                            'studentName': '누구누구',
                             'singer': 'aaa',
-                            'music_name': 'aaa'
+                            'musicName': 'aaa'
                         }
                     ]
                 }
@@ -97,7 +97,7 @@ MUSIC_POST = {
             'required': True
         },
         {
-            'name': 'music_name',
+            'name': 'musicName',
             'description': '노래 이름',
             'in': 'json',
             'type': 'str',
