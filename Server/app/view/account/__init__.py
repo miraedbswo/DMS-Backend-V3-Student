@@ -9,11 +9,14 @@ api = Api(account_blueprint)
 from .auth import AuthView
 api.add_resource(AuthView, '/auth')
 
-from .info import InfoView
-api.add_resource(InfoView, '/info/<type>')
+from .info import ExtensionInfoView, BasicInfoView, PointInfoView
+api.add_resource(ExtensionInfoView, '/info/extension')
+api.add_resource(BasicInfoView, '/info/basic')
+api.add_resource(PointInfoView, '/info/point')
 
-from .manage import ChangePasswordView
-api.add_resource(ChangePasswordView, '/password')
+from .manage import ChangePasswordView, FindPasswordView
+api.add_resource(ChangePasswordView, '/change-pw')
+api.add_resource(FindPasswordView, '/find-pw')
 
 from .signup import SignupView
 api.add_resource(SignupView, '/signup')

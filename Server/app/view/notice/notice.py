@@ -12,5 +12,5 @@ class NoticeListView(NoticeResource):
 
 class NoticeView(NoticeResource):
     @swag_from(NOTICE_GET)
-    def get(self):
+    def get(self, notice_id):
         pass
