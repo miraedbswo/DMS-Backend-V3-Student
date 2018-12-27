@@ -1,10 +1,16 @@
 from flask import Flask
-from Server.app.view import Router
+from app.view import Router
 
 
-def create_app():
-    app = Flask(__name__)
+def register_extension(flask_app: Flask):
+    from app import extension
+    extension.swag.init_app(flask_app)
 
-    Router(app).register_blueprint()
 
-    return app
+def create_app() -> Flask:
+    flask_app = Flask(__name__)
+
+    register_extension(flask_app)
+    Router(flask_app).register_blueprint()
+
+    return flask_app
