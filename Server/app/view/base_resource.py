@@ -14,6 +14,10 @@ class ApplyResource(BaseResource):
     pass
 
 
+class NoticeResource(BaseResource):
+    pass
+
+
 class ReportResource(BaseResource):
     pass
 

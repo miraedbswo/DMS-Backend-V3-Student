@@ -22,7 +22,7 @@ RULE_LIST_GET = {
     }
 }
 
-NOTICE_GET = {
+RULE_GET = {
     'tags': ['Notice'],
     'description': '기숙사 규정 확인',
     'parameters': [
