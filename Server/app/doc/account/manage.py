@@ -1,4 +1,4 @@
-from app.doc import JWT_ACCESS_TOKEN
+from app.doc import JWT_ACCESS_TOKEN, parameter
 
 
 CHANGE_PW_PATCH = {
@@ -34,3 +34,24 @@ CHANGE_PW_PATCH = {
     }
 }
 
+FIND_PW_POST = {
+    'tags': ['Account'],
+    'description': '''비밀번호 초기화
+    
+    이메일발송 후 이메일 링크 클릭시 1234로 초기화''',
+    'parameters': [
+        parameter('id', '아이디'),
+        parameter('email', '학교 이메일'),
+    ],
+    'responses': {
+        '201': {
+            'description': '이메일 발송 성공'
+        },
+        '204': {
+            'description': '없는 아이디'
+        },
+        '205': {
+            'description': '아이디에 이메일이 맞지 않음'
+        }
+    }
+}

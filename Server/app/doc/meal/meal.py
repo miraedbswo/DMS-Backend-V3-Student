@@ -35,8 +35,8 @@ MEAL_GET = {
                 }
             }
         },
-        '204': {
-            'description': '연장신청 정보 없음'
+        '205': {
+            'description': '잘못된 날짜'
         },
         '403': {
             'description': '권한 없음'
