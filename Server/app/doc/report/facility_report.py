@@ -6,8 +6,8 @@ FACILITY_REPORT_POST = {
     'parameters': [
         JWT_ACCESS_TOKEN,
         {
-            'name': 'content',
-            'description': '시설고장신고 내용',
+            'name': 'title',
+            'description': '시설고장신고 제목',
             'in': 'json',
             'type': 'str',
             'required': True
@@ -18,7 +18,14 @@ FACILITY_REPORT_POST = {
             'in': 'json',
             'type': 'int',
             'required': True
-        }
+        },
+        {
+            'name': 'content',
+            'description': '시설고장신고 내용',
+            'in': 'json',
+            'type': 'str',
+            'required': True
+        },
     ],
     'responses': {
         '201': {
