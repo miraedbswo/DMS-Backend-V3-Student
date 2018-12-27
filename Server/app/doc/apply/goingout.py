@@ -3,7 +3,9 @@ from app.doc import JWT_ACCESS_TOKEN
 GOINGOUT_GET = {
     'tags': ['Apply'],
     'description': '학생 자신의 외출신청 정보를 조회합니다.',
-    'parameters': [JWT_ACCESS_TOKEN],
+    'parameters': [
+        JWT_ACCESS_TOKEN
+    ],
     'responses': {
         '200': {
             'description': '외출신청 정보 조회 성공',
