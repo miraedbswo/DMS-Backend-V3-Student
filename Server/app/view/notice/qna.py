@@ -12,5 +12,5 @@ class QnaListView(NoticeResource):
 
 class QnaView(NoticeResource):
     @swag_from(QNA_GET)
-    def get(self):
+    def get(self, qna_id):
         pass

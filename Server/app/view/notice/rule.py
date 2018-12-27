@@ -12,5 +12,5 @@ class RuleListView(NoticeResource):
 
 class RuleView(NoticeResource):
     @swag_from(RULE_GET)
-    def get(self):
+    def get(self, rule_id):
         pass
