@@ -1,5 +1,32 @@
+from os import getenv
+
+
 class Config:
-    pass
+    SERVICE_NAME = 'DMS-V3'
+    SWAGGER = {
+        'title': SERVICE_NAME,
+        'specs_route': getenv('SWAGGER_URI', '/docs'),
+        'uiversion': 3,
+
+        'info': {
+            'title': SERVICE_NAME + ' API',
+            'version': '1.0',
+            'description': ''
+        },
+        'basePath': '/',
+    }
+
+    SWAGGER_TEMPLATE = {
+        'schemes': [
+            'http'
+        ],
+        'tags': [
+            {
+                'name': 'Account',
+                'description': '계정 관련 API'
+            }
+        ]
+    }
 
 
 class TestConfig(Config):
