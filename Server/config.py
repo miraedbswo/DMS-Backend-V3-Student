@@ -18,13 +18,7 @@ class Config:
 
     SWAGGER_TEMPLATE = {
         'schemes': [
-            'http'
-        ],
-        'tags': [
-            {
-                'name': 'Account',
-                'description': '계정 관련 API'
-            }
+            'https'
         ]
     }
 
