@@ -1,7 +1,7 @@
 from app.doc import JWT_ACCESS_TOKEN
 
 EXTENSION_INFO_GET = {
-    'tags': ['Account'],
+    'tags': ['Info'],
     'description': '학생 자신의 신청 정보를 조회합니다.',
     'parameters': [JWT_ACCESS_TOKEN],
     'responses': {
@@ -30,7 +30,7 @@ EXTENSION_INFO_GET = {
 
 
 BASIC_INFO_GET = {
-    'tags': ['Account'],
+    'tags': ['Info'],
     'description': '학생 자신의 기본 정보(이름, 학번, 상벌점)를 조회합니다.',
     'parameters': [JWT_ACCESS_TOKEN],
     'responses': {
@@ -52,7 +52,7 @@ BASIC_INFO_GET = {
 }
 
 POINT_HISTORY_GET = {
-    'tags': ['Account'],
+    'tags': ['Info'],
     'description': '학생 자신의 상벌점 기록을 조회합니다.',
     'parameters': [JWT_ACCESS_TOKEN],
     'responses': {
