@@ -6,7 +6,7 @@ QUESTION_POST = {
     'description': '질문에 답변을 남깁니다. 이미 답변을 남겼을 경우, 덮어씌웁니다.',
     'parameters': [
         JWT_ACCESS_TOKEN,
-        parameter('questionId', '질문 아이디'),
+        parameter('questionId', '질문 아이디', 'url'),
         parameter('answerContent', '답변')
     ],
     'responses': {
