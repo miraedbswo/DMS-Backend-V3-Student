@@ -6,13 +6,6 @@ FACILITY_REPORT_POST = {
     'parameters': [
         JWT_ACCESS_TOKEN,
         {
-            'name': 'title',
-            'description': '시설고장신고 제목',
-            'in': 'json',
-            'type': 'str',
-            'required': True
-        },
-        {
             'name': 'room',
             'description': '호실 번호',
             'in': 'json',

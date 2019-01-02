@@ -9,6 +9,13 @@ class StudentModel(db.Model):
     number = db.column(db.Integer)
     email = db.column(db.String)
 
+    def __init__(self, id, pw, name, number, email):
+        self.id = id
+        self. pw = pw
+        self.name = name
+        self.number = number
+        self.email = email
+
 
 class UnsignedStudentModel(db.Model):
     __tablename__ = 'unsigned_student_model'
@@ -16,3 +23,9 @@ class UnsignedStudentModel(db.Model):
     name = db.column(db.String)
     number = db.column(db.Integer)
     email = db.column(db.String)
+
+    def __init__(self, uuid, name, number, email):
+        self.uuid = uuid
+        self.name = name
+        self.number = number
+        self.email = email
