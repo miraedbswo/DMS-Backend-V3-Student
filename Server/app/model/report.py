@@ -12,3 +12,8 @@ class FacilityReport(db.Model):
         self.student_id = student_id
         self.room = room
         self.content = content
+
+    @db.validates('room')
+    def validate_room(self, key, room):
+        assert 201 <= room <= 524
+        return room
