@@ -1,4 +1,4 @@
-from app.doc import SAMPLE_OBJECT_IDS, JWT_ACCESS_TOKEN
+from app.doc import SAMPLE_OBJECT_IDS, JWT_ACCESS_TOKEN, parameter
 
 SURVEY_LIST_GET = {
     'tags': ['Survey'],
@@ -41,14 +41,17 @@ SURVEY_LIST_GET = {
 
 SURVEY_GET = {
     'tags': ['Survey'],
-    'description': '''설문지 리스트를 불러옵니다.
+    'description': '''설문지를 불러옵니다.
     아래의 조건 중 하나 이상에 맞는 설문조사는 response되지 않습니다.
 
     1. 대상이 해당 학년이 아닌 설문조사
     2. 설문 기간이 지난 설문조사
     3. 질문이 없는 설문조사
     ''',
-    'parameters': [JWT_ACCESS_TOKEN],
+    'parameters': [
+        JWT_ACCESS_TOKEN,
+        parameter('survey_id', '설문지 id', 'url', 'int')
+    ],
     'responses': {
         '200': {
             'description': '설문지 불러오기 성공',

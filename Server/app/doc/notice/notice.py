@@ -3,7 +3,6 @@ from app.doc import parameter, JWT_ACCESS_TOKEN
 NOTICE_LIST_GET = {
     'tags': ['Notice'],
     'description': '공지사항 리스트 확인',
-    'parameters': [JWT_ACCESS_TOKEN],
     'responses': {
         '200': {
             'description': '공지사항 리스트 조회 성공',
@@ -25,10 +24,7 @@ NOTICE_LIST_GET = {
 NOTICE_GET = {
     'tags': ['Notice'],
     'description': '공지사항 확인',
-    'parameters': [
-        JWT_ACCESS_TOKEN,
-        parameter('noticeId', '공지사항 아이디', 'url')
-    ],
+    'parameters': parameter('noticeId', '공지사항 아이디', 'url'),
     'responses': {
         '200': {
             'description': '공지사항 조회 성공',
