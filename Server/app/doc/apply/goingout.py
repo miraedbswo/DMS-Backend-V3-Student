@@ -1,4 +1,4 @@
-from app.doc import JWT_ACCESS_TOKEN
+from app.doc import JWT_ACCESS_TOKEN, parameter
 
 GOINGOUT_GET = {
     'tags': ['Apply'],
@@ -11,8 +11,23 @@ GOINGOUT_GET = {
             'description': '외출신청 정보 조회 성공',
             'examples': {
                 '': {
-                    'sat': True,
-                    'sun': False
+                    'goingOut': [
+                        {
+                            'goOutDate': '2019-01-01 8:00',
+                            'returnDate': '2019-01-01 9:00',
+                            'reason': '아침 식사 외출(서브웨이)'
+                        },
+                        {
+                            'goOutDate': '2019-01-01 12:00',
+                            'returnDate': '2019-01-01 13:00',
+                            'reason': '점심 식사 외출(베스타)'
+                        },
+                        {
+                            'goOutDate': '2019-01-01 18:00',
+                            'returnDate': '2019-01-01 19:00',
+                            'reason': '저녁 식사 외출(신라호텔)'
+                        }
+                    ]
                 }
             }
         },
@@ -34,20 +49,9 @@ GOINGOUT_POST = {
     ''',
     'parameters': [
         JWT_ACCESS_TOKEN,
-        {
-            'name': 'sat',
-            'description': '토요일 외출 여부',
-            'in': 'json',
-            'type': 'bool',
-            'required': True
-        },
-        {
-            'name': 'sun',
-            'description': '일요일 외출 여부',
-            'in': 'json',
-            'type': 'bool',
-            'required': True
-        }
+        parameter('goOutDate', '외출 나가는 시각 (YYYY-MM-DD HH:MM)'),
+        parameter('returnDate', '귀사 시각 (YYYY-MM-DD HH:MM)'),
+        parameter('reason', '외출 사유')
     ],
     'responses': {
         '201': {

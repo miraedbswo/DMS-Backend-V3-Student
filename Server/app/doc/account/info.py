@@ -14,10 +14,23 @@ EXTENSION_INFO_GET = {
                         'seatNum': 13
                     },
                     'extension12': None,
-                    'goingout': {
-                        'sat': True,
-                        'sun': False
-                    },
+                    'goingOut': [
+                        {
+                            'goOutDate': '2019-01-01 8:00',
+                            'returnDate': '2019-01-01 9:00',
+                            'reason': '아침 식사 외출(서브웨이)'
+                        },
+                        {
+                            'goOutDate': '2019-01-01 12:00',
+                            'returnDate': '2019-01-01 13:00',
+                            'reason': '점심 식사 외출(베스타)'
+                        },
+                        {
+                            'goOutDate': '2019-01-01 18:00',
+                            'returnDate': '2019-01-01 19:00',
+                            'reason': '저녁 식사 외출(신라호텔)'
+                        }
+                    ],
                     'stay': 4
                 }
             }
