@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask_restful import Api
 
 
-meal_blueprint = Blueprint('meal', __name__, url_prefix='/meal')
+meal_blueprint = Blueprint('meal', __name__)
 api = Api(meal_blueprint)
 
 
