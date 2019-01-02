@@ -1,6 +1,7 @@
 from app.extension import db
 
 week = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+seat_count = [0, 20, 20, 20, 20, 44, 44, 43, 23]
 
 
 class MusicApplyModel(db.Model):
@@ -46,6 +47,16 @@ class ExtensionApplyModel(db.Model):
         self.class_ = class_
         self.seat = seat
 
+    @db.validates('class_')
+    def validate_class_(self, key, class_):
+        assert 1 <= class_ <= 8
+        return class_
+
+    @db.validates('seat')
+    def validate_seat(self, key, seat):
+        assert 1 <= seat <= seat_count[self.class_]
+        return seat
+
 
 class StayApplyModel(db.Model):
     __tablename__ = 'stay_apply_model'
@@ -55,3 +66,8 @@ class StayApplyModel(db.Model):
     def __init__(self, student_id, value):
         self.student_id = student_id
         self.value = value
+
+    @db.validates('value')
+    def validate_value(self, key, value):
+        assert 1 <= value <= 4
+        return value
