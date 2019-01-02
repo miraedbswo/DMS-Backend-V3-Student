@@ -1,5 +1,7 @@
-from app.extension import db
+import bcrypt
 import re
+
+from app.extension import db
 
 
 class StudentModel(db.Model):
@@ -10,12 +12,42 @@ class StudentModel(db.Model):
     number = db.column(db.Integer)
     email = db.column(db.String)
 
-    def __init__(self, id, pw, name, number, email):
+    def __init__(self, id: str, pw: str, name: str, number: number, email: str):
         self.id = id
-        self.pw = pw
+        self.pw = bcrypt.hashpw(pw.encode(), bcrypt.gensalt())
         self.name = name
         self.number = number
         self.email = email
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def get_student_by_id(self, id: str):
+        return self.query.filter_by(id=id).first()
+
+    def login(self, id: str, pw: str):
+        student: StudentModel = self.get_student_by_id(id)
+        if not student or not bcrypt.checkpw(pw, student.pw):
+            return None
+        return student
+
+    def change_pw(self, id: str, current_pw: str, new_pw: str):
+        student: StudentModel = self.get_student_by_id(id)
+        if bcrypt.checkpw(current_pw, student.pw):
+            student.pw = bcrypt.hashpw(new_pw.encode(), bcrypt.gensalt())
+            db.session.commit()
+            return True
+        return False
+
+    def reset_pw(self, id: str):
+        student: StudentModel = self.get_student_by_id(id)
+        student.pw = bcrypt.hashpw('1234'.encode(), bcrypt.gensalt())
+        db.session.commit()
 
     @db.validates('id')
     def validate_id(self, key, id):
