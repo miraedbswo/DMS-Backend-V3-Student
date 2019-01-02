@@ -1,4 +1,4 @@
-from app.doc import JWT_ACCESS_TOKEN
+from app.doc import JWT_ACCESS_TOKEN, parameter
 
 MUSIC_GET = {
     'tags': ['Apply'],
@@ -89,20 +89,8 @@ MUSIC_POST = {
     ''',
     'parameters': [
         JWT_ACCESS_TOKEN,
-        {
-            'name': 'singer',
-            'description': '가수 이름',
-            'in': 'json',
-            'type': 'str',
-            'required': True
-        },
-        {
-            'name': 'musicName',
-            'description': '노래 이름',
-            'in': 'json',
-            'type': 'str',
-            'required': True
-        }
+        parameter('singer', '가수 이름'),
+        parameter('musicName', '노래 이름')
     ],
     'responses': {
         '201': {

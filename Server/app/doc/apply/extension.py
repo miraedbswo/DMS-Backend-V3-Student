@@ -1,17 +1,11 @@
-from app.doc import JWT_ACCESS_TOKEN
+from app.doc import JWT_ACCESS_TOKEN, parameter
 
 EXTENSION_GET = {
     'tags': ['Apply'],
     'description': '학생 자신의 연장신청 정보를 조회합니다.',
     'parameters': [
         JWT_ACCESS_TOKEN,
-        {
-            'name': 'time',
-            'description': '11시/12시 연장',
-            'in': 'url',
-            'type': 'int',
-            'required': True
-        }
+        parameter('time', '11시, 12시 연장 구분 (11, 12)', 'url', 'int')
     ],
     'responses': {
         '200': {
@@ -40,13 +34,7 @@ EXTENSION_POST = {
     ''',
     'parameters': [
         JWT_ACCESS_TOKEN,
-        {
-            'name': 'time',
-            'description': '11시/12시 연장',
-            'in': 'url',
-            'type': 'int',
-            'required': True
-        },
+        parameter('time', '11시, 12시 연장 구분 (11, 12)', 'url', 'int'),
         {
             'name': 'classNum',
             'description': '''
@@ -63,13 +51,7 @@ EXTENSION_POST = {
             'type': 'int',
             'required': True
         },
-        {
-            'name': 'seatNum',
-            'description': '연장 학습실 자리 번호',
-            'in': 'json',
-            'type': 'int',
-            'required': True
-        }
+        parameter('seatNum', '연장학습 자리 번호', type_='int')
     ],
     'responses': {
         '201': {
@@ -96,13 +78,7 @@ EXTENSION_DELETE = {
     ''',
     'parameters': [
         JWT_ACCESS_TOKEN,
-        {
-            'name': 'time',
-            'description': '11시/12시 연장',
-            'in': 'url',
-            'type': 'int',
-            'required': True
-        }
+        parameter('time', '11시, 12시 연장 구분 (11, 12)', 'url', 'int')
     ],
     'responses': {
         '200': {
@@ -121,20 +97,8 @@ EXTENSION_MAP_GET = {
     'tags': ['Apply'],
     'description': '연장신청 지도를 조회합니다. 해당 class에 대한 신청 여부, 신청되어 있다면 자리까지 response합니다. 신청되어 있지 않으면 자리는 0입니다.',
     'parameters': [
-        {
-            'name': 'time',
-            'description': '11시/12시 연장',
-            'in': 'url',
-            'type': 'int',
-            'required': True
-        },
-        {
-            'name': 'classNum',
-            'description': '지도를 조회할 학습실 번호',
-            'in': 'url',
-            'type': 'int',
-            'required': True
-        }
+        parameter('time', '11시, 12시 연장 구분 (11, 12)', 'url', 'int'),
+        parameter('classNum', '조회할 학습실 번호', 'url', 'int')
     ],
     'responses': {
         '200': {

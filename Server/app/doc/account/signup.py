@@ -1,28 +1,11 @@
+from app.doc import parameter
 SIGNUP_POST = {
     'tags': ['Account'],
     'description': '회원가입',
     'parameters': [
-        {
-            'name': 'uuid',
-            'description': 'UUID',
-            'in': 'json',
-            'type': 'str',
-            'required': True
-        },
-        {
-            'name': 'id',
-            'description': '사용자 ID',
-            'in': 'json',
-            'type': 'str',
-            'required': True
-        },
-        {
-            'name': 'password',
-            'description': '사용자 PW',
-            'in': 'json',
-            'type': 'str',
-            'required': True
-        }
+        parameter('uuid', 'UUID'),
+        parameter('id', '사용자 아이디'),
+        parameter('password', '사용자 비밀번호')
     ],
     'responses': {
         '201': {

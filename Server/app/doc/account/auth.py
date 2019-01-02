@@ -1,23 +1,12 @@
 from app.doc.account import SAMPLE_ACCESS_TOKEN, SAMPLE_REFRESH_TOKEN
+from app.doc import parameter
 
 AUTH_POST = {
     'tags': ['Account'],
     'description': '로그인',
     'parameters': [
-        {
-            'name': 'id',
-            'description': 'ID',
-            'in': 'json',
-            'type': 'str',
-            'required': True
-        },
-        {
-            'name': 'password',
-            'description': '비밀번호',
-            'in': 'json',
-            'type': 'str',
-            'required': True
-        }
+        parameter('id', '아이디'),
+        parameter('password', '비밀번호')
     ],
     'responses': {
         '200': {

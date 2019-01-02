@@ -6,20 +6,8 @@ CHANGE_PW_PATCH = {
     'description': '비밀번호 변경',
     'parameters': [
         JWT_ACCESS_TOKEN,
-        {
-            'name': 'currentPassword',
-            'description': '현재 비밀번호',
-            'in': 'json',
-            'type': 'str',
-            'required': True
-        },
-        {
-            'name': 'newPassword',
-            'description': '바꿀 비밀번호',
-            'in': 'json',
-            'type': 'str',
-            'required': True
-        }
+        parameter('currentPassword', '현재 비밀번호'),
+        parameter('newPassword', '바꿀 비밀번호')
     ],
     'responses': {
         '201': {

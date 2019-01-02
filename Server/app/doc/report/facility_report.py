@@ -1,24 +1,12 @@
-from app.doc import SAMPLE_OBJECT_IDS, JWT_ACCESS_TOKEN
+from app.doc import SAMPLE_OBJECT_IDS, JWT_ACCESS_TOKEN, parameter
 
 FACILITY_REPORT_POST = {
     'tags': ['Report'],
     'description': '시설고장신고',
     'parameters': [
         JWT_ACCESS_TOKEN,
-        {
-            'name': 'room',
-            'description': '호실 번호',
-            'in': 'json',
-            'type': 'int',
-            'required': True
-        },
-        {
-            'name': 'content',
-            'description': '시설고장신고 내용',
-            'in': 'json',
-            'type': 'str',
-            'required': True
-        },
+        parameter('room', '호실 번호', type_='int'),
+        parameter('content', '시설 고장 신고 내용')
     ],
     'responses': {
         '201': {
