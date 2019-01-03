@@ -1,5 +1,6 @@
 import bcrypt
 import re
+from typing import Union
 
 from app.extension import db
 
@@ -27,25 +28,29 @@ class StudentModel(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    def get_student_by_id(self, id: str):
-        return self.query.filter_by(id=id).first()
+    @staticmethod
+    def get_student_by_id(id: str) -> 'StudentModel':
+        return StudentModel.query.filter_by(id=id).first()
 
-    def login(self, id: str, pw: str):
-        student: StudentModel = self.get_student_by_id(id)
+    @staticmethod
+    def login(id: str, pw: str) -> Union[None, 'StudentModel']:
+        student: StudentModel = StudentModel.get_student_by_id(id)
         if not student or not bcrypt.checkpw(pw, student.pw):
             return None
         return student
 
-    def change_pw(self, id: str, current_pw: str, new_pw: str):
-        student: StudentModel = self.get_student_by_id(id)
+    @staticmethod
+    def change_pw(id: str, current_pw: str, new_pw: str) -> bool:
+        student: StudentModel = StudentModel.get_student_by_id(id)
         if bcrypt.checkpw(current_pw, student.pw):
             student.pw = bcrypt.hashpw(new_pw.encode(), bcrypt.gensalt())
             db.session.commit()
             return True
         return False
 
-    def reset_pw(self, id: str):
-        student: StudentModel = self.get_student_by_id(id)
+    @staticmethod
+    def reset_pw(id: str):
+        student: StudentModel = StudentModel.get_student_by_id(id)
         student.pw = bcrypt.hashpw('1234'.encode(), bcrypt.gensalt())
         db.session.commit()
 
