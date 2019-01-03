@@ -1,15 +1,17 @@
 from functools import wraps
 
-from unittest import TestCase
+import unittest
 from app import create_app
 from app.extension import db
 
 
-class TCBase(TestCase):
+class TCBase(unittest.TestCase):
+    def __init__(self):
+        self.app = create_app('testing')
+        self.client = self.app.test_client()
+        super(TCBase, self).__init__()
 
     def setUp(self):
-        self.app = create_app()
-        self.client = self.app.test_client()
         self.db = db
         db.create_all(app=self.app)
 
