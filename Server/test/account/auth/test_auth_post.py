@@ -1,3 +1,4 @@
+from flask import Response
 from unittest import mock
 
 from app.doc.account import SAMPLE_ACCESS_TOKEN, SAMPLE_REFRESH_TOKEN
@@ -6,7 +7,6 @@ from test.request import AccountRequest
 
 
 class TestSignedAccountAuth(TCBase, AccountRequest):
-
     @check_status_code(200)
     def test_login_success(self):
         # 맞는 id & pw 200 success
@@ -26,7 +26,7 @@ class TestSignedAccountAuth(TCBase, AccountRequest):
         return rv
 
     @check_status_code(200)
-    @mock.patch('self.client.post')
+    @mock.patch('test.request.AccountRequest')
     def test_token(self, mock_get):
         # mock 해서 return 값 토큰을 sample_access_token & sample_refresh_token 발급
         # response 온 sample 값이 맞는지 assertEqual
@@ -37,8 +37,11 @@ class TestSignedAccountAuth(TCBase, AccountRequest):
         mock_get.return_value = mock_resp
 
         rv = self.request_auth()
-        self.assertEqual(rv.data["accessToken"], SAMPLE_ACCESS_TOKEN)
-        self.assertEqual(rv.data["refreshToken"], SAMPLE_REFRESH_TOKEN)
+
+        self.assertIsNotNone(rv)
+
+        self.assertEqual(rv.json["accessToken"], SAMPLE_ACCESS_TOKEN)
+        self.assertEqual(rv.json["refreshToken"], SAMPLE_REFRESH_TOKEN)
 
 
 class TestUnsignedAccountAuth(TCBase):
