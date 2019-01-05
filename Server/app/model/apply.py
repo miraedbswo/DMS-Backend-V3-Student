@@ -18,21 +18,6 @@ class MusicApplyModel(db.Model):
         self.song_name = song_name
 
 
-class GoingoutApplyModel(db.Model):
-    __tablename__ = 'goingout_model'
-    id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.String, db.ForeignKey('student_model.id', ondelete='CASCADE'))
-    go_out_date = db.Column(db.DateTime)
-    return_date = db.Column(db.DateTime)
-    reason = db.Column(db.String)
-
-    def __init__(self, student_id, go_out_date, return_date, reason):
-        self.student_id = student_id
-        self.go_out_date = go_out_date
-        self.return_date = return_date
-        self.reason = reason
-
-
 class StayApplyModel(db.Model):
     __tablename__ = 'stay_apply_model'
     student_id = db.Column(db.String, db.ForeignKey('student_model.id', ondelete='CASCADE'), primary_key=True)

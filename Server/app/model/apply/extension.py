@@ -26,15 +26,12 @@ class ExtensionApplyModel(db.Model):
         db.session.commit()
 
     @staticmethod
-    def get_all_extension_apply():
-        return ExtensionApplyModel.query.all()
-    @staticmethod
     def get_extension_apply(student_id: str, time: int) -> 'ExtensionApplyModel':
-        return ExtensionApplyModel.query.find_by(student_id=student_id, time=time).first()
+        return ExtensionApplyModel.query.filter_by(student_id=student_id, time=time).first()
 
     @staticmethod
     def get_extension_apply_by_seat(class_: int, seat: int) -> 'ExtensionApplyModel':
-        return ExtensionApplyModel.query.find_by(class_=class_, seat=seat).first()
+        return ExtensionApplyModel.query.filter_by(class_=class_, seat=seat).first()
 
     @staticmethod
     def get_extension_apply_status(student_id: str, time: int) -> dict:
