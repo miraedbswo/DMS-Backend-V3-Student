@@ -32,8 +32,9 @@ class GoingoutApplyModel(db.Model):
         return GoingoutApplyModel.query.filter_by(student_id=student_id).all()
 
     @staticmethod
-    def delete_goingout_apply(apply_id: int):
-        apply = GoingoutApplyModel.query.filter_by(id=apply_id).first()
+    def delete_goingout_apply(apply_id: int, student_id: str):
+        apply = GoingoutApplyModel.query.filter_by(id=apply_id, student_id=student_id).first()
 
         if apply is None:
             raise NoContentException()
+        apply.delete()

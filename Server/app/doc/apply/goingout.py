@@ -13,16 +13,19 @@ GOINGOUT_GET = {
                 '': {
                     'goingOut': [
                         {
+                            'id': 123,
                             'goOutDate': '2019-01-01 8:00',
                             'returnDate': '2019-01-01 9:00',
                             'reason': '아침 식사 외출(서브웨이)'
                         },
                         {
+                            'id': 124,
                             'goOutDate': '2019-01-01 12:00',
                             'returnDate': '2019-01-01 13:00',
                             'reason': '점심 식사 외출(베스타)'
                         },
                         {
+                            'id': 222,
                             'goOutDate': '2019-01-01 18:00',
                             'returnDate': '2019-01-01 19:00',
                             'reason': '저녁 식사 외출(신라호텔)'
@@ -62,6 +65,23 @@ GOINGOUT_POST = {
         },
         '403': {
             'description': '권한 없음'
+        }
+    }
+}
+
+GOINGOUT_DELETE = {
+    'tags': ['Apply'],
+    'description': '외출신청 취소',
+    'parameters': [
+        JWT_ACCESS_TOKEN,
+        parameter('applyId', '외출신청 아이디', type_='int')
+    ],
+    'responses': {
+        '200': {
+            'description': '취소 성공'
+        },
+        '204': {
+            'description': '외출신청 없음'
         }
     }
 }
