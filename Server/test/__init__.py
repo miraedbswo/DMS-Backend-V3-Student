@@ -7,6 +7,8 @@ from app.extension import db
 
 
 class TCBase(unittest.TestCase):
+    def __init__(self, *args, **kwargs):
+        self.jwt = create_access_token('test',
     def setUp(self):
         self.db = db
 
