@@ -10,62 +10,82 @@ MUSIC_GET = {
                 '': {
                     'mon': [
                         {
+                            'id': 1,
                             'studentName': '누구누구',
                             'singer': 'aaa',
-                            'musicName': 'aaa'
+                            'musicName': 'aaa',
+                            'applyDate': '2019-01-07 11:27:25.689022'
                         },
                         {
+                            'id': 10,
                             'studentName': '누구누구',
                             'singer': 'aaa',
-                            'musicName': 'aaa'
+                            'musicName': 'aaa',
+                            'applyDate': '2019-02-07 11:27:25.689022'
                         }
                     ],
                     'tue': [
                         {
+                            'id': 2,
                             'studentName': '누구누구',
                             'singer': 'aaa',
-                            'musicName': 'aaa'
+                            'musicName': 'aaa',
+                            'applyDate': '2019-03-07 11:27:25.689022'
                         },
                         {
+                            'id': 3,
                             'studentName': '누구누구',
                             'singer': 'aaa',
-                            'musicName': 'aaa'
+                            'musicName': 'aaa',
+                            'applyDate': '2019-04-07 11:27:25.689022'
                         }
                     ],
                     'wed': [
                         {
+                            'id': 4,
                             'studentName': '누구누구',
                             'singer': 'aaa',
-                            'musicName': 'aaa'
+                            'musicName': 'aaa',
+                            'applyDate': '2019-01-03 11:27:25.689022'
                         },
                         {
+                            'id': 5,
                             'studentName': '누구누구',
                             'singer': 'aaa',
-                            'musicName': 'aaa'
+                            'musicName': 'aaa',
+                            'applyDate': '2019-01-08 11:27:25.689022'
                         }
                     ],
                     'thu': [
                         {
+                            'id': 6,
                             'studentName': '누구누구',
                             'singer': 'aaa',
-                            'musicName': 'aaa'
+                            'musicName': 'aaa',
+                            'applyDate': '2019-01-17 11:27:25.689022'
                         },
                         {
+                            'id': 7,
                             'studentName': '누구누구',
                             'singer': 'aaa',
-                            'musicName': 'aaa'
+                            'musicName': 'aaa',
+                            'applyDate': '2019-01-27 11:27:25.689022'
                         }
                     ],
                     'fri': [
                         {
+                            'id': 8,
                             'studentName': '누구누구',
                             'singer': 'aaa',
-                            'musicName': 'aaa'
+                            'musicName': 'aaa',
+                            'applyDate': '2019-01-12 11:27:25.689022'
                         },
                         {
+                            'id': 9,
                             'studentName': '누구누구',
                             'singer': 'aaa',
-                            'musicName': 'aaa'
+                            'musicName': 'aaa',
+                            'applyDate': '2019-01-23 11:27:25.689022'
                         }
                     ]
                 }
