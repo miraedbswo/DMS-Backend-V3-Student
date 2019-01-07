@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 
 class Config:
@@ -15,6 +16,8 @@ class Config:
         },
         'basePath': '/',
     }
+
+    SECRET_KEY = os.getenv('SECRET_KEY', 'Nerd-Bear')
 
     SWAGGER_TEMPLATE = {
         'schemes': [
@@ -33,6 +36,7 @@ class TestConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
                               'sqlite:///:memory:'
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=10)
 
 
 class ProductionConfig(Config):
