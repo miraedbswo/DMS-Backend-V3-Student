@@ -1,7 +1,8 @@
 from app.extension import db
+from app.model.mixin import BaseMixin
 
 
-class NoticeModel(db.Model):
+class NoticeModel(db.Model, BaseMixin):
     __tablename__ = 'notice_model'
     id = db.Column(db.Integer, primary_key=True)
     post_date = db.Column(db.DateTime)
@@ -14,7 +15,7 @@ class NoticeModel(db.Model):
         self.content = content
 
 
-class RuleModel(db.Model):
+class RuleModel(db.Model, BaseMixin):
     __tablename__ = 'rule_model'
     id = db.Column(db.Integer, primary_key=True)
     post_date = db.Column(db.DateTime)
@@ -27,7 +28,7 @@ class RuleModel(db.Model):
         self.content = content
 
 
-class QNAModel(db.Model):
+class QNAModel(db.Model, BaseMixin):
     __tablename__ = 'qna_model'
     id = db.Column(db.Integer, primary_key=True)
     post_date = db.Column(db.DateTime)

@@ -2,11 +2,12 @@ from datetime import date as Date
 from typing import List
 
 from app.extension import db
+from app.model.mixin import BaseMixin
 
 type_list = ['breakfast', 'lunch', 'dinner']
 
 
-class MealModel(db.Model):
+class MealModel(db.Model, BaseMixin):
     __tablename__ = 'meal_model'
     date: Date = db.Column(db.Date, primary_key=True)
     type: int = db.Column(db.Integer)
@@ -16,11 +17,6 @@ class MealModel(db.Model):
         self.date = date
         self.type = type
         self.meal = meal
-
-    def save(self) -> 'MealModel':
-        db.session.add(self)
-        db.session.commit()
-        return self
 
     @staticmethod
     def get_meal(date: Date) -> dict:

@@ -1,10 +1,11 @@
 from app.extension import db
 from app.exception import NoContentException, AlreadyExistItemException
+from app.model.mixin import BaseMixin
 
 seat_count = [0, 20, 20, 20, 20, 44, 44, 43, 23]
 
 
-class ExtensionApplyModel(db.Model):
+class ExtensionApplyModel(db.Model, BaseMixin):
     __tablename__ = 'extension_apply_model'
     student_id = db.Column(db.String, db.ForeignKey('student_model.id', ondelete='CASCADE'), primary_key=True)
     time = db.Column(db.Integer, primary_key=True)
@@ -16,14 +17,6 @@ class ExtensionApplyModel(db.Model):
         self.time = time
         self.class_ = class_
         self.seat = seat
-
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def delete(self):
-        db.session.delte(self)
-        db.session.commit()
 
     @staticmethod
     def get_extension_apply(student_id: str, time: int) -> 'ExtensionApplyModel':

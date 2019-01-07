@@ -1,7 +1,8 @@
 from app.extension import db
+from app.model.mixin import BaseMixin
 
 
-class StayApplyModel(db.Model):
+class StayApplyModel(db.Model, BaseMixin):
     __tablename__ = 'stay_apply_model'
     student_id: str = db.Column(db.String, db.ForeignKey('student_model.id', ondelete='CASCADE'), primary_key=True)
     value: int = db.Column(db.Enum('fri_go', 'sat_go', 'sat_come', 'stay'))
@@ -9,15 +10,6 @@ class StayApplyModel(db.Model):
     def __init__(self, student_id: str, value: int):
         self.student_id = student_id
         self.value = value
-
-    def save(self) -> 'StayApplyModel':
-        db.session.add(self)
-        db.session.commit()
-        return self
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
 
     @staticmethod
     def get_stay_apply_status(student_id: str) -> dict:

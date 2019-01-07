@@ -3,9 +3,10 @@ import re
 from typing import Union
 
 from app.extension import db
+from app.model.mixin import BaseMixin
 
 
-class StudentModel(db.Model):
+class StudentModel(db.Model, BaseMixin):
     __tablename__ = 'student_model'
     id = db.column(db.String, primary_key=True)
     pw = db.column(db.String)
@@ -19,14 +20,6 @@ class StudentModel(db.Model):
         self.name = name
         self.number = number
         self.email = email
-
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
 
     @staticmethod
     def get_student_by_id(id: str) -> 'StudentModel':

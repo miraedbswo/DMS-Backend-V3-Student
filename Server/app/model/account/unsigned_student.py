@@ -2,9 +2,10 @@ import hashlib
 import re
 
 from app.extension import db
+from app.model.mixin import BaseMixin
 
 
-class UnsignedStudentModel(db.Model):
+class UnsignedStudentModel(db.Model, BaseMixin):
     __tablename__ = 'unsigned_student_model'
     uuid = db.column(db.String, primary_key=True)
     name = db.column(db.String)
@@ -16,14 +17,6 @@ class UnsignedStudentModel(db.Model):
         self.name = name
         self.number = number
         self.email = email
-
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
 
     @staticmethod
     def generate_uuid(key: str) -> str:

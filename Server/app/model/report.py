@@ -1,7 +1,8 @@
 from app.extension import db
+from app.model.mixin import BaseMixin
 
 
-class FacilityReport(db.Model):
+class FacilityReport(db.Model, BaseMixin):
     __tablename__ = 'facility_report'
     id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.String, db.ForeignKey('student_model.id', ondelete='CASCADE'))

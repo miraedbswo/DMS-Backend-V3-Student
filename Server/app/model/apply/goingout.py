@@ -3,9 +3,10 @@ from typing import List
 
 from app.extension import db
 from app.exception import NoContentException
+from app.model.mixin import BaseMixin
 
 
-class GoingoutApplyModel(db.Model):
+class GoingoutApplyModel(db.Model, BaseMixin):
     __tablename__ = 'goingout_model'
     id: int = db.Column(db.Integer, primary_key=True)
     student_id: str = db.Column(db.String, db.ForeignKey('student_model.id', ondelete='CASCADE'))
@@ -18,14 +19,6 @@ class GoingoutApplyModel(db.Model):
         self.go_out_date = go_out_date
         self.return_date = return_date
         self.reason = reason
-
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
 
     @staticmethod
     def get_goingout_apply(student_id: str) -> List['GoingoutApplyModel']:

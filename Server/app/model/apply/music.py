@@ -3,6 +3,7 @@ from typing import List
 
 from app.extension import db
 from app.exception import AlreadyExistItemException
+from app.model.mixin import BaseMixin
 
 week = [0, 1, 2, 3, 4]
 weekday = ['mon', 'tue', 'wed', 'thu', 'fri']
@@ -23,15 +24,6 @@ class MusicApplyModel(db.Model):
         self.singer = singer
         self.song_name = song_name
         self.apply_date = datetime.now()
-
-    def save(self) -> 'MusicApplyModel':
-        db.session.add(self)
-        db.session.commit()
-        return self
-
-    def delete(self):
-        db.session.add(self)
-        db.session.commit()
 
     @staticmethod
     def get_music_apply() -> List['MusicApplyModel']:
