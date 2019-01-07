@@ -30,7 +30,7 @@ class ExtensionApplyModel(db.Model, BaseMixin):
     def get_extension_apply_status(student_id: str, time: int) -> dict:
         extension = ExtensionApplyModel.get_extension_apply(student_id, time)
         if extension is None:
-            raise NoContentException()
+            return None
         return {
             'classNum': extension.class_,
             'seatNum': extension.seat

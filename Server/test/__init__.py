@@ -1,4 +1,6 @@
 from functools import wraps
+from flask_jwt_extended import create_access_token
+from datetime import datetime, timedelta
 
 import unittest
 from unittest.mock import Mock
@@ -7,11 +9,17 @@ from app.extension import db
 
 
 class TCBase(unittest.TestCase):
-    def setUp(self):
-        self.db = db
-
+    def __init__(self, *args, **kwargs):
         self.app = create_app('testing')
         self.client = self.app.test_client()
+
+        self.jwt = create_access_token('test',
+                                       expires_delta=datetime.utcnow() + timedelta(minutes=10))
+
+        super(TCBase, self).__init__(*args, **kwargs)
+
+    def setUp(self):
+        self.db = db
         db.create_all(app=self.app)
 
     def tearDown(self):
@@ -21,8 +29,7 @@ class TCBase(unittest.TestCase):
     def _mock_response(
             self,
             content: dict,
-            status: int = 200):
-
+            status: int = 200) -> Mock:
         mock_resp = Mock()
 
         mock_resp.status_code = status
