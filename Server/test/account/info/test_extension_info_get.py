@@ -74,4 +74,5 @@ class TestExtensionInfo(TCBase, InfoRequest):
         rv = self.request_extension_info(self.jwt)
 
         self.assertEqual(stay_test_data, rv.data['stay'])
+    @check_status_code(403)
 
