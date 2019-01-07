@@ -1,6 +1,5 @@
 from functools import wraps
 from flask_jwt_extended import create_access_token
-from datetime import datetime, timedelta
 
 import unittest
 from unittest.mock import Mock
@@ -13,8 +12,16 @@ class TCBase(unittest.TestCase):
         self.app = create_app('testing')
         self.client = self.app.test_client()
 
-        self.jwt = create_access_token('test',
-                                       expires_delta=datetime.utcnow() + timedelta(minutes=10))
+        """
+        flask_jwt_extended.create_access_token() 함수 내부에서, 
+        current_app.extensions['flask-jwt-extended'] 을 호출함.
+        current_app 객체는 application context 내부에서만 사용할 수 있으므로
+        test_context를 만들어 주고 json web token을 context 내부에서 생성한다.
+        """
+        self.test_context = self.app.app_context()
+
+        with self.test_context:
+            self.jwt = create_access_token('test')
 
         super(TCBase, self).__init__(*args, **kwargs)
 
