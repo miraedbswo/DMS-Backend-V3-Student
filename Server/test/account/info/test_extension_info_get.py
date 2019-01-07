@@ -1,10 +1,11 @@
 from app.model import ExtensionApplyModel, GoingoutApplyModel, StayApplyModel
 
-from test import TCBase
+from test import TCBase, check_status_code
 from test.request import InfoRequest
 
 
 class TestExtensionInfo(TCBase, InfoRequest):
+    @check_status_code(200)
     def test_extension_default_status(self):
         """
         default status 검증
@@ -15,17 +16,20 @@ class TestExtensionInfo(TCBase, InfoRequest):
             'stay': 4
         }
         """
-        rv = self.request_extension_info(self.jwt)
-
         default_data = {
             "extension11": None,
             "extension12": None,
             "goingOut": [],
             "stay": 4
         }
-        self.assertEqual(rv.data, default_data)
+
+        rv = self.request_extension_info(self.jwt)
+
+        self.assertDictEqual(default_data, rv.json)
+        return rv
 
     # extension11, 12, goingOut, stay 설정 후 assertEqual
+    @check_status_code(200)
     def test_set_extension11_status(self):
         extension11_test_data = {
             'classNum': 2,
@@ -35,8 +39,10 @@ class TestExtensionInfo(TCBase, InfoRequest):
         ExtensionApplyModel.post_extension_apply('test', 11, 2, 12)
         rv = self.request_extension_info(self.jwt)
 
-        self.assertDictEqual(extension11_test_data, rv.data['extension11'])
+        self.assertDictEqual(extension11_test_data, rv.json['extension11'])
+        return rv
 
+    @check_status_code(200)
     def test_set_extension12_status(self):
         extension12_test_data = {
             'classNum': 2,
@@ -46,8 +52,10 @@ class TestExtensionInfo(TCBase, InfoRequest):
         ExtensionApplyModel.post_extension_apply('test', 12, 2, 12)
         rv = self.request_extension_info(self.jwt)
 
-        self.assertDictEqual(extension12_test_data, rv.data['extension12'])
+        self.assertDictEqual(extension12_test_data, rv.json['extension12'])
+        return rv
 
+    @check_status_code(200)
     def test_set_goingout_status(self):
         goingout_test_data = [
             {
@@ -65,13 +73,21 @@ class TestExtensionInfo(TCBase, InfoRequest):
         )
         rv = self.request_extension_info(self.jwt)
 
-        self.assertListEqual(goingout_test_data, rv.data['goingOut'])
+        self.assertListEqual(goingout_test_data, rv.json['goingOut'])
+        return rv
 
+    @check_status_code(200)
     def test_set_stay_status(self):
         stay_test_data = 1
 
         StayApplyModel.post_stay_apply('test', 1)
         rv = self.request_extension_info(self.jwt)
 
-        self.assertEqual(stay_test_data, rv.data['stay'])
+        self.assertEqual(stay_test_data, rv.json['stay'])
+        return rv
 
+    @check_status_code(403)
+    def test_extension_info_forbidden(self):
+        rv = self.request_extension_info('fake_jwt_token')
+
+        return rv

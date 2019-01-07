@@ -23,22 +23,22 @@ class TestSignedAccountAuth(TCBase, AccountRequest):
         pass
 
     @check_status_code(401)
-    def test_wrong_id_type(self):
+    def test_wrong_id_type(self) -> Response:
         # id 타입 변경 후 assert test
         rv = self.request_auth(id=1)
         return rv
 
     @check_status_code(401)
-    def test_wrong_pw_type(self):
+    def test_wrong_pw_type(self) -> Response:
         # pw 타입 변경 후 assert test
         rv = self.request_auth(password=1)
         return rv
 
     @check_status_code(200)
-    def test_login_success(self):
+    def test_login_success(self) -> Response:
         # 맞는 id & pw 200 success
         rv = self.request_auth()
-        rv_data = rv.data
+        rv_data = rv.json
 
         self.test_auth_response_type(rv_data)
         self.test_validate_token(rv_data)
