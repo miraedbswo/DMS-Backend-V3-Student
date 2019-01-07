@@ -16,18 +16,3 @@ class MusicApplyModel(db.Model):
         self.student_id = student_id
         self.singer = singer
         self.song_name = song_name
-
-
-class StayApplyModel(db.Model):
-    __tablename__ = 'stay_apply_model'
-    student_id = db.Column(db.String, db.ForeignKey('student_model.id', ondelete='CASCADE'), primary_key=True)
-    value = db.Column(db.Enum('fri_go', 'sat_go', 'sat_come', 'stay'))
-
-    def __init__(self, student_id, value):
-        self.student_id = student_id
-        self.value = value
-
-    @db.validates('value')
-    def validate_value(self, key, value):
-        assert 1 <= value <= 4
-        return value
