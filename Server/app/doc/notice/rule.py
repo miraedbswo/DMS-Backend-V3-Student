@@ -24,7 +24,7 @@ RULE_LIST_GET = {
 RULE_GET = {
     'tags': ['Notice'],
     'description': '기숙사 규정 확인',
-    'parameters': parameter('ruleId', '기숙사 규정 아이디', 'url'),
+    'parameters': [parameter('ruleId', '기숙사 규정 아이디', 'url')],
     'responses': {
         '200': {
             'description': '기숙사 규정 조회 성공',
