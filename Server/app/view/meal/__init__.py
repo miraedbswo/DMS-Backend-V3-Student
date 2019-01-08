@@ -7,4 +7,4 @@ api = Api(meal_blueprint)
 
 
 from .meal import MealView
-api.add_resource(MealView, '/meal')
+api.add_resource(MealView, '/meal/<day>')
