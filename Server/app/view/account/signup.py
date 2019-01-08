@@ -15,3 +15,4 @@ class SignupView(AccountResource):
         id = request.json['id']
         pw = request.json['password']
         StudentModel.signup(id, pw, unsigned_student)
+        unsigned_student.delete()
