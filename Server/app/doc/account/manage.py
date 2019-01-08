@@ -36,10 +36,7 @@ FIND_PW_POST = {
             'description': '이메일 발송 성공'
         },
         '204': {
-            'description': '없는 아이디'
-        },
-        '205': {
-            'description': '아이디에 이메일이 맞지 않음'
+            'description': '잘못된 아이디, 비밀번호'
         }
     }
 }

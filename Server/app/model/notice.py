@@ -1,41 +1,99 @@
+from datetime import datetime
+
 from app.extension import db
 from app.model.mixin import BaseMixin
+from app.exception import NoContentException
 
 
-class NoticeModel(db.Model, BaseMixin):
+class PostModelBase(db.Model, BaseMixin):
+    __tablename__ = 'post_model_base'
+    id: int = db.Column(db.Integer, primary_key=True)
+    post_date: datetime = db.Column(db.DateTime)
+    title: str = db.Column(db.String)
+    content: str = db.Column(db.String)
+
+    def __init__(self, title: str, content: str):
+        self.post_date: datetime = datetime.now()
+        self.title: str = title
+        self.content: str = content
+
+
+class NoticeModel(PostModelBase):
     __tablename__ = 'notice_model'
-    id = db.Column(db.Integer, primary_key=True)
-    post_date = db.Column(db.DateTime)
-    title = db.Column(db.String)
-    content = db.Column(db.String)
 
-    def __init__(self, post_date, title, content):
-        self.post_date = post_date
-        self.title = title
-        self.content = content
+    @staticmethod
+    def get_notice_list() -> dict:
+        return {
+            'noticeList': [
+                {
+                    'noticeId': notice.id,
+                    'postDate': str(notice.post_date),
+                    'title': notice.title
+                } for notice in NoticeModel.query.all()
+            ]
+        }
+
+    @staticmethod
+    def get_notice(notice_id) -> dict:
+        notice: NoticeModel = NoticeModel.query.filter_by(id=notice_id).first()
+        if notice is None:
+            raise NoContentException()
+        return {
+            'content': notice.content,
+            'title': notice.title,
+            'postDate': str(notice.post_date)
+        }
 
 
-class RuleModel(db.Model, BaseMixin):
+class RuleModel(NoticeModel):
     __tablename__ = 'rule_model'
-    id = db.Column(db.Integer, primary_key=True)
-    post_date = db.Column(db.DateTime)
-    title = db.Column(db.String)
-    content = db.Column(db.String)
 
-    def __init__(self, post_date, title, content):
-        self.post_date = post_date
-        self.title = title
-        self.content = content
+    @staticmethod
+    def get_rule_list() -> dict:
+        return {
+            'ruleList': [
+                {
+                    'ruleId': rule.id,
+                    'postDate': str(rule.post_date),
+                    'title': rule.title
+                } for rule in RuleModel.query.all()
+            ]
+        }
+
+    @staticmethod
+    def get_rule(rule_id) -> dict:
+        rule: RuleModel = RuleModel.query.filter_by(id=rule_id).first()
+        if rule is None:
+            raise NoContentException()
+        return {
+            'content': rule.content,
+            'title': rule.title,
+            'postDate': str(rule.post_date)
+        }
 
 
-class QNAModel(db.Model, BaseMixin):
+class QNAModel(NoticeModel):
     __tablename__ = 'qna_model'
-    id = db.Column(db.Integer, primary_key=True)
-    post_date = db.Column(db.DateTime)
-    title = db.Column(db.String)
-    content = db.Column(db.String)
 
-    def __init__(self, post_date, title, content):
-        self.post_date = post_date
-        self.title = title
-        self.content = content
+    @staticmethod
+    def get_qna_list() -> dict:
+        return {
+            'qnaList': [
+                {
+                    'qnaId': qna.id,
+                    'postDate': str(qna.post_date),
+                    'title': qna.title
+                } for qna in QNAModel.query.all()
+            ]
+        }
+
+    @staticmethod
+    def get_qna(qna_id) -> dict:
+        qna: QNAModel = QNAModel.query.filter_by(id=qna_id).first()
+        if qna is None:
+            raise NoContentException()
+        return {
+            'content': qna.content,
+            'title': qna.title,
+            'postDate': str(qna.post_date)
+        }

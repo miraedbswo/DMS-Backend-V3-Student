@@ -7,3 +7,5 @@ from .apply.music import MusicApplyModel
 from .apply.stay import StayApplyModel
 
 from .meal import MealModel
+
+from .notice import NoticeModel, RuleModel, QNAModel

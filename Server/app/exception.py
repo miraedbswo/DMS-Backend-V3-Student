@@ -10,3 +10,13 @@ class NoContentException(DMSException):
 class AlreadyExistItemException(DMSException):
     def __str__(self):
         return 'Already Exist Item'
+
+
+class ResetContentException(DMSException):
+    def __str__(self):
+        return 'Reset Content'
+
+
+class WrongAuthExcption(DMSException):
+    def __str__(self):
+        return 'Wrong Student'
