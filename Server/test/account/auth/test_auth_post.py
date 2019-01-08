@@ -6,7 +6,7 @@ from test.request import AccountRequest
 
 
 class TestSignedAccountAuth(TCBase, AccountRequest):
-    def test_auth_response_type(self, data: dict):
+    def auth_response_type(self, data: dict):
         self.assertIsInstance(data, dict)
 
         self.assertIn('accessToken', data)
@@ -18,17 +18,18 @@ class TestSignedAccountAuth(TCBase, AccountRequest):
         self.assertIsInstance(access_token, str)
         self.assertIsInstance(refresh_token, str)
 
-    def test_validate_token(self, data: dict):
+    def validate_token(self, data: dict):
         # 토큰 검증 방식
         pass
 
-    @check_status_code(401)
+    @check_status_code(400)
     def test_wrong_id_type(self) -> Response:
         # id 타입 변경 후 assert test
         rv: Response = self.request_auth(id=1)
+
         return rv
 
-    @check_status_code(401)
+    @check_status_code(400)
     def test_wrong_pw_type(self) -> Response:
         # pw 타입 변경 후 assert test
         rv: Response = self.request_auth(password=1)
@@ -40,8 +41,8 @@ class TestSignedAccountAuth(TCBase, AccountRequest):
         rv: Response = self.request_auth()
         rv_data = rv.json
 
-        self.test_auth_response_type(rv_data)
-        self.test_validate_token(rv_data)
+        self.auth_response_type(rv_data)
+        self.validate_token(rv_data)
 
         return rv
 
