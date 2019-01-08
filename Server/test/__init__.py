@@ -27,7 +27,7 @@ class TCBase(unittest.TestCase):
 
         super(TCBase, self).__init__(*args, **kwargs)
 
-    def _create_test_account(self):
+    def create_test_account(self):
         self.test_account = StudentModel(
             id='test',
             pw='test',
@@ -39,7 +39,7 @@ class TCBase(unittest.TestCase):
     def setUp(self):
         self.db = db
         db.create_all(app=self.app)
-        self._create_test_account()
+        self.create_test_account()
 
     def tearDown(self):
         db.session.remove()
