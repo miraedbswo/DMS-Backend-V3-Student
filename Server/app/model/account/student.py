@@ -16,7 +16,7 @@ class StudentModel(db.Model, BaseMixin):
     number = db.Column(db.Integer)
     email = db.Column(db.String)
 
-    def __init__(self, id: str, pw: str, name: str, number: number, email: str):
+    def __init__(self, id: str, pw: str, name: str, number: int, email: str):
         self.id = id
         self.pw = bcrypt.hashpw(pw.encode(), bcrypt.gensalt())
         self.name = name
