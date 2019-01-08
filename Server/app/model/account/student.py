@@ -35,6 +35,17 @@ class StudentModel(db.Model, BaseMixin):
         return student
 
     @staticmethod
+    def signup(id, pw, unsigned_student: UnsignedStudentModel):
+        name = unsigned_student.name
+        number = unsigned_student.number
+        email = unsigned_student.email
+
+        if StudentModel.get_student_by_id(id) is not None:
+            raise ResetContentException()
+
+        StudentModel(id, pw, name, number, email).save()
+
+    @staticmethod
     def login(id: str, pw: str) -> Union[None, 'StudentModel']:
         student: StudentModel = StudentModel.get_student_by_id(id)
         if not student or not bcrypt.checkpw(pw, student.pw):
