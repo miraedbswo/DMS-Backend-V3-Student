@@ -39,7 +39,8 @@ class TCBase(unittest.TestCase):
     def setUp(self):
         self.db = db
         db.create_all(app=self.app)
-        self.create_test_account()
+        with self.test_context:
+            self.create_test_account()
 
     def tearDown(self):
         db.session.remove()
