@@ -3,6 +3,7 @@ import re
 from typing import Union
 
 from app.extension import db
+from app.exception import NoContentException
 from app.model.mixin import BaseMixin
 
 
@@ -29,7 +30,7 @@ class StudentModel(db.Model, BaseMixin):
     def login(id: str, pw: str) -> Union[None, 'StudentModel']:
         student: StudentModel = StudentModel.get_student_by_id(id)
         if not student or not bcrypt.checkpw(pw, student.pw):
-            return None
+            raise NoContentException()
         return student
 
     @staticmethod
