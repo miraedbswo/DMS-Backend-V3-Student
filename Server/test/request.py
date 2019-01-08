@@ -9,7 +9,7 @@ class AccountRequest:
         )
         return rv
 
-    def request_change_pw(self, jwt: str, current_password: str='test', new_password: str='testtest') -> Response:
+    def request_change_pw(self, jwt: str, current_password: str='test', new_password: str='new_pw') -> Response:
         rv = self.client.patch(
             '/account/pw',
             headers={'Authorization': jwt},
