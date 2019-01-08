@@ -11,7 +11,7 @@ class MealModel(db.Model, BaseMixin):
     __tablename__ = 'meal_model'
     date: Date = db.Column(db.Date, primary_key=True)
     type: int = db.Column(db.Integer)
-    meal: str = db.Column(db.String)     # ,로 구분하여 입력
+    meal: str = db.Column(db.String)     # ||로 구분하여 입력
 
     def __init__(self, date: Date, type: int, meal:str):
         self.date = date
@@ -24,7 +24,8 @@ class MealModel(db.Model, BaseMixin):
 
         return {
             str(date): {
-                type_list[meal.type]: meal.meal for meal in meal_list
+                type_list[meal.type]: [menu.split('||') for menu in meal.meal]
+                for meal in meal_list
             }
         }
 

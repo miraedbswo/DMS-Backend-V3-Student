@@ -4,11 +4,11 @@ MEAL_GET = {
     'tags': ['Meal'],
     'description': '급식 조회',
     'parameters': [
-        parameter('date', '조회할 날짜(2019-04-20)')
+        parameter('day', '조회할 날짜(2019-04-20)', in_='url')
     ],
     'responses': {
         '200': {
-            'description': '연장신청 정보 조회 성공',
+            'description': '급식 정보 조회 성공',
             'examples': {
                 '': {
                     'breakfast': [

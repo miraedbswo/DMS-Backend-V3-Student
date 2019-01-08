@@ -24,7 +24,7 @@ QNA_LIST_GET = {
 QNA_GET = {
     'tags': ['Notice'],
     'description': '자주 하는 질문 확인',
-    'parameters': parameter('qnaId', '자주 하는 질문 아이디', 'url'),
+    'parameters': [parameter('qnaId', '자주 하는 질문 아이디', 'url')],
     'responses': {
         '200': {
             'description': '자주 하는 질문 조회 성공',
