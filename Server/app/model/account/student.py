@@ -48,7 +48,7 @@ class StudentModel(db.Model, BaseMixin):
     @staticmethod
     def login(id: str, pw: str) -> Union[None, 'StudentModel']:
         student: StudentModel = StudentModel.get_student_by_id(id)
-        if not student or not bcrypt.checkpw(pw, student.pw):
+        if not student or not bcrypt.checkpw(pw.encode(), student.pw):
             raise NoContentException()
         return student
 
