@@ -72,7 +72,7 @@ class RuleModel(NoticeModel):
         }
 
 
-class QNAModel(QNAModel):
+class QNAModel(NoticeModel):
     __tablename__ = 'qna_model'
 
     @staticmethod

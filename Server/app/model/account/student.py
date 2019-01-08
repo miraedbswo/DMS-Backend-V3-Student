@@ -5,15 +5,16 @@ from typing import Union
 from app.extension import db
 from app.exception import NoContentException, ResetContentException, WrongAuthExcption
 from app.model.mixin import BaseMixin
+from app.model.account.unsigned_student import UnsignedStudentModel
 
 
 class StudentModel(db.Model, BaseMixin):
     __tablename__ = 'student_model'
-    id = db.column(db.String, primary_key=True)
-    pw = db.column(db.String)
-    name = db.column(db.String)
-    number = db.column(db.Integer)
-    email = db.column(db.String)
+    id = db.Column(db.String, primary_key=True)
+    pw = db.Column(db.String)
+    name = db.Column(db.String)
+    number = db.Column(db.Integer)
+    email = db.Column(db.String)
 
     def __init__(self, id: str, pw: str, name: str, number: number, email: str):
         self.id = id

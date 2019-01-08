@@ -7,10 +7,10 @@ from app.model.mixin import BaseMixin
 
 class UnsignedStudentModel(db.Model, BaseMixin):
     __tablename__ = 'unsigned_student_model'
-    uuid = db.column(db.String, primary_key=True)
-    name = db.column(db.String)
-    number = db.column(db.Integer)
-    email = db.column(db.String)
+    uuid = db.Column(db.String, primary_key=True)
+    name = db.Column(db.String)
+    number = db.Column(db.Integer)
+    email = db.Column(db.String)
 
     def __init__(self, name, number, email):
         self.uuid = UnsignedStudentModel.generate_uuid(email)
