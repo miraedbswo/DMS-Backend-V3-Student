@@ -1,3 +1,5 @@
+from typing import Union
+
 from app.extension import db
 from app.exception import NoContentException, AlreadyExistItemException
 from app.model.mixin import BaseMixin
@@ -27,7 +29,7 @@ class ExtensionApplyModel(db.Model, BaseMixin):
         return ExtensionApplyModel.query.filter_by(class_=class_, seat=seat).first()
 
     @staticmethod
-    def get_extension_apply_status(student_id: str, time: int) -> dict:
+    def get_extension_apply_status(student_id: str, time: int) -> Union[None, dict]:
         extension = ExtensionApplyModel.get_extension_apply(student_id, time)
         if extension is None:
             return None
