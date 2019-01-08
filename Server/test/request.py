@@ -5,7 +5,7 @@ class AccountRequest:
     def request_auth(self, id='test', password='test') -> Response:
         rv = self.client.post(
             '/account/auth',
-            json={'id': id, 'pw': password}
+            json={'id': id, 'password': password}
         )
         return rv
 
@@ -28,6 +28,90 @@ class AccountRequest:
         rv = self.client.post(
             '/account/signup',
             json={'uuid': uuid, 'id': id, 'password': password}
+        )
+        return rv
+
+
+class ApplyRequest:
+    def request_extension_get(self, jwt: str, time: int) -> Response:
+        rv = self.client.get(
+            f'/apply/extension/{time}',
+            headers={'Authorization': jwt}
+        )
+        return rv
+
+    def request_extension_post(self, jwt: str, time: int, class_num: int, seat_num: int) -> Response:
+        rv = self.client.post(
+            f'/apply/extension/{time}',
+            headers={'Authorization': jwt},
+            json={
+                'classNum': class_num,
+                'seatNum': seat_num
+            }
+        )
+        return rv
+
+    def request_extension_delete(self, jwt: str, time: int) -> Response:
+        rv = self.client.delete(
+            f'/apply/extension/{time}',
+            headers={'Authorization': jwt}
+        )
+        return rv
+
+    def request_extension_map(self, time: int, class_num: int) -> Response:
+        rv = self.client.get(
+            f'/apply/extension/{time}/{class_num}'
+        )
+        return rv
+
+    def request_goingout_get(self, jwt: str) -> Response:
+        rv = self.client.get(
+            '/apply/goingout',
+            headers={'Authorization': jwt}
+        )
+        return rv
+
+    def request_goingout_post(self, jwt: str, go_out_date: str, return_date: str, reason: str) -> Response:
+        rv = self.client.post(
+            '/apply/goingout',
+            headers={'Authorization': jwt},
+            json={
+                'goOutDate': go_out_date,
+                'returnDate': return_date,
+                'reason': reason
+            }
+        )
+        return rv
+
+    def request_music_get(self) -> Response:
+        rv = self.client.get(
+            '/apply/music'
+        )
+        return rv
+
+    def request_music_post(self, jwt: str, singer: str, music_name: str) -> Response:
+        rv = self.client.post(
+            '/apply/music',
+            headers={'Authorization': jwt},
+            json={
+                'singer': singer,
+                'musicName': music_name
+            }
+        )
+        return rv
+
+    def request_stay_get(self, jwt: str) -> Response:
+        rv = self.client.get(
+            '/apply/stay',
+            headers={'Authorization': jwt}
+        )
+        return rv
+
+    def request_stay_post(self, jwt: str, value: int) -> Response:
+        rv = self.client.post(
+            '/apply/stay',
+            headers={'Authorization': jwt},
+            json={'value': value}
         )
         return rv
 
