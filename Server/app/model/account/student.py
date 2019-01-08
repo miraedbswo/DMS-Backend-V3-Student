@@ -3,7 +3,7 @@ import re
 from typing import Union
 
 from app.extension import db
-from app.exception import NoContentException
+from app.exception import NoContentException, ResetContentException, WrongAuthExcption
 from app.model.mixin import BaseMixin
 
 
@@ -27,6 +27,13 @@ class StudentModel(db.Model, BaseMixin):
         return StudentModel.query.filter_by(id=id).first()
 
     @staticmethod
+    def get_student_by_id_email(id: str, email:str) -> 'StudentModel':
+        student = StudentModel.query.filter_by(id=id, email=email).first()
+        if student is None:
+            raise ResetContentException()
+        return student
+
+    @staticmethod
     def login(id: str, pw: str) -> Union[None, 'StudentModel']:
         student: StudentModel = StudentModel.get_student_by_id(id)
         if not student or not bcrypt.checkpw(pw, student.pw):
@@ -34,13 +41,16 @@ class StudentModel(db.Model, BaseMixin):
         return student
 
     @staticmethod
-    def change_pw(id: str, current_pw: str, new_pw: str) -> bool:
+    def change_pw(id: str, current_pw: str, new_pw: str):
         student: StudentModel = StudentModel.get_student_by_id(id)
-        if bcrypt.checkpw(current_pw, student.pw):
-            student.pw = bcrypt.hashpw(new_pw.encode(), bcrypt.gensalt())
-            db.session.commit()
-            return True
-        return False
+        if student is None:
+            raise WrongAuthExcption()
+
+        if not bcrypt.checkpw(current_pw, student.pw):
+            raise ResetContentException()
+
+        student.pw = bcrypt.hashpw(new_pw.encode(), bcrypt.gensalt())
+        db.session.commit()
 
     @staticmethod
     def reset_pw(id: str):
