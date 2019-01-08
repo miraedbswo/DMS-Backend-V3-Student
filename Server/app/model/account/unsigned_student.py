@@ -13,8 +13,8 @@ class UnsignedStudentModel(db.Model, BaseMixin):
     number: int = db.Column(db.Integer)
     email: str = db.Column(db.String)
 
-    def __init__(self, name: str, number: int, email: str):
-        self.uuid: str = UnsignedStudentModel.generate_uuid(email)
+    def __init__(self, name: str, number: int, email: str, uuid=None):
+        self.uuid: str = UnsignedStudentModel.generate_uuid(email) if uuid is None else uuid
         self.name: str = name
         self.number: int = number
         self.email: str = email
@@ -23,7 +23,7 @@ class UnsignedStudentModel(db.Model, BaseMixin):
     def get_unsigned_student(uuid: str) -> 'UnsignedStudentModel':
         unsigned_student = UnsignedStudentModel.query.filter_by(uuid=uuid).first()
         if unsigned_student is None:
-            raise NoContentException
+            raise NoContentException()
         return unsigned_student
 
     @staticmethod
