@@ -3,7 +3,7 @@ from freezegun import freeze_time
 
 from test import TCBase, check_status_code
 from test.request import ApplyRequest
-from app.model.apply.extension import ExtensionApplyModel
+from app.model.apply import ExtensionApplyModel
 
 
 class TestPostExtension(TCBase, ApplyRequest):
