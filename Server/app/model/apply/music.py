@@ -35,18 +35,20 @@ class MusicApplyModel(db.Model):
         status = {week: [] for week in weekday}
         music_apply = MusicApplyModel.get_music_apply()
 
-        for apply in music_apply:
-            status[weekday[apply.day]].append(
-                [
-                    {
-                        'id': MusicApplyModel.id,
-                        'musicName': MusicApplyModel.song_name,
-                        'singer': MusicApplyModel.singer,
-                        'studentId': MusicApplyModel.student_id,
-                        'applyDate': str(MusicApplyModel.apply_date)
-                    }
-                ]
-            )
+        if music_apply is not None:
+            for apply in music_apply:
+                status[weekday[apply.day]].append(
+                    [
+                        {
+                            'id': MusicApplyModel.id,
+                            'musicName': MusicApplyModel.song_name,
+                            'singer': MusicApplyModel.singer,
+                            'studentId': MusicApplyModel.student_id,
+                            'applyDate': str(MusicApplyModel.apply_date)
+                        }
+                    ]
+                )
+
         return status
 
     @staticmethod

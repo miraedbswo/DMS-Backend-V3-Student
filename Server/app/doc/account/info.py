@@ -54,7 +54,9 @@ BASIC_INFO_GET = {
                     'name': '조민규',
                     'number': 20120,
                     'goodPoint': 1,
-                    'badPoint': 458756945
+                    'badPoint': 458756945,
+                    'penaltyLevel': 2,
+                    'penaltyStatus': True
                 }
             }
         },

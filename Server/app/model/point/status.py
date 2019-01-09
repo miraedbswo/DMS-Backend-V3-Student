@@ -16,4 +16,11 @@ class PointStatusModel(db.Model, BaseMixin):
 
     @staticmethod
     def get_point_status(student_id: str):
-        return PointStatusModel.query.filter_by(student_id=student_id).first()
+        point_status: PointStatusModel = PointStatusModel.query.filter_by(student_id=student_id).first()
+
+        return {
+            'badPoint': point_status.bad_pint,
+            'goodPoint': point_status.good_point,
+            'penaltyLevel': point_status.penalty_level,
+            'penaltyStatus': point_status.penalty_status
+        }
