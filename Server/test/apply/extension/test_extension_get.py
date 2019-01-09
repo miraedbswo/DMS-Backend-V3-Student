@@ -14,7 +14,7 @@ class TestGetExtension(TCBase, ApplyRequest):
         return rv
 
     @check_status_code(200)
-    def test_extension_successful(self) -> Response:
+    def test_get_extension_successful(self) -> Response:
         extension_data = {
             'classNum': 1,
             'seatNum': 16

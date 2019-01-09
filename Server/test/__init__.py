@@ -36,6 +36,8 @@ class TCBase(unittest.TestCase):
             email='test@dsm.hs.kr'
         ).save()
 
+        self.test_student_id = 'test'
+
     def setUp(self):
         self.db = db
         db.create_all(app=self.app)
