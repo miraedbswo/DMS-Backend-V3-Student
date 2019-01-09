@@ -72,20 +72,22 @@ POINT_HISTORY_GET = {
         '200': {
             'description': '내역 조회 성공',
             'examples': {
-                '': [
-                    {
-                        'time': '2017-12-17',
-                        'reason': '치킨 먹음',
-                        'pointType': False,
-                        'point': 3
-                    },
-                    {
-                        'time': '2017-12-19',
-                        'reason': '치킨 맛있음',
-                        'pointType': True,
-                        'point': 2
-                    }
-                ]
+                '': {
+                    'point_history': [
+                        {
+                            'date': '2017-12-17',
+                            'reason': '치킨 먹음',
+                            'pointType': False,
+                            'point': 3
+                        },
+                        {
+                            'date': '2017-12-19',
+                            'reason': '치킨 맛있음',
+                            'pointType': True,
+                            'point': 2
+                        }
+                    ]
+                }
             }
         },
         '403': {
