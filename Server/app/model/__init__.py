@@ -9,3 +9,7 @@ from .apply.stay import StayApplyModel
 from .meal import MealModel
 
 from .notice import NoticeModel, RuleModel, QNAModel
+
+from .point.status import PointStatusModel
+from .point.history import PointHistoryModel
+from .point.item import PointItemModel
