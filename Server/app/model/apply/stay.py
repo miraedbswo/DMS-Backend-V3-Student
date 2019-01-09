@@ -3,8 +3,8 @@ from app.model.mixin import BaseMixin
 
 
 class StayApplyModel(db.Model, BaseMixin):
-    __tablename__ = 'stay_apply_model'
-    student_id: str = db.Column(db.String, db.ForeignKey('student_model.id', ondelete='CASCADE'), primary_key=True)
+    __tablename__ = 'stay_apply'
+    student_id: str = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'), primary_key=True)
     value: int = db.Column(db.Enum('fri_go', 'sat_go', 'sat_come', 'stay'))
 
     def __init__(self, student_id: str, value: int):

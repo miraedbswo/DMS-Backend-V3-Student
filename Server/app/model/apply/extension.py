@@ -8,8 +8,8 @@ seat_count = [0, 20, 20, 20, 20, 44, 44, 43, 23]
 
 
 class ExtensionApplyModel(db.Model, BaseMixin):
-    __tablename__ = 'extension_apply_model'
-    student_id = db.Column(db.String, db.ForeignKey('student_model.id', ondelete='CASCADE'), primary_key=True)
+    __tablename__ = 'extension_apply'
+    student_id = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'), primary_key=True)
     time = db.Column(db.Integer, primary_key=True)
     class_ = db.Column(db.Integer)
     seat = db.Column(db.Integer)

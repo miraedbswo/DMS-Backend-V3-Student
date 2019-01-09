@@ -7,7 +7,7 @@ from app.model.mixin import BaseMixin
 
 
 class UnsignedStudentModel(db.Model, BaseMixin):
-    __tablename__ = 'unsigned_student_model'
+    __tablename__ = 'unsigned_student'
     uuid: str = db.Column(db.String, primary_key=True)
     name: str = db.Column(db.String)
     number: int = db.Column(db.Integer)

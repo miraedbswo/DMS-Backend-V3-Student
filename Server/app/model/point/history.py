@@ -7,11 +7,11 @@ from app.model.point.item import PointItemModel
 
 
 class PointHistoryModel(db.Model, BaseMixin):
-    __tablename__ = 'point_history_model'
+    __tablename__ = 'point_history'
 
     id: int = db.Column(db.Integer, primary_key=True)
-    student_id: str = db.Column(db.String, 'student_model.id', ondelete='CASCADE')
-    point_id: int = db.Column(db.Integer, db.ForeignKey('point_item_model.id', ondelete='CASCADE'))
+    student_id: str = db.Column(db.String, 'student.id', ondelete='CASCADE')
+    point_id: int = db.Column(db.Integer, db.ForeignKey('point_item.id', ondelete='CASCADE'))
     point_date: date = db.Column(db.Date)
 
     def __init__(self, student_id: str, point_id: int):

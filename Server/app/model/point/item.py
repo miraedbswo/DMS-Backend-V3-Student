@@ -3,7 +3,7 @@ from app.model.mixin import BaseMixin
 
 
 class PointItemModel(db.Model, BaseMixin):
-    __tablename__ = 'point_item_model'
+    __tablename__ = 'point_item'
 
     id = db.Column(db.Integer, primary_key=True)
     reason: str = db.Column(db.String)

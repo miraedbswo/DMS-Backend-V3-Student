@@ -9,7 +9,7 @@ from app.model.account.unsigned_student import UnsignedStudentModel
 
 
 class StudentModel(db.Model, BaseMixin):
-    __tablename__ = 'student_model'
+    __tablename__ = 'student'
     id = db.Column(db.String, primary_key=True)
     pw = db.Column(db.String)
     name = db.Column(db.String)

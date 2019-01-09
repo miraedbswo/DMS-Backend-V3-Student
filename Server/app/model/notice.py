@@ -6,7 +6,7 @@ from app.exception import NoContentException
 
 
 class PostModelBase(db.Model, BaseMixin):
-    __tablename__ = 'post_model_base'
+    __tablename__ = 'post_base'
     id: int = db.Column(db.Integer, primary_key=True)
     post_date: datetime = db.Column(db.DateTime)
     title: str = db.Column(db.String)
@@ -19,7 +19,7 @@ class PostModelBase(db.Model, BaseMixin):
 
 
 class NoticeModel(PostModelBase):
-    __tablename__ = 'notice_model'
+    __tablename__ = 'notice'
 
     @staticmethod
     def get_notice_list() -> dict:
@@ -46,7 +46,7 @@ class NoticeModel(PostModelBase):
 
 
 class RuleModel(NoticeModel):
-    __tablename__ = 'rule_model'
+    __tablename__ = 'rule'
 
     @staticmethod
     def get_rule_list() -> dict:
@@ -73,7 +73,7 @@ class RuleModel(NoticeModel):
 
 
 class QNAModel(NoticeModel):
-    __tablename__ = 'qna_model'
+    __tablename__ = 'qna'
 
     @staticmethod
     def get_qna_list() -> dict:

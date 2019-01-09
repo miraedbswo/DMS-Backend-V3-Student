@@ -10,10 +10,10 @@ weekday = ['mon', 'tue', 'wed', 'thu', 'fri']
 
 
 class MusicApplyModel(db.Model):
-    __tablename__ = 'music_apply_model'
+    __tablename__ = 'music_apply'
     id: int = db.Column(db.Integer, primary_key=True)
     day: int = db.Column(db.Integer)
-    student_id: str = db.Column(db.String, db.ForeignKey('student_model.id', ondelete='CASCADE'))
+    student_id: str = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'))
     singer: str = db.Column(db.String)
     song_name: str = db.Column(db.String)
     apply_date: datetime = db.Column(db.DateTime)

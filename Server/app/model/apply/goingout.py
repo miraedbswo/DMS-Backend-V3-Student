@@ -7,9 +7,9 @@ from app.model.mixin import BaseMixin
 
 
 class GoingoutApplyModel(db.Model, BaseMixin):
-    __tablename__ = 'goingout_model'
+    __tablename__ = 'goingout'
     id: int = db.Column(db.Integer, primary_key=True)
-    student_id: str = db.Column(db.String, db.ForeignKey('student_model.id', ondelete='CASCADE'))
+    student_id: str = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'))
     go_out_date: datetime = db.Column(db.DateTime)
     return_date: datetime = db.Column(db.DateTime)
     reason: str = db.Column(db.String)

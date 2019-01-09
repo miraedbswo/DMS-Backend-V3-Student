@@ -8,7 +8,7 @@ type_list = ['breakfast', 'lunch', 'dinner']
 
 
 class MealModel(db.Model, BaseMixin):
-    __tablename__ = 'meal_model'
+    __tablename__ = 'meal'
     date: Date = db.Column(db.Date, primary_key=True)
     type: int = db.Column(db.Integer)
     meal: str = db.Column(db.String)     # ||로 구분하여 입력
