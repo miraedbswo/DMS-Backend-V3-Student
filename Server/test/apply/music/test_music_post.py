@@ -36,7 +36,7 @@ class TestPostMusic(TCBase, ApplyRequest):
 
         rv: Response = self.request_music_post(self.access_token, 'test', 'test')
         return rv
-    
+
     @freeze_time('2019-01-04 18:00:00')
     @check_status_code(409)
     def test_apply_music_outside_time(self) -> Response:
