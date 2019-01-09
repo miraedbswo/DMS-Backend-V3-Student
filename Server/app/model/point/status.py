@@ -5,7 +5,7 @@ from app.model.mixin import BaseMixin
 class PointStatusModel(db.Model, BaseMixin):
     __tablename__ = 'point_status_model'
 
-    student_id: str = db.Column(db.String, primary_key=True)
+    student_id: str = db.Column(db.String, db.ForeignKey('student_model.id', ondelete='CASCADE'), primary_key=True)
     good_point: int = db.Column(db.Integer, default=0)
     bad_pint: int = db.Column(db.Integer, default=0)
     penalty_level: int = db.Column(db.Integer, default=0)
