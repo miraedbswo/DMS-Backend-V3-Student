@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import List
 
 from app.extension import db
-from app.exception import AlreadyExistItemException
+from app.exception import ResetContentException
 from app.model.mixin import BaseMixin
 
 week = [0, 1, 2, 3, 4]
@@ -51,7 +51,7 @@ class MusicApplyModel(db.Model):
     @staticmethod
     def post_music_apply(day, student_id, singer, song_name):
         if len(MusicApplyModel.query.filter_by(day=day).all()) > 5:
-            raise AlreadyExistItemException()
+            raise ResetContentException()
         MusicApplyModel(day, student_id, singer, song_name).save()
 
     @db.validates('day')

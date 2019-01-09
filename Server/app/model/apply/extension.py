@@ -1,7 +1,7 @@
 from typing import Union
 
 from app.extension import db
-from app.exception import NoContentException, AlreadyExistItemException
+from app.exception import NoContentException, ResetContentException
 from app.model.mixin import BaseMixin
 
 seat_count = [0, 20, 20, 20, 20, 44, 44, 43, 23]
@@ -42,7 +42,7 @@ class ExtensionApplyModel(db.Model, BaseMixin):
     def post_extension_apply(student_id: str, time: int, class_: int, seat: int):
         extension = ExtensionApplyModel.get_extension_apply_by_seat(class_, seat).first()
         if extension is not None:
-            raise AlreadyExistItemException()
+            raise ResetContentException()
 
         extension = ExtensionApplyModel.get_extension_apply(student_id, time)
         if extension is not None:

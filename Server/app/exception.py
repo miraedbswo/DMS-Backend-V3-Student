@@ -1,27 +1,25 @@
-class DMSException(Exception):
+from werkzeug.exceptions import HTTPException
+
+
+class DMSException(HTTPException):
     pass
 
 
 class NoContentException(DMSException):
-    def __str__(self):
-        return 'No Content'
-
-
-class AlreadyExistItemException(DMSException):
-    def __str__(self):
-        return 'Already Exist Item'
+    code = 204
+    description = 'No Content'
 
 
 class ResetContentException(DMSException):
-    def __str__(self):
-        return 'Reset Content'
+    code = 205
+    description = 'Reset Content'
 
 
 class WrongAuthExcption(DMSException):
-    def __str__(self):
-        return 'Wrong Student'
+    code = 401
+    description = 'Wrong Auth'
 
 
 class ApplyTimeException(DMSException):
-    def __str__(self):
-        return 'Apply Time Exception'
+    code = 409
+    description = 'Can\'t Apply Time'
