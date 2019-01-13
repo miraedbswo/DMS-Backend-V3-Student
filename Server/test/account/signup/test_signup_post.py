@@ -7,12 +7,16 @@ from app.model.account import StudentModel, UnsignedStudentModel
 
 
 class TestSignup(TCBase, AccountRequest):
-    """
-    uuid 중복 check status code check
-    id 중복 (이미 있는 id) 205 status code check
-    """
     def setUp(self):
         super(TestSignup, self).setUp()
+
+        """
+        TCBase setUp 안에서 test 계정을 만들어 주는데, 
+        Signup TC에서는 test 계정이 존재하면 안됨
+        """
+
+        StudentModel.get_student_by_id('test').delete()
+
         _unsigned_account_data = {
             'uuid': 'test',
             'name': 'test',
