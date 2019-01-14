@@ -23,7 +23,7 @@ class TestExtensionInfo(TCBase, InfoRequest):
             "stay": 4
         }
 
-        rv = self.request_extension_info(self.jwt)
+        rv = self.request_extension_info(self.access_token)
 
         self.assertDictEqual(default_data, rv.json)
         return rv
@@ -37,7 +37,7 @@ class TestExtensionInfo(TCBase, InfoRequest):
         }
 
         ExtensionApplyModel.post_extension_apply('test', 11, 2, 12)
-        rv = self.request_extension_info(self.jwt)
+        rv = self.request_extension_info(self.access_token)
 
         self.assertDictEqual(extension11_test_data, rv.json['extension11'])
         return rv
@@ -50,7 +50,7 @@ class TestExtensionInfo(TCBase, InfoRequest):
         }
 
         ExtensionApplyModel.post_extension_apply('test', 12, 2, 12)
-        rv = self.request_extension_info(self.jwt)
+        rv = self.request_extension_info(self.access_token)
 
         self.assertDictEqual(extension12_test_data, rv.json['extension12'])
         return rv
@@ -71,7 +71,7 @@ class TestExtensionInfo(TCBase, InfoRequest):
             '2019-01-01 17:30',
             '영화 관람'
         )
-        rv = self.request_extension_info(self.jwt)
+        rv = self.request_extension_info(self.access_token)
 
         self.assertListEqual(goingout_test_data, rv.json['goingOut'])
         return rv
@@ -81,7 +81,7 @@ class TestExtensionInfo(TCBase, InfoRequest):
         stay_test_data = 1
 
         StayApplyModel.post_stay_apply('test', 1)
-        rv = self.request_extension_info(self.jwt)
+        rv = self.request_extension_info(self.access_token)
 
         self.assertEqual(stay_test_data, rv.json['stay'])
         return rv

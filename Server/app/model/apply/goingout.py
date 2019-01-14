@@ -25,6 +25,22 @@ class GoingoutApplyModel(db.Model, BaseMixin):
         return GoingoutApplyModel.query.filter_by(student_id=student_id).all()
 
     @staticmethod
+    def post_goingout_apply(student_id: str, go_out_date: datetime, return_date: datetime, reason: str):
+        goingout = GoingoutApplyModel.get_goingout_apply(student_id)
+
+        """
+        같은 날짜에 이미 외출 신청을 했다면
+        그 신청을 삭제한 후 다시 신청한 데이터로 override 됨 
+        """
+        for apply in goingout:
+            apply_goingout_date = apply.go_out_date.strftime('%Y-%M-%D')
+
+            if apply_goingout_date == go_out_date.strftime('%Y-%M-%D'):
+                apply.delete()
+
+        GoingoutApplyModel(student_id, go_out_date, return_date, reason).save()
+
+    @staticmethod
     def delete_goingout_apply(apply_id: int, student_id: str):
         apply = GoingoutApplyModel.query.filter_by(id=apply_id, student_id=student_id).first()
 
