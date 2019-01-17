@@ -14,8 +14,8 @@ GOINGOUT_GET = {
                     'goingOut': [
                         {
                             'id': 123,
-                            'goOutDate': '2019-01-01 8:00',
-                            'returnDate': '2019-01-01 9:00',
+                            'goOutDate': '2019-01-01 08:00',
+                            'returnDate': '2019-01-01 09:00',
                             'reason': '아침 식사 외출(서브웨이)'
                         },
                         {
