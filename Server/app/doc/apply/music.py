@@ -109,6 +109,7 @@ MUSIC_POST = {
     ''',
     'parameters': [
         JWT_ACCESS_TOKEN,
+        parameter('day', '요일', type_='int'),
         parameter('singer', '가수 이름'),
         parameter('musicName', '노래 이름')
     ],
