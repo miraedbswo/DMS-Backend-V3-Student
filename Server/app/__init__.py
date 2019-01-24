@@ -9,6 +9,7 @@ def register_extension(flask_app: Flask):
     extension.jwt.init_app(flask_app)
     extension.swag.init_app(flask_app)
     extension.swag.template = flask_app.config['SWAGGER_TEMPLATE']
+    extension.cors.init_app(flask_app)
 
 
 def register_error_handler(flask_app: Flask):
