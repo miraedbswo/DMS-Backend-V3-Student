@@ -5,3 +5,4 @@ Flask-SQLAlchemy
 flasgger
 bcrypt
 freezegun
+slacker
