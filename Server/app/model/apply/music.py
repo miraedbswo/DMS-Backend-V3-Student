@@ -12,6 +12,7 @@ weekday = ['mon', 'tue', 'wed', 'thu', 'fri']
 class MusicApplyModel(db.Model):
     __tablename__ = 'music_apply'
     id: int = db.Column(db.Integer, primary_key=True)
+    # (0 = 월요일, 1 = 화요일, 2 = 수요일, 3 = 목요일, 4 = 금요일)
     day: int = db.Column(db.Integer)
     student_id: str = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'))
     singer: str = db.Column(db.String)
@@ -51,7 +52,7 @@ class MusicApplyModel(db.Model):
         return status
 
     @staticmethod
-    def post_music_apply(day, student_id, singer, song_name):
+    def post_music_apply(day: int, student_id: str, singer: str, song_name: str):
         if len(MusicApplyModel.query.filter_by(day=day).all()) > 5:
             raise ResetContentException()
         MusicApplyModel(day, student_id, singer, song_name).save()

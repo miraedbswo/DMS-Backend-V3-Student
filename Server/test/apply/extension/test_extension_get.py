@@ -3,7 +3,7 @@ from freezegun import freeze_time
 
 from test import TCBase, check_status_code
 from test.request import ApplyRequest
-from app.model.apply.extension import ExtensionApplyModel
+from app.model.apply import ExtensionApplyModel
 
 
 class TestGetExtension(TCBase, ApplyRequest):
@@ -14,7 +14,7 @@ class TestGetExtension(TCBase, ApplyRequest):
         return rv
 
     @check_status_code(200)
-    def test_extension_successful(self) -> Response:
+    def test_get_extension_successful(self) -> Response:
         extension_data = {
             'classNum': 1,
             'seatNum': 16

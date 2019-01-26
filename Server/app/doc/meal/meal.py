@@ -37,9 +37,6 @@ MEAL_GET = {
         },
         '205': {
             'description': '잘못된 날짜'
-        },
-        '403': {
-            'description': '권한 없음'
         }
     }
 }

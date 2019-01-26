@@ -25,6 +25,8 @@ class TCBase(unittest.TestCase):
             self.access_token = create_access_token('test')
             self.refresh_token = create_refresh_token('test')
 
+        self.test_context.push()
+
         super(TCBase, self).__init__(*args, **kwargs)
 
     def create_test_account(self):
@@ -36,9 +38,11 @@ class TCBase(unittest.TestCase):
             email='test@dsm.hs.kr'
         ).save()
 
+        self.test_student_id = 'test'
+
     def setUp(self):
-        self.db = db
         db.create_all(app=self.app)
+
         with self.test_context:
             self.create_test_account()
 

@@ -141,10 +141,7 @@ class InfoRequest:
 
 class MealRequest:
     def request_meal(self, date: str) -> Response:
-        rv = self.client.post(
-            '/meal',
-            json={'date': date}
-        )
+        rv = self.client.post(f'/meal/{date}')
         return rv
 
 

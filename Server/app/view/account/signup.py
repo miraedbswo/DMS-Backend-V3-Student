@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, Response
 from flasgger import swag_from
 
 from app.doc.account.signup import SIGNUP_POST
@@ -16,3 +16,5 @@ class SignupView(AccountResource):
         pw = request.json['password']
         StudentModel.signup(id, pw, unsigned_student)
         unsigned_student.delete()
+
+        return Response('', 201)

@@ -40,7 +40,7 @@ class ExtensionApplyModel(db.Model, BaseMixin):
 
     @staticmethod
     def post_extension_apply(student_id: str, time: int, class_: int, seat: int):
-        extension = ExtensionApplyModel.get_extension_apply_by_seat(class_, seat).first()
+        extension = ExtensionApplyModel.get_extension_apply_by_seat(class_, seat)
         if extension is not None:
             raise ResetContentException()
 
