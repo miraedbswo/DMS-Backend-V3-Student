@@ -124,9 +124,9 @@ class InfoRequest:
         )
         return rv
 
-    def request_extension_info(self, jwt: str) -> Response:
+    def request_apply_info(self, jwt: str) -> Response:
         rv = self.client.get(
-            '/info/extension',
+            '/info/apply',
             headers={'Authorization': jwt}
         )
         return rv

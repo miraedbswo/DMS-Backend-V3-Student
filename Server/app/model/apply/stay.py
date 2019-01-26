@@ -5,7 +5,7 @@ from app.model.mixin import BaseMixin
 class StayApplyModel(db.Model, BaseMixin):
     __tablename__ = 'stay_apply'
     student_id: str = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'), primary_key=True)
-    value: int = db.Column(db.Enum('fri_go', 'sat_go', 'sat_come', 'stay'))
+    value: int = db.Column(db.Integer)
 
     def __init__(self, student_id: str, value: int):
         self.student_id = student_id
@@ -22,7 +22,7 @@ class StayApplyModel(db.Model, BaseMixin):
 
     @staticmethod
     def post_stay_apply(student_id: str, value: int):
-        stay = StayApplyModel.get_stay_apply(student_id)
+        stay = StayApplyModel.query.filter(StayApplyModel.student_id == student_id).first()
         if stay:
             stay.delete()
 

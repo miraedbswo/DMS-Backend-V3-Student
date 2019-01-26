@@ -4,7 +4,7 @@ from test import TCBase, check_status_code
 from test.request import InfoRequest
 
 
-class TestExtensionInfo(TCBase, InfoRequest):
+class TestApplyInfo(TCBase, InfoRequest):
     @check_status_code(200)
     def test_extension_default_status(self):
         """
@@ -23,7 +23,7 @@ class TestExtensionInfo(TCBase, InfoRequest):
             "stay": 4
         }
 
-        rv = self.request_extension_info(self.access_token)
+        rv = self.request_apply_info(self.access_token)
 
         self.assertDictEqual(default_data, rv.json)
         return rv
@@ -37,7 +37,7 @@ class TestExtensionInfo(TCBase, InfoRequest):
         }
 
         ExtensionApplyModel.post_extension_apply('test', 11, 2, 12)
-        rv = self.request_extension_info(self.access_token)
+        rv = self.request_apply_info(self.access_token)
 
         self.assertDictEqual(extension11_test_data, rv.json['extension11'])
         return rv
@@ -50,7 +50,7 @@ class TestExtensionInfo(TCBase, InfoRequest):
         }
 
         ExtensionApplyModel.post_extension_apply('test', 12, 2, 12)
-        rv = self.request_extension_info(self.access_token)
+        rv = self.request_apply_info(self.access_token)
 
         self.assertDictEqual(extension12_test_data, rv.json['extension12'])
         return rv
@@ -71,7 +71,7 @@ class TestExtensionInfo(TCBase, InfoRequest):
             '2019-01-01 17:30',
             '영화 관람'
         )
-        rv = self.request_extension_info(self.access_token)
+        rv = self.request_apply_info(self.access_token)
 
         self.assertListEqual(goingout_test_data, rv.json['goingOut'])
         return rv
@@ -81,13 +81,12 @@ class TestExtensionInfo(TCBase, InfoRequest):
         stay_test_data = 1
 
         StayApplyModel.post_stay_apply('test', 1)
-        rv = self.request_extension_info(self.access_token)
-
+        rv = self.request_apply_info(self.access_token)
         self.assertEqual(stay_test_data, rv.json['stay'])
         return rv
 
     @check_status_code(403)
-    def test_extension_info_forbidden(self):
-        rv = self.request_extension_info('fake_jwt_token')
+    def test_apply_info_forbidden(self):
+        rv = self.request_apply_info('fake_jwt_token')
 
         return rv
