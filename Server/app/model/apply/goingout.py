@@ -25,10 +25,19 @@ class GoingoutApplyModel(db.Model, BaseMixin):
         GoingoutApplyModel(student_id, go_out_date, return_date, reason).save()
 
     @staticmethod
-    def get_goingout_apply(student_id: str) -> List['GoingoutApplyModel']:
-        applies = GoingoutApplyModel.query.filter_by(student_id=student_id).all()
+    def get_goingout_apply(student_id: str) -> List[dict]:
+        applies: List['GoingoutApplyModel'] = GoingoutApplyModel.query.filter_by(student_id=student_id).all()
+
         if not applies:
-            raise NoContentException()
+            return None
+
+        applies = [
+            {
+                'goOutDate': str(apply.go_out_date),
+                'returnDate': str(apply.return_date),
+                'reason': apply.reason
+            }
+        for apply in applies]
 
         return applies
 

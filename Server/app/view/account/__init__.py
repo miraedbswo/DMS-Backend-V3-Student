@@ -12,8 +12,8 @@ info_api = Api(info_blueprint)
 from .auth import AuthView
 account_api.add_resource(AuthView, '/auth')
 
-from .info import ExtensionInfoView, BasicInfoView, PointInfoView
-info_api.add_resource(ExtensionInfoView, '/extension')
+from .info import ApplyInfoView, BasicInfoView, PointInfoView
+info_api.add_resource(ApplyInfoView, '/apply')
 info_api.add_resource(BasicInfoView, '/basic')
 info_api.add_resource(PointInfoView, '/point')
 

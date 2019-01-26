@@ -1,6 +1,6 @@
 from app.doc import JWT_ACCESS_TOKEN
 
-EXTENSION_INFO_GET = {
+APPLY_INFO_GET = {
     'tags': ['Info'],
     'description': '학생 자신의 신청 정보를 조회합니다.',
     'parameters': [JWT_ACCESS_TOKEN],

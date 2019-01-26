@@ -2,17 +2,24 @@ from flask import jsonify
 from flasgger import swag_from
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
-from app.doc.account.info import EXTENSION_INFO_GET, BASIC_INFO_GET, POINT_HISTORY_GET
+from app.doc.account.info import APPLY_INFO_GET, BASIC_INFO_GET, POINT_HISTORY_GET
 from app.view.base_resource import AccountResource
-from app.model import PointStatusModel, StudentModel
+from app.model import StudentModel, PointStatusModel, ExtensionApplyModel, GoingoutApplyModel, StayApplyModel
 
 
-class ExtensionInfoView(AccountResource):
-    @swag_from(EXTENSION_INFO_GET)
+class ApplyInfoView(AccountResource):
+    @swag_from(APPLY_INFO_GET)
     @jwt_required
     def get(self):
-        # TODO: Extension Info View
-        pass
+        student_id = get_jwt_identity()
+
+        apply_info = dict(
+            extension11=ExtensionApplyModel.get_extension_apply_status(student_id, 11),
+            extension12=ExtensionApplyModel.get_extension_apply_status(student_id, 12),
+            goingOut=GoingoutApplyModel.get_goingout_apply(student_id),
+            stay=StayApplyModel.get_stay_apply_status(student_id)
+        )
+        return jsonify(apply_info)
 
 
 class BasicInfoView(AccountResource):
