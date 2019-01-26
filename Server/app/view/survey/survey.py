@@ -9,6 +9,7 @@ class SurveyListView(SurveyResource):
     @swag_from(SURVEY_LIST_GET)
     @jwt_required
     def get(self):
+        # TODO: Survey List View
         pass
 
 
@@ -16,4 +17,5 @@ class SurveyView(SurveyResource):
     @swag_from(SURVEY_GET)
     @jwt_required
     def get(self):
+        # TODO: Survey View
         pass

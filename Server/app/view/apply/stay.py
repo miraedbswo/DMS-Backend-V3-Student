@@ -9,9 +9,11 @@ class StayView(ApplyResource):
     @swag_from(STAY_GET)
     @jwt_required
     def get(self):
+        # TODO: Stay Apply Get
         pass
 
     @swag_from(STAY_POST)
     @jwt_required
     def post(self):
+        # TODO: Stay Apply Post
         pass

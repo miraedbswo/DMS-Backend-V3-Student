@@ -11,6 +11,7 @@ class ExtensionInfoView(AccountResource):
     @swag_from(EXTENSION_INFO_GET)
     @jwt_required
     def get(self):
+        # TODO: Extension Info View
         pass
 
 
@@ -32,4 +33,5 @@ class PointInfoView(AccountResource):
     @swag_from(POINT_HISTORY_GET)
     @jwt_required
     def get(self):
+        # TODO: Point Info View
         pass

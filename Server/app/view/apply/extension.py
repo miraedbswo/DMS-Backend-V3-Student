@@ -51,4 +51,5 @@ class ExtensionView(ApplyResource):
 class ExtensionMapView(ApplyResource):
     @swag_from(EXTENSION_MAP_GET)
     def get(self, time):
+        #TODO: Extension Map View
         pass

@@ -9,4 +9,5 @@ class FacilityReportView(ReportResource):
     @swag_from(FACILITY_REPORT_POST)
     @jwt_required
     def post(self):
+        # TODO: Facility Report View
         pass
