@@ -9,7 +9,7 @@ week = [0, 1, 2, 3, 4]
 weekday = ['mon', 'tue', 'wed', 'thu', 'fri']
 
 
-class MusicApplyModel(db.Model):
+class MusicApplyModel(db.Model, BaseMixin):
     __tablename__ = 'music_apply'
     id: int = db.Column(db.Integer, primary_key=True)
     # (0 = 월요일, 1 = 화요일, 2 = 수요일, 3 = 목요일, 4 = 금요일)
