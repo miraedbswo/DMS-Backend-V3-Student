@@ -1,6 +1,6 @@
 from flask import request, Response
 from flasgger import swag_from
-from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import get_jwt_identity, jwt_required
 
 from app.doc.apply.music import MUSIC_GET, MUSIC_POST
 from app.view.base_resource import ApplyResource
@@ -14,6 +14,7 @@ class MusicView(ApplyResource):
         return MusicApplyModel.get_music_apply_status()
 
     @swag_from(MUSIC_POST)
+    @jwt_required
     def post(self):
         # TODO: apply time filtering
         student_id = get_jwt_identity()

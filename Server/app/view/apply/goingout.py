@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import request, jsonify, Response
 from flasgger import swag_from
-from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import get_jwt_identity, jwt_required
 
 from app.doc.apply.goingout import GOINGOUT_GET, GOINGOUT_POST, GOINGOUT_DELETE
 from app.view.base_resource import ApplyResource
@@ -12,6 +12,7 @@ from app.exception import ApplyTimeException
 
 class GoingOutView(ApplyResource):
     @swag_from(GOINGOUT_GET)
+    @jwt_required
     def get(self):
         studnet_id = get_jwt_identity()
         goingout_applies = GoingoutApplyModel.get_goingout_apply(studnet_id)
@@ -30,6 +31,7 @@ class GoingOutView(ApplyResource):
         return jsonify(goingout_applies)
 
     @swag_from(GOINGOUT_POST)
+    @jwt_required
     def post(self):
         request_time = datetime.now()
         if not (0 <= request_time.weekday() <= 3 or request_time.weekday() == 4 and request_time.hour <= 21):
@@ -43,6 +45,7 @@ class GoingOutView(ApplyResource):
         return Response('', 201)
 
     @swag_from(GOINGOUT_DELETE)
+    @jwt_required
     def delete(self):
         student_id = get_jwt_identity()
         request_time = datetime.now()

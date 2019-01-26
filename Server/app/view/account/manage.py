@@ -1,14 +1,15 @@
+from flask import request, Response
+from flask_jwt_extended import get_jwt_identity, jwt_required
+from flasgger import swag_from
+
 from app.doc.account.manage import CHANGE_PW_PATCH, FIND_PW_POST
 from app.view.base_resource import AccountResource
 from app.model import StudentModel
 
-from flask import request, Response
-from flask_jwt_extended import get_jwt_identity
-from flasgger import swag_from
-
 
 class ManagePasswordView(AccountResource):
     @swag_from(CHANGE_PW_PATCH)
+    @jwt_required
     def patch(self):
         id = get_jwt_identity()
         cur_pw = request.json['currentPassword']

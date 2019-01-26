@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flasgger import swag_from
 from flask import request, Response
-from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from slacker import Slacker
 
 from app.doc.report.bug_report import BUG_REPORT_POST
@@ -19,6 +19,7 @@ class BugReportView(ReportResource):
     }
 
     @swag_from(BUG_REPORT_POST)
+    @jwt_required
     def post(self, platform: int):
         student_id = get_jwt_identity()
         student_name = StudentModel.get_student_by_id(student_id).name
