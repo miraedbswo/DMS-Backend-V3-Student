@@ -21,8 +21,16 @@ class GoingoutApplyModel(db.Model, BaseMixin):
         self.reason = reason
 
     @staticmethod
+    def post_goingout_apply(student_id: str, go_out_date: datetime, return_date: datetime, reason: str):
+        GoingoutApplyModel(student_id, go_out_date, return_date, reason).save()
+
+    @staticmethod
     def get_goingout_apply(student_id: str) -> List['GoingoutApplyModel']:
-        return GoingoutApplyModel.query.filter_by(student_id=student_id).all()
+        applies = GoingoutApplyModel.query.filter_by(student_id=student_id).all()
+        if not applies:
+            raise NoContentException()
+
+        return applies
 
     @staticmethod
     def delete_goingout_apply(apply_id: int, student_id: str):
