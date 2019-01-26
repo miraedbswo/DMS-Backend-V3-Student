@@ -1,4 +1,4 @@
-from app.doc import SAMPLE_OBJECT_IDS, JWT_ACCESS_TOKEN, parameter
+from app.doc import JWT_ACCESS_TOKEN, parameter
 
 FACILITY_REPORT_POST = {
     'tags': ['Report'],
@@ -10,12 +10,7 @@ FACILITY_REPORT_POST = {
     ],
     'responses': {
         '201': {
-            'description': '시설고장 신고에 성공했으며, 업로드된 시설고장 신고의 ID를 응답합니다.',
-            'examples': {
-                '': {
-                    'id': SAMPLE_OBJECT_IDS[0]
-                }
-            }
+            'description': '시설고장 신고에 성공했으며, 업로드된 시설고장 신고의 ID를 응답합니다.'
         },
         '403': {
             'description': '권한 없음'

@@ -13,3 +13,5 @@ from .notice import NoticeModel, RuleModel, QNAModel
 from .point.status import PointStatusModel
 from .point.history import PointHistoryModel
 from .point.item import PointItemModel
+
+from .report import FacilityReportModel
