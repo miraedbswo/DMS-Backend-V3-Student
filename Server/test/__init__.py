@@ -66,7 +66,7 @@ def check_status_code(status_code):
         @wraps(fn)
         def wrapper(self, *args, **kwargs):
             rv = fn(self, *args, **kwargs)
-            self.assertEqual(rv.status_code, status_code)
+            self.assertEqual(status_code, rv.status_code)
 
         return wrapper
 
