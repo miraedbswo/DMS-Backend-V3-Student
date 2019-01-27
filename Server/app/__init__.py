@@ -19,6 +19,7 @@ def register_error_handler(flask_app: Flask):
     flask_app.register_error_handler(exception.ResetContentException, http_exception_handler)
     flask_app.register_error_handler(exception.WrongAuthExcption, http_exception_handler)
     flask_app.register_error_handler(exception.ApplyTimeException, http_exception_handler)
+    flask_app.register_error_handler(exception.BadRequestException, http_exception_handler)
 
 
 def create_app(config_name: str) -> Flask:

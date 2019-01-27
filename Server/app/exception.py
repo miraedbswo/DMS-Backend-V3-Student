@@ -23,3 +23,8 @@ class WrongAuthExcption(DMSException):
 class ApplyTimeException(DMSException):
     code = 409
     description = 'Can\'t Apply Time'
+
+
+class BadRequestException(DMSException):
+    code = 400
+    description = 'Bad Parameter Request'
