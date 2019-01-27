@@ -5,9 +5,11 @@ from flasgger import swag_from
 from app.doc.account.manage import CHANGE_PW_PATCH, FIND_PW_POST
 from app.view.base_resource import AccountResource
 from app.model import StudentModel
+from app.util.json_schema import json_type_validate, PW_PATCH_JSON, PW_POST_JSON
 
 
 class ManagePasswordView(AccountResource):
+    @json_type_validate(PW_PATCH_JSON)
     @swag_from(CHANGE_PW_PATCH)
     @jwt_required
     def patch(self):
@@ -18,6 +20,7 @@ class ManagePasswordView(AccountResource):
         StudentModel.change_pw(id, cur_pw, new_pw)
         return Response('', 201)
 
+    @json_type_validate(PW_POST_JSON)
     @swag_from(FIND_PW_POST)
     def post(self):
         id = request.json['id']

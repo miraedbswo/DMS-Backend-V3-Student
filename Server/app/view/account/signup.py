@@ -4,9 +4,11 @@ from flasgger import swag_from
 from app.doc.account.signup import SIGNUP_POST
 from app.view.base_resource import AccountResource
 from app.model import UnsignedStudentModel, StudentModel
+from app.util.json_schema import json_type_validate, SIGNUP_POST_JSON
 
 
 class SignupView(AccountResource):
+    @json_type_validate(SIGNUP_POST_JSON)
     @swag_from(SIGNUP_POST)
     def post(self):
         uuid = request.json['uuid']

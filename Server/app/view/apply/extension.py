@@ -8,6 +8,8 @@ from app.doc.apply.extension import EXTENSION_GET, EXTENSION_POST, EXTENSION_DEL
 from app.view.base_resource import ApplyResource
 from app.model import ExtensionApplyModel
 from app.exception import NoContentException, ApplyTimeException
+from app.util.json_schema import json_type_validate, EXTENSION_POST_JSON
+
 
 extension_apply_start = {11: Time(17, 30), 12: Time(20, 30)}
 extension_apply_end = {11: Time(17, 30), 12: Time(22, 0)}
@@ -25,6 +27,7 @@ class ExtensionView(ApplyResource):
 
         return jsonify(extension_apply)
 
+    @json_type_validate(EXTENSION_POST_JSON)
     @swag_from(EXTENSION_POST)
     @jwt_required
     def post(self, time):
