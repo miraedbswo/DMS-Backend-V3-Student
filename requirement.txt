@@ -6,3 +6,4 @@ flasgger
 bcrypt
 freezegun
 slacker
+psycopg2

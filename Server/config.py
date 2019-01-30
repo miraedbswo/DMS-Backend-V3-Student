@@ -26,6 +26,7 @@ class Config:
     }
 
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:root@dms.istruly.sexy/dms-test'
 
 
 class DevelopmentConfig(Config):
