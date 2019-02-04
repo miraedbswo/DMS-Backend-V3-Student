@@ -17,6 +17,8 @@ class PointStatusModel(db.Model, BaseMixin):
     @staticmethod
     def get_point_status(student_id: str):
         point_status: PointStatusModel = PointStatusModel.query.filter_by(student_id=student_id).first()
+        if point_status is None:
+            point_status = PointStatusModel(student_id).save()
 
         return {
             'badPoint': point_status.bad_pint,

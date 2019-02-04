@@ -3,7 +3,7 @@ from flasgger import swag_from
 
 from app.doc.account.signup import SIGNUP_POST
 from app.view.base_resource import AccountResource
-from app.model import UnsignedStudentModel, StudentModel
+from app.model import UnsignedStudentModel, StudentModel, PointStatusModel
 from app.util.json_schema import json_type_validate, SIGNUP_POST_JSON
 
 
@@ -17,6 +17,7 @@ class SignupView(AccountResource):
         id = request.json['id']
         pw = request.json['password']
         StudentModel.signup(id, pw, unsigned_student)
+        PointStatusModel(id).save()
         unsigned_student.delete()
 
         return Response('', 201)
