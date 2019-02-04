@@ -17,8 +17,9 @@ info_api.add_resource(ApplyInfoView, '/apply')
 info_api.add_resource(BasicInfoView, '/basic')
 info_api.add_resource(PointInfoView, '/point')
 
-from .manage import ManagePasswordView
+from .manage import ManagePasswordView, FindPWGetView
 account_api.add_resource(ManagePasswordView, '/pw')
+account_api.add_resource(FindPWGetView, '/pw/<uuid>')
 
 from .signup import SignupView
 account_api.add_resource(SignupView, '/signup')

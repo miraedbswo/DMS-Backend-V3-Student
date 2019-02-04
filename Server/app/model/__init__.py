@@ -1,5 +1,6 @@
 from .account.student import StudentModel
 from .account.unsigned_student import UnsignedStudentModel
+from .account.find_pw import FindPWModel
 
 from .apply.extension import ExtensionApplyModel
 from .apply.goingout import GoingoutApplyModel

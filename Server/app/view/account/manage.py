@@ -1,10 +1,13 @@
-from flask import request, Response
+import smtplib
+from email.mime.text import MIMEText
+
+from flask import request, Response, current_app
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flasgger import swag_from
 
 from app.doc.account.manage import CHANGE_PW_PATCH, FIND_PW_POST
 from app.view.base_resource import AccountResource
-from app.model import StudentModel
+from app.model import StudentModel, FindPWModel
 from app.util.json_schema import json_type_validate, PW_PATCH_JSON, PW_POST_JSON
 
 
@@ -26,6 +29,24 @@ class ManagePasswordView(AccountResource):
         id = request.json['id']
         email = request.json['email']
         student = StudentModel.get_student_by_id_email(id, email)
+        find_pw = FindPWModel(student.id)
 
-        # TODO: Send Email
+        smtp = smtplib.SMTP(current_app.config.MAIL_SERVER, current_app.config.MAIL_PORT)
+        smtp.starttls()
+        smtp.login(current_app.config.MAIL_ID, current_app.config.MAIL_PW)
+
+        msg = MIMEText(f'http://dms.istruly.sexy/account/pw/{find_pw.id}')
+        msg['Subject'] = 'dms 비밀번호 초기화 링크'
+        msg['To'] = student.email
+        msg['From'] = current_app.config.MAIL_ID
+
+        smtp.sendmail(current_app.config.MAIL_ID, student.email, msg)
+
         return Response('', 201)
+
+
+class FindPWGetView(AccountResource):
+    def get(self, uuid: str):
+        FindPWModel.check_uuid(uuid=uuid)
+
+        return Response('', 200)
