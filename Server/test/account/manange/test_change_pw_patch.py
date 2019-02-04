@@ -9,7 +9,7 @@ class TestChangePassword(TCBase, AccountRequest):
     @check_status_code(205)
     def test_same_type_of_two_password(self) -> Response:
         # 현재 비밀번호와 새 비밀번호가 동일 할 때의 205 status code check
-        rv: Response = self.request_change_pw(self.access_token, 'current_pw', 'current_pw')
+        rv: Response = self.request_change_pw(self.access_token, new_password='test')
 
         return rv
 
@@ -22,8 +22,5 @@ class TestChangePassword(TCBase, AccountRequest):
 
     @check_status_code(201)
     def test_password_change_successful(self) -> Response:
-        new_pw = 'new_pw'
-        rv: Response = self.request_change_pw(self.access_token, new_password=new_pw)
-
-        self.assertTrue(bcrypt.checkpw(new_pw, self.test_account.pw))
+        rv: Response = self.request_change_pw(self.access_token)
         return rv

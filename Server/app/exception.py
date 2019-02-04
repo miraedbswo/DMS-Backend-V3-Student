@@ -20,6 +20,11 @@ class WrongAuthExcption(DMSException):
     description = 'Wrong Auth'
 
 
+class ForbiddenException(DMSException):
+    code = 403
+    description = 'Forbidden'
+
+
 class ApplyTimeException(DMSException):
     code = 409
     description = 'Can\'t Apply Time'

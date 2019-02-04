@@ -3,7 +3,7 @@ import re
 from typing import Union
 
 from app.extension import db
-from app.exception import NoContentException, ResetContentException, WrongAuthExcption
+from app.exception import NoContentException, ResetContentException, WrongAuthExcption, ForbiddenException
 from app.model.mixin import BaseMixin
 from app.model.account.unsigned_student import UnsignedStudentModel
 
@@ -58,7 +58,10 @@ class StudentModel(db.Model, BaseMixin):
         if student is None:
             raise WrongAuthExcption()
 
-        if not bcrypt.checkpw(current_pw, student.pw):
+        if not bcrypt.checkpw(current_pw.encode(), student.pw):
+            raise ForbiddenException()
+
+        if bcrypt.checkpw(new_pw.encode(), student.pw):
             raise ResetContentException()
 
         student.pw = bcrypt.hashpw(new_pw.encode(), bcrypt.gensalt())
