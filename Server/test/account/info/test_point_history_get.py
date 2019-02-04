@@ -10,7 +10,7 @@ class TestPointInfo(TCBase, InfoRequest):
         default_data = []
         rv: Response = self.request_point_info(self.access_token)
 
-        self.assertEqual(default_data, rv.json)
+        self.assertEqual(default_data, rv.json['point_history'])
 
         return rv
 

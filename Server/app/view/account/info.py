@@ -17,7 +17,7 @@ class ApplyInfoView(AccountResource):
             extension11=ExtensionApplyModel.get_extension_apply_status(student_id, 11),
             extension12=ExtensionApplyModel.get_extension_apply_status(student_id, 12),
             goingOut=GoingoutApplyModel.get_goingout_apply(student_id),
-            stay=StayApplyModel.get_stay_apply_status(student_id)
+            stay=StayApplyModel.get_stay_apply_status(student_id)['value']
         )
         return jsonify(apply_info)
 

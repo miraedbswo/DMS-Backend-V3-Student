@@ -1,3 +1,4 @@
+from datetime import datetime
 from app.model import ExtensionApplyModel, GoingoutApplyModel, StayApplyModel
 
 from test import TCBase, check_status_code
@@ -19,7 +20,7 @@ class TestApplyInfo(TCBase, InfoRequest):
         default_data = {
             "extension11": None,
             "extension12": None,
-            "goingOut": [],
+            "goingOut": None,
             "stay": 4
         }
 
@@ -59,16 +60,16 @@ class TestApplyInfo(TCBase, InfoRequest):
     def test_set_goingout_status(self):
         goingout_test_data = [
             {
-                'goOutDate': '2019-01-01 12:30',
-                'reason': '2019-01-01 17:30',
-                'returnDate': '영화 관람'
+                'goOutDate': '2019-01-01 12:30:00',
+                'returnDate': '2019-01-01 17:30:00',
+                'reason': '영화 관람'
             }
         ]
 
         GoingoutApplyModel.post_goingout_apply(
             'test',
-            '2019-01-01 12:30',
-            '2019-01-01 17:30',
+            datetime(2019, 1, 1, 12, 30),
+            datetime(2019, 1, 1, 17, 30),
             '영화 관람'
         )
         rv = self.request_apply_info(self.access_token)
