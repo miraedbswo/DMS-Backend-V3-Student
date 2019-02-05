@@ -89,13 +89,14 @@ class ApplyRequest:
         )
         return rv
 
-    def request_music_post(self, jwt: str, singer: str, music_name: str) -> Response:
+    def request_music_post(self, jwt: str, day:int, singer: str, music_name: str) -> Response:
         rv = self.client.post(
             '/apply/music',
             headers={'Authorization': jwt},
             json={
                 'singer': singer,
-                'musicName': music_name
+                'musicName': music_name,
+                'day': day
             }
         )
         return rv

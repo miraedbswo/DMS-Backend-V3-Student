@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import List
 
 from app.extension import db
-from app.exception import ResetContentException
+from app.exception import ResetContentException, NoContentException
 from app.model.mixin import BaseMixin
 
 week = [0, 1, 2, 3, 4]
@@ -28,32 +28,33 @@ class MusicApplyModel(db.Model, BaseMixin):
 
     @staticmethod
     def get_music_apply() -> List['MusicApplyModel']:
-        return MusicApplyModel.query.all().order_by(MusicApplyModel.day, MusicApplyModel.apply_date)
+        return MusicApplyModel.query.order_by(MusicApplyModel.day, MusicApplyModel.apply_date).all()
 
     @staticmethod
     def get_music_apply_status() -> dict:
         status = {week: [] for week in weekday}
         music_apply = MusicApplyModel.get_music_apply()
 
+        if not music_apply:
+            raise NoContentException()
+
         if music_apply is not None:
             for apply in music_apply:
                 status[weekday[apply.day]].append(
-                    [
-                        {
-                            'id': MusicApplyModel.id,
-                            'musicName': MusicApplyModel.song_name,
-                            'singer': MusicApplyModel.singer,
-                            'studentId': MusicApplyModel.student_id,
-                            'applyDate': str(MusicApplyModel.apply_date)
-                        }
-                    ]
+                    {
+                        'id': apply.id,
+                        'musicName': apply.song_name,
+                        'singer': apply.singer,
+                        'studentId': apply.student_id,
+                        'applyDate': str(apply.apply_date)
+                    }
                 )
 
         return status
 
     @staticmethod
     def post_music_apply(day: int, student_id: str, singer: str, song_name: str):
-        if len(MusicApplyModel.query.filter_by(day=day).all()) > 5:
+        if len(MusicApplyModel.query.filter_by(day=day).all()) >= 5:
             raise ResetContentException()
         MusicApplyModel(day, student_id, singer, song_name).save()
 

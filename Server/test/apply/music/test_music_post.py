@@ -1,3 +1,4 @@
+from datetime import date, timedelta
 from flask import Response
 from freezegun import freeze_time
 
@@ -5,24 +6,29 @@ from test import TCBase, check_status_code
 from test.request import ApplyRequest
 from app.model.apply import MusicApplyModel
 
+tomorrow = str(date.today() + timedelta(1))
+
 
 class TestPostMusic(TCBase, ApplyRequest):
     @check_status_code(201)
     def test_post_music_apply_status(self) -> Response:
         test_music_apply_data = {
             'singer': '아이유',
-            'song_name': '삐삐'
+            'song_name': '삐삐',
+            'studentId': 'test'
         }
         rv: Response = self.request_music_post(
             self.access_token,
+            0,
             test_music_apply_data['singer'],
             test_music_apply_data['song_name']
         )
 
         status = MusicApplyModel.get_music_apply_status()
         status_data = {
-            'singer': status['mon'].singer,
-            'song_name': status['mon'].musicName
+            'singer': status['mon'][0]['singer'],
+            'song_name': status['mon'][0]['musicName'],
+            'studentId': status['mon'][0]['studentId']
         }
 
         self.assertDictEqual(test_music_apply_data, status_data)
@@ -34,14 +40,15 @@ class TestPostMusic(TCBase, ApplyRequest):
         for _ in range(5):
             MusicApplyModel.post_music_apply(0, 'test', 'singer', 'song')
 
-        rv: Response = self.request_music_post(self.access_token, 'test', 'test')
+        rv: Response = self.request_music_post(self.access_token, 0, 'test', 'test')
         return rv
 
-    @freeze_time('2019-01-04 18:00:00')
+    @freeze_time(f'{tomorrow} 18:00:00')
     @check_status_code(409)
     def test_apply_music_outside_time(self) -> Response:
         rv: Response = self.request_music_post(
             self.access_token,
+            0,
             '아이유',
             '삐삐'
         )

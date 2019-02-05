@@ -10,7 +10,8 @@ class TestGetMusic(TCBase, ApplyRequest):
     def test_get_music_apply_status(self) -> Response:
         test_music_apply_data = {
             'singer': '아이유',
-            'song_name': '삐삐'
+            'song_name': '삐삐',
+            'studentId': 'test'
         }
         MusicApplyModel.post_music_apply(
             day=0,
@@ -20,9 +21,11 @@ class TestGetMusic(TCBase, ApplyRequest):
         )
 
         rv: Response = self.request_music_get()
+        print(rv.json)
         rv_data = {
-            'singer': rv.json['mon'].singer,
-            'song_name': rv.json['mon'].musicName
+            'singer': rv.json['mon'][0]['singer'],
+            'song_name': rv.json['mon'][0]['musicName'],
+            'studentId': rv.json['mon'][0]['studentId']
         }
 
         self.assertDictEqual(test_music_apply_data, rv_data)
@@ -32,6 +35,5 @@ class TestGetMusic(TCBase, ApplyRequest):
     def test_no_content_music(self) -> Response:
         rv: Response = self.request_music_get()
 
-        self.assertIsNone(rv.json)
         return rv
 
