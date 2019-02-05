@@ -24,7 +24,7 @@ class TCBase(unittest.TestCase):
         self.test_context = self.app.app_context()
 
         with self.test_context:
-            self.access_token = 'Bearer '+create_access_token('test', expires_delta=timedelta(2))
+            self.access_token = 'Bearer '+create_access_token('test', expires_delta=timedelta(100))
             self.refresh_token = create_refresh_token('test')
 
         self.test_context.push()
