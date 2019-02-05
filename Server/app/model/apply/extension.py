@@ -52,7 +52,7 @@ class ExtensionApplyModel(db.Model, BaseMixin):
 
     @staticmethod
     def delete_extension_apply(student_id: str, time: int):
-        extension = ExtensionApplyModel.get_extension_apply(student_id, time).first()
+        extension = ExtensionApplyModel.get_extension_apply(student_id, time)
         if extension is None:
             raise NoContentException()
 
