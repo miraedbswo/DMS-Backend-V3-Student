@@ -31,7 +31,6 @@ class TestDeleteExtension(TCBase, ApplyRequest):
     @freeze_time(f"{tomorrow} 19:30:00")
     @check_status_code(200)
     def test_delete_extension_successful(self) -> Response:
-        print(self.access_token)
         rv: Response = self.request_extension_delete(self.access_token, 11)
 
         self.assertIsNone(ExtensionApplyModel.get_extension_apply_status('test', 11))
