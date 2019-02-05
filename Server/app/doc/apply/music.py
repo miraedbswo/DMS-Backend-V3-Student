@@ -103,8 +103,6 @@ MUSIC_GET = {
 MUSIC_POST = {
     'tags': ['Apply'],
     'description': '''기상음악 신청
-    
-    신청 시간: 일요일 20:30 - 금요일 12:00
     초기화 시간: 금요일 12:00
     ''',
     'parameters': [
@@ -122,9 +120,6 @@ MUSIC_POST = {
         },
         '403': {
             'description': '권한 없음'
-        },
-        '409': {
-            'description': '기상 음악 신청 실패(신청 가능 시간 아님)'
         }
     }
 }

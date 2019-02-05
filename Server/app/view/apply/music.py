@@ -18,7 +18,6 @@ class MusicView(ApplyResource):
     @swag_from(MUSIC_POST)
     @jwt_required
     def post(self):
-        # TODO: apply time filtering
         student_id = get_jwt_identity()
         day = request.json['day']
         singer = request.json['singer']

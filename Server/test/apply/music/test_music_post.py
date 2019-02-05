@@ -42,15 +42,3 @@ class TestPostMusic(TCBase, ApplyRequest):
 
         rv: Response = self.request_music_post(self.access_token, 0, 'test', 'test')
         return rv
-
-    @freeze_time(f'{tomorrow} 18:00:00')
-    @check_status_code(409)
-    def test_apply_music_outside_time(self) -> Response:
-        rv: Response = self.request_music_post(
-            self.access_token,
-            0,
-            '아이유',
-            '삐삐'
-        )
-
-        return rv
