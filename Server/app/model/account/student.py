@@ -18,7 +18,7 @@ class StudentModel(db.Model, BaseMixin):
 
     def __init__(self, id: str, pw: str, name: str, number: int, email: str):
         self.id = id
-        self.pw = bcrypt.hashpw(pw.encode(), bcrypt.gensalt())
+        self.pw = bcrypt.hashpw(pw.encode('utf-8'), bcrypt.gensalt()).decode()
         self.name = name
         self.number = number
         self.email = email
@@ -48,7 +48,7 @@ class StudentModel(db.Model, BaseMixin):
     @staticmethod
     def login(id: str, pw: str) -> Union[None, 'StudentModel']:
         student: StudentModel = StudentModel.get_student_by_id(id)
-        if not student or not bcrypt.checkpw(pw.encode(), student.pw):
+        if not student or not bcrypt.checkpw(pw.encode('utf-8'), student.pw.encode('utf-8')):
             raise NoContentException()
         return student
 
@@ -64,13 +64,13 @@ class StudentModel(db.Model, BaseMixin):
         if bcrypt.checkpw(new_pw.encode(), student.pw):
             raise ResetContentException()
 
-        student.pw = bcrypt.hashpw(new_pw.encode(), bcrypt.gensalt())
+        student.pw = bcrypt.hashpw(new_pw.encode(), bcrypt.gensalt()).decode()
         db.session.commit()
 
     @staticmethod
     def reset_pw(id: str):
         student: StudentModel = StudentModel.get_student_by_id(id)
-        student.pw = bcrypt.hashpw('1234'.encode(), bcrypt.gensalt())
+        student.pw = bcrypt.hashpw('1234'.encode(), bcrypt.gensalt()).decode()
         db.session.commit()
 
     @db.validates('id')
