@@ -58,10 +58,10 @@ class StudentModel(db.Model, BaseMixin):
         if student is None:
             raise WrongAuthExcption()
 
-        if not bcrypt.checkpw(current_pw.encode(), student.pw):
+        if not bcrypt.checkpw(current_pw.encode(), student.pw.encode()):
             raise ForbiddenException()
 
-        if bcrypt.checkpw(new_pw.encode(), student.pw):
+        if bcrypt.checkpw(new_pw.encode(), student.pw.encode()):
             raise ResetContentException()
 
         student.pw = bcrypt.hashpw(new_pw.encode(), bcrypt.gensalt()).decode()
