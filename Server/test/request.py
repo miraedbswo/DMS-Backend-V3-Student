@@ -142,7 +142,7 @@ class InfoRequest:
 
 class MealRequest:
     def request_meal(self, date: str) -> Response:
-        rv = self.client.post(f'/meal/{date}')
+        rv = self.client.get(f'/meal/{date}')
         return rv
 
 

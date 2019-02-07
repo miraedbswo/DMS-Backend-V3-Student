@@ -11,6 +11,7 @@ from app.util.json_schema import json_type_validate, MUSIC_POST_JSON
 
 class MusicView(ApplyResource):
     @swag_from(MUSIC_GET)
+    @jwt_required
     def get(self):
         return MusicApplyModel.get_music_apply_status()
 
