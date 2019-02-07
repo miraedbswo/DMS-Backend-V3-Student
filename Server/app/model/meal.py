@@ -20,7 +20,7 @@ class MealModel(db.Model, BaseMixin):
 
     @staticmethod
     def get_meal(date: Date) -> dict:
-        meal_list: List['MealModel'] = MealModel.query.filter_by(date=date).all().order_by('type')
+        meal_list: List['MealModel'] = MealModel.query.filter_by(date=date).order_by('type')
 
         return {
             str(date): {

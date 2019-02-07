@@ -32,4 +32,3 @@ class TestGetMeal(TCBase, MealRequest):
         rv: Response = self.request_meal('2019-01-00')
 
         return rv
-
