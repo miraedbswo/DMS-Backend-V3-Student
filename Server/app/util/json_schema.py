@@ -32,6 +32,7 @@ EXTENSION_POST_JSON = dict(classNum=int, seatNum=int)
 GOINGOUT_DELETE_JSON = dict(applyId=int)
 GOINGOUT_POST_JSON = dict(goOutDate=str, returnDate=str, reason=str)
 MUSIC_POST_JSON = dict(day=int, singer=str, musicName=str)
+MUSIC_DELETE_JSON = dict(appyId=int)
 STAY_POST_JSON = dict(value=int)
 
 # Report

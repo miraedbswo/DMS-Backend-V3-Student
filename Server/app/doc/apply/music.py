@@ -124,3 +124,22 @@ MUSIC_POST = {
     }
 }
 
+MUSIC_DELETE = {
+    'tags': ['Apply'],
+    'description': '기상음악 신청 취소',
+    'parameters': [
+        JWT_ACCESS_TOKEN,
+        parameter('applyId', '신청 아이디', type_='int')
+    ],
+    'responses': {
+        '200': {
+            'description': '기상음악 신청 성'
+        },
+        '204': {
+            'description': '없는 apply id'
+        },
+        '403': {
+            'description': '권한 없음'
+        }
+    }
+}
