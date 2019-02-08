@@ -4,6 +4,7 @@ from typing import List
 from app.extension import db
 from app.exception import ResetContentException, NoContentException, ForbiddenException
 from app.model.mixin import BaseMixin
+from app.model import StudentModel
 
 week = [0, 1, 2, 3, 4]
 weekday = ['mon', 'tue', 'wed', 'thu', 'fri']
@@ -40,13 +41,15 @@ class MusicApplyModel(db.Model, BaseMixin):
 
         if music_apply is not None:
             for apply in music_apply:
+                student = StudentModel.get_student_by_id(apply.student_id)
                 status[weekday[apply.day]].append(
                     {
                         'id': apply.id,
                         'musicName': apply.song_name,
                         'singer': apply.singer,
                         'studentId': apply.student_id,
-                        'applyDate': str(apply.apply_date)
+                        'applyDate': str(apply.apply_date),
+                        'studentName': student.name
                     }
                 )
 
