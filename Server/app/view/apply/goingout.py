@@ -26,7 +26,7 @@ class GoingOutView(ApplyResource):
                     "reason": apply.reason,
                     "returnDate": str(apply.return_date)
                 }
-            for apply in goingout_applies]
+                for apply in goingout_applies]
         }
 
         return jsonify(goingout_applies)
@@ -60,6 +60,6 @@ class GoingOutView(ApplyResource):
         return Response('', 200)
 
     def get_datetime(self, request_date: str) -> datetime:
-        date = request_date.split()[0].split('-')
-        time = request_date.split()[1].split(':')
+        date = map(int, request_date.split()[0].split('-'))
+        time = map(int, request_date.split()[1].split(':'))
         return datetime(*date, *time)
