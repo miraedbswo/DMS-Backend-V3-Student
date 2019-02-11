@@ -13,7 +13,7 @@ def register_extension(flask_app: Flask):
     extension.cors.init_app(flask_app)
 
 
-def register_error_handler(flask_app: Flask):
+def register_hook(flask_app: Flask):
     from app import exception
     from app.hook.exception_handler import http_exception_handler
     flask_app.register_error_handler(exception.NoContentException, http_exception_handler)
@@ -22,12 +22,19 @@ def register_error_handler(flask_app: Flask):
     flask_app.register_error_handler(exception.ApplyTimeException, http_exception_handler)
     flask_app.register_error_handler(exception.BadRequestException, http_exception_handler)
 
+    from app.hook.after_request import new_access_token
+    flask_app.after_request(new_access_token)
+
+    from app.hook.before_request import check_secret_header
+    flask_app.before_request(check_secret_header)
+
 
 def create_app(config_name: str) -> Flask:
     flask_app = Flask(__name__)
     flask_app.config.from_object(config[config_name])
 
     register_extension(flask_app)
+    register_hook(flask_app)
     Router(flask_app).register_blueprint()
 
     return flask_app
