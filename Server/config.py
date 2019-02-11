@@ -33,6 +33,8 @@ class Config:
     MAIL_PW = 'dmsM@ail2019'
     MAIL_PORT = 587
 
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=10)
+
 
 class DevelopmentConfig(Config):
     pass
@@ -41,7 +43,7 @@ class DevelopmentConfig(Config):
 class TestConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = "sqlite:///test.db"
-    JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=10)
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=100)
 
 
 class ProductionConfig(Config):
