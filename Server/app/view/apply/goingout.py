@@ -16,7 +16,7 @@ class GoingOutView(ApplyResource):
     @jwt_required
     def get(self):
         studnet_id = get_jwt_identity()
-        goingout_applies = GoingoutApplyModel.get_goingout_apply(studnet_id)
+        goingout_applies = GoingoutApplyModel.get_goingout_apply(studnet_id) or []
 
         goingout_applies = {
             'goingOut': [
