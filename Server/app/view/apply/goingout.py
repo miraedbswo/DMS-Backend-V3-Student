@@ -15,18 +15,19 @@ class GoingOutView(ApplyResource):
     @swag_from(GOINGOUT_GET)
     @jwt_required
     def get(self):
-        studnet_id = get_jwt_identity()
-        goingout_applies = GoingoutApplyModel.get_goingout_apply(studnet_id) or []
+        student_id = get_jwt_identity()
+        goingout_applies = GoingoutApplyModel.get_goingout_apply(student_id)
 
         goingout_applies = {
             'goingOut': [
                 {
-                    "goOutDate": str(apply.go_out_date),
-                    "id": apply.id,
-                    "reason": apply.reason,
-                    "returnDate": str(apply.return_date)
+                    "goOutDate": str(apply['go_out_date']),
+                    "id": student_id,
+                    "reason": apply['reason'],
+                    "returnDate": str(apply['return_date'])
                 }
-                for apply in goingout_applies]
+                for apply in goingout_applies
+            ]
         }
 
         return jsonify(goingout_applies)

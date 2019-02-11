@@ -29,15 +29,16 @@ class GoingoutApplyModel(db.Model, BaseMixin):
         applies: List['GoingoutApplyModel'] = GoingoutApplyModel.query.filter_by(student_id=student_id).all()
 
         if not applies:
-            return None
+            return []
 
         applies = [
             {
-                'goOutDate': str(apply.go_out_date),
-                'returnDate': str(apply.return_date),
+                'go_out_date': str(apply.go_out_date),
+                'return_date': str(apply.return_date),
                 'reason': apply.reason
             }
-        for apply in applies]
+            for apply in applies
+        ]
 
         return applies
 
