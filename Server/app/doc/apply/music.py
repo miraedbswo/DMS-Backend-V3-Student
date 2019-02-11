@@ -15,14 +15,16 @@ MUSIC_GET = {
                             'studentName': '누구누구',
                             'singer': 'aaa',
                             'musicName': 'aaa',
-                            'applyDate': '2019-01-07 11:27:25.689022'
+                            'applyDate': '2019-01-07 11:27:25.689022',
+                            'studentId': 'asdf222'
                         },
                         {
                             'id': 10,
                             'studentName': '누구누구',
                             'singer': 'aaa',
                             'musicName': 'aaa',
-                            'applyDate': '2019-02-07 11:27:25.689022'
+                            'applyDate': '2019-02-07 11:27:25.689022',
+                            'studentId': 'asdf111'
                         }
                     ],
                     'tue': [
@@ -31,14 +33,16 @@ MUSIC_GET = {
                             'studentName': '누구누구',
                             'singer': 'aaa',
                             'musicName': 'aaa',
-                            'applyDate': '2019-03-07 11:27:25.689022'
+                            'applyDate': '2019-03-07 11:27:25.689022',
+                            'studentId': 'asdf444'
                         },
                         {
                             'id': 3,
                             'studentName': '누구누구',
                             'singer': 'aaa',
                             'musicName': 'aaa',
-                            'applyDate': '2019-04-07 11:27:25.689022'
+                            'applyDate': '2019-04-07 11:27:25.689022',
+                            'studentId': 'asdf12'
                         }
                     ],
                     'wed': [
@@ -47,14 +51,16 @@ MUSIC_GET = {
                             'studentName': '누구누구',
                             'singer': 'aaa',
                             'musicName': 'aaa',
-                            'applyDate': '2019-01-03 11:27:25.689022'
+                            'applyDate': '2019-01-03 11:27:25.689022',
+                            'studentId': 'asd63f'
                         },
                         {
                             'id': 5,
                             'studentName': '누구누구',
                             'singer': 'aaa',
                             'musicName': 'aaa',
-                            'applyDate': '2019-01-08 11:27:25.689022'
+                            'applyDate': '2019-01-08 11:27:25.689022',
+                            'studentId': 'as321df'
                         }
                     ],
                     'thu': [
@@ -63,14 +69,16 @@ MUSIC_GET = {
                             'studentName': '누구누구',
                             'singer': 'aaa',
                             'musicName': 'aaa',
-                            'applyDate': '2019-01-17 11:27:25.689022'
+                            'applyDate': '2019-01-17 11:27:25.689022',
+                            'studentId': 'asd123f'
                         },
                         {
                             'id': 7,
                             'studentName': '누구누구',
                             'singer': 'aaa',
                             'musicName': 'aaa',
-                            'applyDate': '2019-01-27 11:27:25.689022'
+                            'applyDate': '2019-01-27 11:27:25.689022',
+                            'studentId': 'asredf'
                         }
                     ],
                     'fri': [
@@ -79,14 +87,16 @@ MUSIC_GET = {
                             'studentName': '누구누구',
                             'singer': 'aaa',
                             'musicName': 'aaa',
-                            'applyDate': '2019-01-12 11:27:25.689022'
+                            'applyDate': '2019-01-12 11:27:25.689022',
+                            'studentId': 'asedf'
                         },
                         {
                             'id': 9,
                             'studentName': '누구누구',
                             'singer': 'aaa',
                             'musicName': 'aaa',
-                            'applyDate': '2019-01-23 11:27:25.689022'
+                            'applyDate': '2019-01-23 11:27:25.689022',
+                            'studentId': 'asdfd'
                         }
                     ]
                 }
@@ -125,3 +135,22 @@ MUSIC_POST = {
     }
 }
 
+MUSIC_DELETE = {
+    'tags': ['Apply'],
+    'description': '기상음악 신청 취소',
+    'parameters': [
+        JWT_ACCESS_TOKEN,
+        parameter('applyId', '신청 아이디', type_='int')
+    ],
+    'responses': {
+        '200': {
+            'description': '기상음악 신청 성'
+        },
+        '204': {
+            'description': '없는 apply id'
+        },
+        '403': {
+            'description': '권한 없음'
+        }
+    }
+}

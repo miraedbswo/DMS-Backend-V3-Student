@@ -42,12 +42,6 @@ class GoingoutApplyModel(db.Model, BaseMixin):
         return applies
 
     @staticmethod
-    def post_goingout_apply(student_id: str, go_out_date: datetime, return_date: datetime, reason: str):
-        goingout = GoingoutApplyModel.get_goingout_apply(student_id)
-
-        GoingoutApplyModel(student_id, go_out_date, return_date, reason).save()
-
-    @staticmethod
     def delete_goingout_apply(apply_id: int, student_id: str):
         apply = GoingoutApplyModel.query.filter_by(id=apply_id, student_id=student_id).first()
 
