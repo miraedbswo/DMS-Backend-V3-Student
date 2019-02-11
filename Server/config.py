@@ -40,7 +40,7 @@ class DevelopmentConfig(Config):
 
 class TestConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.getenv('TEST_DATABASE_URL', 'sqlite:///:memory:')
+    SQLALCHEMY_DATABASE_URI = "sqlite:///test.db"
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=10)
 
 

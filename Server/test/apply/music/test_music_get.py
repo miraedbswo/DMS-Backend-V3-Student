@@ -21,7 +21,8 @@ class TestGetMusic(TCBase, ApplyRequest):
         )
 
         rv: Response = self.request_music_get()
-        print(rv.json)
+        self.assertIsNotNone(rv.json)
+
         rv_data = {
             'singer': rv.json['mon'][0]['singer'],
             'song_name': rv.json['mon'][0]['musicName'],
