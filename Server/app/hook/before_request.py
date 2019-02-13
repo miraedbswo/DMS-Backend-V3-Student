@@ -7,7 +7,7 @@ from flask import request, abort
 
 
 def check_secret_header():
-    date = request.headers['Date']
+    date = request.headers['X-Date']
     user_agent = request.headers['User-Agent']
     secret = request.headers['User-Data']
 
