@@ -7,9 +7,12 @@ from flask import request, abort
 
 
 def check_secret_header():
-    date = request.headers['X-Date']
-    user_agent = request.headers['User-Agent']
-    secret = request.headers['User-Data']
+    date = request.headers.get('X-Date')
+    user_agent = request.headers.get('User-Agent')
+    secret = request.headers.get('User-Data')
+
+    if None in (date, user_agent, secret):
+        abort(418)
 
     key = (user_agent + date).encode()
     h = sha3_512(b64encode(key)).hexdigest()

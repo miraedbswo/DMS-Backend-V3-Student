@@ -3,7 +3,7 @@ import re
 from typing import Union
 
 from app.extension import db
-from app.exception import NoContentException, ResetContentException, WrongAuthExcption, ForbiddenException
+from app.exception import NoContentException, ResetContentException, WrongAuthException, ForbiddenException
 from app.model.mixin import BaseMixin
 from app.model.account.unsigned_student import UnsignedStudentModel
 

@@ -15,7 +15,7 @@ class ResetContentException(DMSException):
     description = 'Reset Content'
 
 
-class WrongAuthExcption(DMSException):
+class WrongAuthException(DMSException):
     code = 401
     description = 'Wrong Auth'
 

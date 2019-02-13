@@ -18,7 +18,7 @@ def register_hook(flask_app: Flask):
     from app.hook.exception_handler import http_exception_handler
     flask_app.register_error_handler(exception.NoContentException, http_exception_handler)
     flask_app.register_error_handler(exception.ResetContentException, http_exception_handler)
-    flask_app.register_error_handler(exception.WrongAuthExcption, http_exception_handler)
+    flask_app.register_error_handler(exception.WrongAuthException, http_exception_handler)
     flask_app.register_error_handler(exception.ApplyTimeException, http_exception_handler)
     flask_app.register_error_handler(exception.BadRequestException, http_exception_handler)
 
