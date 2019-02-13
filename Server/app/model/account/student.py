@@ -56,7 +56,7 @@ class StudentModel(db.Model, BaseMixin):
     def change_pw(id: str, current_pw: str, new_pw: str):
         student: StudentModel = StudentModel.get_student_by_id(id)
         if student is None:
-            raise WrongAuthExcption()
+            raise WrongAuthException()
 
         if not bcrypt.checkpw(current_pw.encode(), student.pw.encode()):
             raise ForbiddenException()

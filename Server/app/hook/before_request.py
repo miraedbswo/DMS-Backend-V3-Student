@@ -7,6 +7,9 @@ from flask import request, abort
 
 
 def check_secret_header():
+    if request.method == 'OPTIONS':
+        return ''
+
     date = request.headers.get('X-Date')
     user_agent = request.headers.get('User-Agent')
     secret = request.headers.get('User-Data')
