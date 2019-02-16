@@ -1,3 +1,4 @@
+import json
 from datetime import time as Time, datetime
 
 from flask import jsonify, Response, request
@@ -53,6 +54,6 @@ class ExtensionView(ApplyResource):
 
 class ExtensionMapView(ApplyResource):
     @swag_from(EXTENSION_MAP_GET)
-    def get(self, time):
-        #TODO: Extension Map View
-        pass
+    def get(self, class_num, time):
+        map_ = ExtensionApplyModel.get_extension_map(class_num, time)
+        return self.unicode_safe_json_dumps(map_)

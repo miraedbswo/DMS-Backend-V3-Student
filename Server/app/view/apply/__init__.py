@@ -8,7 +8,7 @@ api = Api(apply_blueprint)
 
 from .extension import ExtensionView, ExtensionMapView
 api.add_resource(ExtensionView, '/extension/<int:time>')
-api.add_resource(ExtensionMapView, '/extension/<int:time>/map')
+api.add_resource(ExtensionMapView, '/extension/<int:time>/map/<int:class_num>')
 
 from .goingout import GoingOutView
 api.add_resource(GoingOutView, '/goingout')

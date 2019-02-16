@@ -3,8 +3,9 @@ from typing import Union
 from app.extension import db
 from app.exception import NoContentException, ResetContentException
 from app.model.mixin import BaseMixin
+from app.util.extension_map import *
 
-seat_count = [0, 20, 20, 20, 20, 44, 44, 43, 23]
+seat_count = [0, 20, 20, 20, 20, 24, 20, 24, 20, 49, 23]
 
 
 class ExtensionApplyModel(db.Model, BaseMixin):
@@ -25,8 +26,8 @@ class ExtensionApplyModel(db.Model, BaseMixin):
         return ExtensionApplyModel.query.filter_by(student_id=student_id, time=time).first()
 
     @staticmethod
-    def get_extension_apply_by_seat(class_: int, seat: int) -> 'ExtensionApplyModel':
-        return ExtensionApplyModel.query.filter_by(class_=class_, seat=seat).first()
+    def get_extension_apply_by_seat(class_: int, seat: int, time: int) -> 'ExtensionApplyModel':
+        return ExtensionApplyModel.query.filter_by(class_=class_, seat=seat, time=time).first()
 
     @staticmethod
     def get_extension_apply_status(student_id: str, time: int) -> Union[None, dict]:
@@ -40,7 +41,7 @@ class ExtensionApplyModel(db.Model, BaseMixin):
 
     @staticmethod
     def post_extension_apply(student_id: str, time: int, class_: int, seat: int):
-        extension = ExtensionApplyModel.get_extension_apply_by_seat(class_, seat)
+        extension = ExtensionApplyModel.get_extension_apply_by_seat(class_, seat, time)
         if extension is not None:
             raise ResetContentException()
 
@@ -57,6 +58,25 @@ class ExtensionApplyModel(db.Model, BaseMixin):
             raise NoContentException()
 
         extension.delete()
+
+    @staticmethod
+    def get_extension_map(class_num: int, time: int):
+        seat_count = 1
+
+        chart = get_map_chart(class_num)
+        for i, row in enumerate(chart):
+            for j, seat in enumerate(row):
+                if not chart[i][j]:
+                    apply = ExtensionApplyModel.get_extension_apply_by_seat(class_num, seat_count, time)
+
+                    if apply:
+                        chart[i][j] = apply.student_id
+                    else:
+                        chart[i][j] = seat_count
+
+                    seat_count += 1
+
+        return chart
 
     @db.validates('time')
     def validate_time(self, key, time):
