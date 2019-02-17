@@ -60,7 +60,7 @@ class ExtensionApplyModel(db.Model, BaseMixin):
         extension.delete()
 
     @staticmethod
-    def get_extension_map(class_num: int, time: int):
+    def get_extension_map(class_num: int, time: int) -> list:
         seat_count = 1
 
         chart = get_map_chart(class_num)
@@ -71,8 +71,6 @@ class ExtensionApplyModel(db.Model, BaseMixin):
 
                     if apply:
                         chart[i][j] = apply.student_id
-                    else:
-                        chart[i][j] = seat_count
 
                     seat_count += 1
 
