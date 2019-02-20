@@ -3,10 +3,12 @@ from dateutil.parser import parse
 from hashlib import sha3_512
 from base64 import b64encode
 
-from flask import request, abort
+from flask import request, abort, current_app
 
 
 def check_secret_header():
+    if current_app.config['TESTING']:
+        return
     if request.method == 'OPTIONS':
         return
     if request.endpoint in ['flasgger.static', 'flasgger.apidocs', 'flassger.apispec', 'flasgger.apispec_1']:
