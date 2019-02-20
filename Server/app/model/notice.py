@@ -26,7 +26,7 @@ class NoticeModel(PostModelBase):
         return {
             'noticeList': [
                 {
-                    'noticeId': notice.id,
+                    'id': notice.id,
                     'postDate': str(notice.post_date),
                     'title': notice.title
                 } for notice in NoticeModel.query.all()
@@ -53,7 +53,7 @@ class RuleModel(NoticeModel):
         return {
             'ruleList': [
                 {
-                    'ruleId': rule.id,
+                    'id': rule.id,
                     'postDate': str(rule.post_date),
                     'title': rule.title
                 } for rule in RuleModel.query.all()
@@ -80,7 +80,7 @@ class QNAModel(NoticeModel):
         return {
             'qnaList': [
                 {
-                    'qnaId': qna.id,
+                    'id': qna.id,
                     'postDate': str(qna.post_date),
                     'title': qna.title
                 } for qna in QNAModel.query.all()
