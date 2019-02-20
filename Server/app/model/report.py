@@ -12,7 +12,7 @@ class FacilityReportModel(db.Model, BaseMixin):
     def __init__(self, student_id: str, room: int, content: str):
         self.student_id: str = student_id
         self.room: int = room
-        self.content: int = content
+        self.content: str = content
 
     @staticmethod
     def post_facility_report(student_id: str, room: int, content: str):

@@ -60,7 +60,7 @@ class ExtensionApplyModel(db.Model, BaseMixin):
         extension.delete()
 
     @staticmethod
-    def get_extension_map(class_num: int, time: int) -> list:
+    def get_extension_map(class_num: int, time: int) -> dict:
         seat_count = 1
 
         chart = get_map_chart(class_num)
@@ -74,7 +74,9 @@ class ExtensionApplyModel(db.Model, BaseMixin):
 
                     seat_count += 1
 
-        return chart
+        map_ = {'map': chart}
+
+        return map_
 
     @db.validates('time')
     def validate_time(self, key, time):

@@ -11,6 +11,7 @@ tomorrow = str(date.today() + timedelta(1))
 
 
 class TestPostExtension(TCBase, ApplyRequest):
+    @freeze_time(f'{tomorrow} 20:00:00')
     @check_status_code(201)
     def test_apply_extension_success(self) -> Response:
         rv: Response = self.request_extension_post(self.access_token, 11, 1, 16)

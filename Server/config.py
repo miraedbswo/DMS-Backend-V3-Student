@@ -19,6 +19,8 @@ class Config:
 
     SECRET_KEY = os.getenv('SECRET_KEY', 'Nerd-Bear')
 
+    JSON_AS_ASCII = False
+
     SWAGGER_TEMPLATE = {
         'schemes': [
             'https'
