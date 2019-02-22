@@ -41,7 +41,6 @@ APPLY_INFO_GET = {
     }
 }
 
-
 BASIC_INFO_GET = {
     'tags': ['Info'],
     'description': '학생 자신의 기본 정보(이름, 학번, 상벌점)를 조회합니다.',

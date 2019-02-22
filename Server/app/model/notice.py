@@ -1,8 +1,8 @@
 from datetime import datetime
 
+from app.exception import NoContentException
 from app.extension import db
 from app.model.mixin import BaseMixin
-from app.exception import NoContentException
 
 
 class NoticeModel(db.Model, BaseMixin):

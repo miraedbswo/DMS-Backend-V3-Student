@@ -1,6 +1,6 @@
 from datetime import datetime
-from app.model import ExtensionApplyModel, GoingoutApplyModel, StayApplyModel
 
+from app.model import ExtensionApplyModel, GoingoutApplyModel, StayApplyModel
 from test import TCBase, check_status_code
 from test.request import InfoRequest
 

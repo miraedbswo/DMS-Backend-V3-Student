@@ -1,7 +1,7 @@
 from typing import Union
 
-from app.extension import db
 from app.exception import NoContentException, ResetContentException
+from app.extension import db
 from app.model.mixin import BaseMixin
 from app.util.extension_map import *
 

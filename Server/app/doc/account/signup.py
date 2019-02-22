@@ -1,4 +1,5 @@
 from app.doc import parameter
+
 SIGNUP_POST = {
     'tags': ['Account'],
     'description': '회원가입',

@@ -1,8 +1,7 @@
 from datetime import timedelta
 
-from flask_jwt_extended import get_jwt_identity, create_access_token
-
 from flask import Response
+from flask_jwt_extended import get_jwt_identity, create_access_token
 
 
 def new_access_token(response: Response):

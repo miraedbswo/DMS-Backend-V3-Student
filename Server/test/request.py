@@ -9,7 +9,7 @@ class AccountRequest:
         )
         return rv
 
-    def request_change_pw(self, jwt: str, current_password: str='test', new_password: str='new_pw') -> Response:
+    def request_change_pw(self, jwt: str, current_password: str = 'test', new_password: str = 'new_pw') -> Response:
         rv = self.client.patch(
             '/account/pw',
             headers={'Authorization': jwt},
@@ -17,14 +17,14 @@ class AccountRequest:
         )
         return rv
 
-    def request_find_pw(self, id: str='test', email: str='test@dsm.hs.kr') -> Response:
+    def request_find_pw(self, id: str = 'test', email: str = 'test@dsm.hs.kr') -> Response:
         rv = self.client.post(
             '/account/pw',
             json={'id': id, 'email': email}
         )
         return rv
 
-    def request_signup(self, uuid: str='test', id: str='test', password: str='test'):
+    def request_signup(self, uuid: str = 'test', id: str = 'test', password: str = 'test'):
         rv = self.client.post(
             '/account/signup',
             json={'uuid': uuid, 'id': id, 'password': password}
@@ -89,7 +89,7 @@ class ApplyRequest:
         )
         return rv
 
-    def request_music_post(self, jwt: str, day:int, singer: str, music_name: str) -> Response:
+    def request_music_post(self, jwt: str, day: int, singer: str, music_name: str) -> Response:
         rv = self.client.post(
             '/apply/music',
             headers={'Authorization': jwt},

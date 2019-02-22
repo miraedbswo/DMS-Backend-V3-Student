@@ -2,9 +2,9 @@ from datetime import date
 
 from flask import Response
 
+from app.model.meal import MealModel
 from test import TCBase, check_status_code
 from test.request import MealRequest
-from app.model.meal import MealModel
 
 
 class TestGetMeal(TCBase, MealRequest):

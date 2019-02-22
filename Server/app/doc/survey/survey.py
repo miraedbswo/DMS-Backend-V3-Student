@@ -38,7 +38,6 @@ SURVEY_LIST_GET = {
     }
 }
 
-
 SURVEY_GET = {
     'tags': ['Survey'],
     'description': '''설문지를 불러옵니다.
@@ -57,28 +56,28 @@ SURVEY_GET = {
             'description': '설문지 불러오기 성공',
             'examples': {
                 '': {
-                        'id': SAMPLE_OBJECT_IDS[0],
-                        'title': '인상민 생일 선물 뭐 줄까?',
-                        'description': '4월 20일은 인상민 생일인데 인상민한테 생일 선물 뭐 줄거예요?',
-                        'startDate': '2018-04-15',
-                        'endDate': '2018-04-20',
-                        'answered': True,
-                        'questions': [
-                            {
-                                'id': '질문 아이디1',
-                                'title': '저녁에 치킨을 먹고 싶습니까?',
-                                'isObjective': True,
-                                'choicePaper': ['예', '아니오'],
-                                'answer': '예'
-                            },
-                            {
-                                'id': '질문 아이디 2',
-                                'title': '어디 치킨이 좋습니까?',
-                                'isObjective': False,
-                                'answer': None
-                            }
-                        ]
-                    }
+                    'id': SAMPLE_OBJECT_IDS[0],
+                    'title': '인상민 생일 선물 뭐 줄까?',
+                    'description': '4월 20일은 인상민 생일인데 인상민한테 생일 선물 뭐 줄거예요?',
+                    'startDate': '2018-04-15',
+                    'endDate': '2018-04-20',
+                    'answered': True,
+                    'questions': [
+                        {
+                            'id': '질문 아이디1',
+                            'title': '저녁에 치킨을 먹고 싶습니까?',
+                            'isObjective': True,
+                            'choicePaper': ['예', '아니오'],
+                            'answer': '예'
+                        },
+                        {
+                            'id': '질문 아이디 2',
+                            'title': '어디 치킨이 좋습니까?',
+                            'isObjective': False,
+                            'answer': None
+                        }
+                    ]
+                }
             }
         },
         '403': {

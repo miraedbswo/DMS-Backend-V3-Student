@@ -1,10 +1,11 @@
-from flask import jsonify
 from flasgger import swag_from
+from flask import jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
 from app.doc.account.info import APPLY_INFO_GET, BASIC_INFO_GET, POINT_HISTORY_GET
+from app.model import StudentModel, PointStatusModel, ExtensionApplyModel, GoingoutApplyModel, StayApplyModel, \
+    PointHistoryModel
 from app.view.base_resource import AccountResource
-from app.model import StudentModel, PointStatusModel, ExtensionApplyModel, GoingoutApplyModel, StayApplyModel, PointHistoryModel
 
 
 class ApplyInfoView(AccountResource):

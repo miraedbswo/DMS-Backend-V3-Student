@@ -1,10 +1,10 @@
-from datetime import date, timedelta
-
+import unittest
+from datetime import timedelta
 from functools import wraps
+from unittest.mock import Mock
+
 from flask_jwt_extended import create_access_token, create_refresh_token
 
-import unittest
-from unittest.mock import Mock
 from app import create_app
 from app.extension import db
 from app.model.account.student import StudentModel

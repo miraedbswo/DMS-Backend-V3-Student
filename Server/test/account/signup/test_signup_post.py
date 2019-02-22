@@ -1,9 +1,9 @@
 from flask import Response
 
-from test import TCBase, check_status_code
-from test.request import AccountRequest
 from app.exception import NoContentException
 from app.model.account import StudentModel, UnsignedStudentModel
+from test import TCBase, check_status_code
+from test.request import AccountRequest
 
 
 class TestSignup(TCBase, AccountRequest):

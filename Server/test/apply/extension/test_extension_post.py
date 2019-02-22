@@ -1,11 +1,11 @@
 from datetime import date, timedelta
+
 from flask import Response
 from freezegun import freeze_time
 
+from app.model.apply import ExtensionApplyModel
 from test import TCBase, check_status_code
 from test.request import ApplyRequest
-from app.model.apply import ExtensionApplyModel
-
 
 tomorrow = str(date.today() + timedelta(1))
 

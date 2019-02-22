@@ -1,4 +1,4 @@
-def parameter(name: str, description: str, in_: str='json', type_: str='str', required: bool=True) -> dict:
+def parameter(name: str, description: str, in_: str = 'json', type_: str = 'str', required: bool = True) -> dict:
     return {
         'name': name,
         'description': description,
@@ -21,4 +21,3 @@ SAMPLE_OBJECT_IDS = [
     '5acddc2bc2a93f68ce96f5c9',
     '5acddc2bc2a93f68ce96f5ce'
 ]
-

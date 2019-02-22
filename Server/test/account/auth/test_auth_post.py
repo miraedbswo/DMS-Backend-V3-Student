@@ -1,5 +1,4 @@
 from flask import Response
-from flask_jwt_extended import get_jwt_identity
 
 from test import TCBase, check_status_code
 from test.request import AccountRequest

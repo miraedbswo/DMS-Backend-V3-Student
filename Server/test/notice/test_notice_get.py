@@ -1,8 +1,5 @@
-from flask import Response
-
-from test import TCBase, check_status_code
+from test import TCBase
 from test.request import NoticeRequest
-from app.model.notice import NoticeModel
 
 
 class TestGetNotice(TCBase, NoticeRequest):

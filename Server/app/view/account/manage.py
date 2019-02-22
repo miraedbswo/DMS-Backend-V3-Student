@@ -1,14 +1,14 @@
 import smtplib
 from email.mime.text import MIMEText
 
+from flasgger import swag_from
 from flask import request, Response, current_app
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from flasgger import swag_from
 
 from app.doc.account.manage import CHANGE_PW_PATCH, FIND_PW_POST
-from app.view.base_resource import AccountResource
 from app.model import StudentModel, FindPWModel
 from app.util.json_schema import json_type_validate, PW_PATCH_JSON, PW_POST_JSON
+from app.view.base_resource import AccountResource
 
 
 class ManagePasswordView(AccountResource):

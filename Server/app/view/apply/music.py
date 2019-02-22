@@ -1,12 +1,11 @@
-from flask import request, Response
 from flasgger import swag_from
+from flask import request, Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
 from app.doc.apply.music import MUSIC_GET, MUSIC_POST, MUSIC_DELETE
-from app.view.base_resource import ApplyResource
-
 from app.model import MusicApplyModel
 from app.util.json_schema import json_type_validate, MUSIC_POST_JSON, MUSIC_DELETE_JSON
+from app.view.base_resource import ApplyResource
 
 
 class MusicView(ApplyResource):

@@ -1,16 +1,14 @@
-import json
 from datetime import time as Time, datetime
 
-from flask import jsonify, Response, request
 from flasgger import swag_from
+from flask import jsonify, Response, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
 from app.doc.apply.extension import EXTENSION_GET, EXTENSION_POST, EXTENSION_DELETE, EXTENSION_MAP_GET
-from app.view.base_resource import ApplyResource
-from app.model import ExtensionApplyModel
 from app.exception import NoContentException, ApplyTimeException
+from app.model import ExtensionApplyModel
 from app.util.json_schema import json_type_validate, EXTENSION_POST_JSON
-
+from app.view.base_resource import ApplyResource
 
 extension_apply_start = {11: Time(17, 30), 12: Time(17, 30)}
 extension_apply_end = {11: Time(20, 30), 12: Time(22, 0)}

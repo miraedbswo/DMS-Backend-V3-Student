@@ -1,8 +1,8 @@
 from flask import Response
 
+from app.model.apply import MusicApplyModel
 from test import TCBase, check_status_code
 from test.request import ApplyRequest
-from app.model.apply import MusicApplyModel
 
 
 class TestGetMusic(TCBase, ApplyRequest):
@@ -37,4 +37,3 @@ class TestGetMusic(TCBase, ApplyRequest):
         rv: Response = self.request_music_get()
 
         return rv
-

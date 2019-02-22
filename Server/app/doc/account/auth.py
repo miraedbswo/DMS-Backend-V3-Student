@@ -1,5 +1,5 @@
-from app.doc.account import SAMPLE_ACCESS_TOKEN, SAMPLE_REFRESH_TOKEN
 from app.doc import parameter
+from app.doc.account import SAMPLE_ACCESS_TOKEN, SAMPLE_REFRESH_TOKEN
 
 AUTH_POST = {
     'tags': ['Account'],

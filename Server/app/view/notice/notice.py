@@ -1,9 +1,9 @@
-from flask import jsonify
 from flasgger import swag_from
+from flask import jsonify
 
 from app.doc.notice.notice import NOTICE_LIST_GET, NOTICE_GET
-from app.view.base_resource import NoticeResource
 from app.model import NoticeModel
+from app.view.base_resource import NoticeResource
 
 
 class NoticeListView(NoticeResource):

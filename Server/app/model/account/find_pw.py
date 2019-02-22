@@ -2,8 +2,8 @@ from datetime import datetime
 from uuid import uuid4
 
 from app.extension import db
+from app.model.account.student import StudentModel
 from app.model.mixin import BaseMixin
-from app.model import StudentModel
 
 
 class FindPWModel(db.Model, BaseMixin):
