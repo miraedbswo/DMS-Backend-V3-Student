@@ -1,4 +1,4 @@
-from app.doc import parameter, JWT_ACCESS_TOKEN
+from app.doc import parameter
 
 RULE_LIST_GET = {
     'tags': ['Notice'],

@@ -1,14 +1,14 @@
 from datetime import datetime
 
 from flasgger import swag_from
-from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask import jsonify, Response, request
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app.doc.apply.stay import STAY_GET, STAY_POST
-from app.view.base_resource import ApplyResource
-from app.model import StayApplyModel
 from app.exception import ApplyTimeException
+from app.model import StayApplyModel
 from app.util.json_schema import json_type_validate, STAY_POST_JSON
+from app.view.base_resource import ApplyResource
 
 
 class StayView(ApplyResource):
@@ -24,8 +24,8 @@ class StayView(ApplyResource):
     def post(self):
         apply_time = datetime.now()
         if (apply_time.weekday() == 3 and apply_time.hour >= 22) or \
-            (4 <= apply_time.weekday() <= 5) or \
-            (apply_time.weekday() == 6 and apply_time.hour <= 20 and apply_time.minute < 30):
+                (4 <= apply_time.weekday() <= 5) or \
+                (apply_time.weekday() == 6 and apply_time.hour <= 20 and apply_time.minute < 30):
             raise ApplyTimeException()
 
         studnet_id = get_jwt_identity()

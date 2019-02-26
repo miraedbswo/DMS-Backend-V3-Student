@@ -1,11 +1,12 @@
-import bcrypt
 import re
 from typing import Union
 
-from app.extension import db
+import bcrypt
+
 from app.exception import NoContentException, ResetContentException, WrongAuthException, ForbiddenException
-from app.model.mixin import BaseMixin
+from app.extension import db
 from app.model.account.unsigned_student import UnsignedStudentModel
+from app.model.mixin import BaseMixin
 
 
 class StudentModel(db.Model, BaseMixin):
@@ -28,7 +29,7 @@ class StudentModel(db.Model, BaseMixin):
         return StudentModel.query.filter_by(id=id).first()
 
     @staticmethod
-    def get_student_by_id_email(id: str, email:str) -> 'StudentModel':
+    def get_student_by_id_email(id: str, email: str) -> 'StudentModel':
         student = StudentModel.query.filter_by(id=id, email=email).first()
         if student is None:
             raise ResetContentException()

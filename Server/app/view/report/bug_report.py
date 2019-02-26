@@ -6,9 +6,9 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from slacker import Slacker
 
 from app.doc.report.bug_report import BUG_REPORT_POST
-from app.view.base_resource import ReportResource
 from app.model import StudentModel
 from app.util.json_schema import json_type_validate, BUG_POST_JSON
+from app.view.base_resource import ReportResource
 
 
 class BugReportView(ReportResource):

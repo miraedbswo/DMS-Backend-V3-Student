@@ -1,4 +1,3 @@
-import bcrypt
 from flask import Response
 
 from test import TCBase, check_status_code

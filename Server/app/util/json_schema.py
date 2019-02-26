@@ -1,5 +1,7 @@
 from functools import wraps
+
 from flask import request
+
 from app.exception import BadRequestException
 
 
@@ -18,6 +20,7 @@ def json_type_validate(json_schema: dict):
             raise BadRequestException()
 
         return wrapper
+
     return decorator
 
 

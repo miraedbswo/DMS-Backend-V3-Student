@@ -1,10 +1,10 @@
 from datetime import datetime
 from typing import List
 
-from app.extension import db
 from app.exception import ResetContentException, NoContentException, ForbiddenException
-from app.model.mixin import BaseMixin
+from app.extension import db
 from app.model import StudentModel
+from app.model.mixin import BaseMixin
 
 week = [0, 1, 2, 3, 4]
 weekday = ['mon', 'tue', 'wed', 'thu', 'fri']

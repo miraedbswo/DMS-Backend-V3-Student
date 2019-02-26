@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+
 from app.view import Router
 from config import config
 
@@ -8,6 +9,7 @@ def register_extension(flask_app: Flask):
     extension.db.init_app(flask_app)
     extension.jwt.init_app(flask_app)
     extension.jwt.invalid_token_loader(wrong_token_handler)
+    extension.jwt.expired_token_loader(wrong_token_handler)
     extension.swag.init_app(flask_app)
     extension.swag.template = flask_app.config['SWAGGER_TEMPLATE']
     extension.cors.init_app(flask_app)

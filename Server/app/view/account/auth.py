@@ -1,12 +1,13 @@
 from datetime import timedelta
+
+from flasgger import swag_from
 from flask import request, jsonify
 from flask_jwt_extended import create_access_token, create_refresh_token
-from flasgger import swag_from
 
 from app.doc.account.auth import AUTH_POST
-from app.view.base_resource import AccountResource
 from app.model import StudentModel
 from app.util.json_schema import json_type_validate, AUTH_POST_JSON
+from app.view.base_resource import AccountResource
 
 
 class AuthView(AccountResource):

@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import List
 
-from app.extension import db
 from app.exception import NoContentException
+from app.extension import db
 from app.model.mixin import BaseMixin
 
 

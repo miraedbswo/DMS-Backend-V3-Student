@@ -1,6 +1,5 @@
 from app.doc import JWT_ACCESS_TOKEN, parameter
 
-
 QUESTION_POST = {
     'tags': ['Survey'],
     'description': '질문에 답변을 남깁니다. 이미 답변을 남겼을 경우, 덮어씌웁니다.',

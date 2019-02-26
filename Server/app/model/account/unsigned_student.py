@@ -1,8 +1,8 @@
 import hashlib
 import re
 
-from app.extension import db
 from app.exception import NoContentException
+from app.extension import db
 from app.model.mixin import BaseMixin
 
 

@@ -1,6 +1,5 @@
 from app.doc import JWT_ACCESS_TOKEN, parameter
 
-
 CHANGE_PW_PATCH = {
     'tags': ['Account'],
     'description': '비밀번호 변경',
