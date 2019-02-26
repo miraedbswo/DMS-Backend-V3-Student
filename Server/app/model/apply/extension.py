@@ -25,6 +25,7 @@ class ExtensionApplyModel(db.Model, BaseMixin):
     def get_extension_apply(student_id: str, time: int) -> 'ExtensionApplyModel':
         return ExtensionApplyModel.query.filter_by(student_id=student_id, time=time).first()
 
+
     @staticmethod
     def get_extension_apply_by_seat(class_: int, seat: int, time: int) -> 'ExtensionApplyModel':
         return ExtensionApplyModel.query.filter_by(class_=class_, seat=seat, time=time).first()
@@ -66,11 +67,13 @@ class ExtensionApplyModel(db.Model, BaseMixin):
         chart = get_map_chart(class_num)
         for i, row in enumerate(chart):
             for j, seat in enumerate(row):
-                if not chart[i][j]:
+                if chart[i][j]:
                     apply = ExtensionApplyModel.get_extension_apply_by_seat(class_num, seat_count, time)
 
                     if apply:
                         chart[i][j] = apply.student_id
+                    else:
+                        chart[i][j] = seat_count
 
                     seat_count += 1
 

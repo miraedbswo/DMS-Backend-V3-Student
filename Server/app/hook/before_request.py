@@ -25,5 +25,5 @@ def check_secret_header():
     h = sha3_512(b64encode(key)).hexdigest()
     request_date = parse(date)
 
-    if not (request_date <= datetime.now() <= request_date + timedelta(seconds=10) and h == secret):
+    if not (request_date <= datetime.now() <= request_date + timedelta(seconds=30) and h == secret):
         abort(418)
