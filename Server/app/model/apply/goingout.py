@@ -42,7 +42,7 @@ class GoingoutApplyModel(db.Model, BaseMixin):
 
             apply = {
                 'go_out_date': datetime.strftime(apply.go_out_date, "%Y-%m-%d %H:%M"),
-                'id': apply.student_id,
+                'id': apply.id,
                 'return_date': datetime.strftime(apply.return_date, "%Y-%m-%d %H:%M"),
                 'reason': apply.reason
             }
