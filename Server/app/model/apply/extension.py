@@ -2,6 +2,7 @@ from typing import Union
 
 from app.exception import NoContentException, ResetContentException
 from app.extension import db
+from app.model.account.student import StudentModel
 from app.model.mixin import BaseMixin
 from app.util.extension_map import *
 
@@ -71,7 +72,8 @@ class ExtensionApplyModel(db.Model, BaseMixin):
                     apply = ExtensionApplyModel.get_extension_apply_by_seat(class_num, seat_count, time)
 
                     if apply:
-                        chart[i][j] = apply.student_id
+                        student = StudentModel.get_student_by_id(apply.student_id)
+                        chart[i][j] = student.name
                     else:
                         chart[i][j] = seat_count
 
