@@ -38,14 +38,14 @@ class GoingoutApplyModel(db.Model, BaseMixin):
         }
 
         for apply in applies:
+            date = apply.go_out_date.weekday()
+
             apply = {
-                'go_out_date': str(apply.go_out_date),
+                'go_out_date': datetime.strftime(apply.go_out_date, "%Y-%m-%d %H:%M"),
                 'id': apply.student_id,
-                'return_date': str(apply.return_date),
+                'return_date': datetime.strftime(apply.return_date, "%Y-%m-%d %H:%M"),
                 'reason': apply.reason
             }
-
-            date = datetime.strptime(apply['go_out_date'], "%Y-%m-%d %H:%M").weekday()
 
             if date <= 4:
                 goingout_data['workday'].append(apply)
