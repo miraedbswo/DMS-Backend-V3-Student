@@ -18,18 +18,6 @@ class GoingOutView(ApplyResource):
         student_id = get_jwt_identity()
         goingout_applies = GoingoutApplyModel.get_goingout_apply(student_id)
 
-        goingout_applies = {
-            'goingOut': [
-                {
-                    "goOutDate": str(apply['go_out_date']),
-                    "id": student_id,
-                    "reason": apply['reason'],
-                    "returnDate": str(apply['return_date'])
-                }
-                for apply in goingout_applies
-            ]
-        }
-
         return jsonify(goingout_applies)
 
     @json_type_validate(GOINGOUT_POST_JSON)

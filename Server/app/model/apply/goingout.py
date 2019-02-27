@@ -25,22 +25,38 @@ class GoingoutApplyModel(db.Model, BaseMixin):
         GoingoutApplyModel(student_id, go_out_date, return_date, reason).save()
 
     @staticmethod
-    def get_goingout_apply(student_id: str) -> List[dict]:
+    def get_goingout_apply(student_id: str) -> dict:
         applies: List['GoingoutApplyModel'] = GoingoutApplyModel.query.filter_by(student_id=student_id).all()
 
         if not applies:
-            return []
+            raise NoContentException
 
-        applies = [
-            {
+        goingout_data = {
+            'workday': [],
+            'saturday': [],
+            'sunday': []
+        }
+
+        for apply in applies:
+            apply = {
                 'go_out_date': str(apply.go_out_date),
+                'id': apply.student_id,
                 'return_date': str(apply.return_date),
                 'reason': apply.reason
             }
-            for apply in applies
-        ]
 
-        return applies
+            date = datetime.strptime(apply['go_out_date'], "%Y-%m-%d %H:%M").weekday()
+
+            if date <= 4:
+                goingout_data['workday'].append(apply)
+
+            elif date == 5:
+                goingout_data['saturday'].append(apply)
+
+            else:
+                goingout_data['sunday'].append(apply)
+
+        return goingout_data
 
     @staticmethod
     def delete_goingout_apply(apply_id: int, student_id: str):

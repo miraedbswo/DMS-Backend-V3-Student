@@ -11,24 +11,29 @@ GOINGOUT_GET = {
             'description': '외출신청 정보 조회 성공',
             'examples': {
                 '': {
-                    'goingOut': [
+                    'workday': [
                         {
-                            'id': 123,
-                            'goOutDate': '2019-01-01 08:00',
-                            'returnDate': '2019-01-01 09:00',
-                            'reason': '아침 식사 외출(서브웨이)'
-                        },
+                            'go_out_date': '2019-02-27 12:30',
+                            'id': 'test',
+                            'return_date': '2019-02-27 17:30',
+                            'reason': '밥'
+                        }
+                    ],
+                    'saturday': [
                         {
-                            'id': 124,
-                            'goOutDate': '2019-01-01 12:00',
-                            'returnDate': '2019-01-01 13:00',
-                            'reason': '점심 식사 외출(베스타)'
-                        },
+                            'go_out_date': '2019-03-02 12:30',
+                            'id': 'test',
+                            'return_date': '2019-03-02 17:30',
+                            'reason': '쇼핑'
+                        }
+
+                    ],
+                    'sunday': [
                         {
-                            'id': 222,
-                            'goOutDate': '2019-01-01 18:00',
-                            'returnDate': '2019-01-01 19:00',
-                            'reason': '저녁 식사 외출(신라호텔)'
+                            'go_out_date': '2019-03-03 12:30',
+                            'id': 'test',
+                            'return_date': '2019-03-03 17:30',
+                            'reason': '개학 ㅠㅠ'
                         }
                     ]
                 }
