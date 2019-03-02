@@ -1,3 +1,7 @@
+from datetime import datetime
+
+from pytz import timezone
+
 from app.extension import db
 
 
@@ -11,3 +15,9 @@ class BaseMixin:
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
+    @staticmethod
+    def kst_now():
+        now = datetime.utcnow()
+        KST = timezone('Asia/Seoul')
+        return KST.localize(now)

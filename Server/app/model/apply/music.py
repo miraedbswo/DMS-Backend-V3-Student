@@ -25,7 +25,7 @@ class MusicApplyModel(db.Model, BaseMixin):
         self.student_id = student_id
         self.singer = singer
         self.song_name = song_name
-        self.apply_date = datetime.now()
+        self.apply_date = self.kst_now()
 
     @staticmethod
     def get_music_apply() -> List['MusicApplyModel']:

@@ -24,7 +24,7 @@ class GoingOutView(ApplyResource):
     @swag_from(GOINGOUT_POST)
     @jwt_required
     def post(self):
-        request_time = datetime.now()
+        request_time = self.kst_now()
         if not (0 <= request_time.weekday() <= 3 or request_time.weekday() == 4 and request_time.hour <= 21):
             raise ApplyTimeException()
         student_id = get_jwt_identity()
@@ -40,7 +40,7 @@ class GoingOutView(ApplyResource):
     @jwt_required
     def delete(self):
         student_id = get_jwt_identity()
-        request_time = datetime.now()
+        request_time = self.kst_now()
         if not (0 <= request_time.weekday() <= 3 or request_time.weekday() == 4 and request_time.hour <= 21):
             raise ApplyTimeException()
 

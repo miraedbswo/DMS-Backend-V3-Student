@@ -14,7 +14,7 @@ class NoticeModel(db.Model, BaseMixin):
     content: str = db.Column(db.String)
 
     def __init__(self, title: str, content: str):
-        self.post_date: datetime = datetime.now()
+        self.post_date: datetime = self.kst_now()
         self.title: str = title
         self.content: str = content
 
@@ -51,7 +51,7 @@ class RuleModel(db.Model, BaseMixin):
     content: str = db.Column(db.String)
 
     def __init__(self, title: str, content: str):
-        self.post_date: datetime = datetime.now()
+        self.post_date: datetime = BaseMixin.kst_now()
         self.title: str = title
         self.content: str = content
 

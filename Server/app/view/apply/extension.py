@@ -1,4 +1,4 @@
-from datetime import time as Time, datetime
+from datetime import time as Time
 
 from flasgger import swag_from
 from flask import jsonify, Response, request
@@ -30,7 +30,7 @@ class ExtensionView(ApplyResource):
     @swag_from(EXTENSION_POST)
     @jwt_required
     def post(self, time):
-        if not extension_apply_start[time] <= datetime.now().time() <= extension_apply_end[time]:
+        if not extension_apply_start[time] <= self.kst_now().time() <= extension_apply_end[time]:
             raise ApplyTimeException()
 
         id: str = get_jwt_identity()
@@ -42,7 +42,7 @@ class ExtensionView(ApplyResource):
     @swag_from(EXTENSION_DELETE)
     @jwt_required
     def delete(self, time):
-        if not extension_apply_start[time] <= datetime.now().time() <= extension_apply_end[time]:
+        if not extension_apply_start[time] <= self.kst_now().time() <= extension_apply_end[time]:
             raise ApplyTimeException()
 
         id: str = get_jwt_identity()

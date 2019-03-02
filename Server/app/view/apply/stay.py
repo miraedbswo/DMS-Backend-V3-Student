@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from flasgger import swag_from
 from flask import jsonify, Response, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -22,7 +20,7 @@ class StayView(ApplyResource):
     @swag_from(STAY_POST)
     @jwt_required
     def post(self):
-        apply_time = datetime.now()
+        apply_time = self.kst_now()
         if (apply_time.weekday() == 3 and apply_time.hour >= 22) or \
                 (4 <= apply_time.weekday() <= 5) or \
                 (apply_time.weekday() == 6 and apply_time.hour <= 20 and apply_time.minute < 30):

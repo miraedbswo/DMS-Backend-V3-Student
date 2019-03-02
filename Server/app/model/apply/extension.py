@@ -26,7 +26,6 @@ class ExtensionApplyModel(db.Model, BaseMixin):
     def get_extension_apply(student_id: str, time: int) -> 'ExtensionApplyModel':
         return ExtensionApplyModel.query.filter_by(student_id=student_id, time=time).first()
 
-
     @staticmethod
     def get_extension_apply_by_seat(class_: int, seat: int, time: int) -> 'ExtensionApplyModel':
         return ExtensionApplyModel.query.filter_by(class_=class_, seat=seat, time=time).first()

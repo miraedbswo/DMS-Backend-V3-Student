@@ -1,7 +1,9 @@
 import json
+from datetime import datetime
 
 from flask import Response
 from flask_restful import Resource
+from pytz import timezone
 
 
 # 확장성을 위해 기능별로 BaseResource 생성
@@ -20,6 +22,12 @@ class BaseResource(Resource):
             status_code,
             content_type='application/json; charset=utf8'
         )
+
+    @staticmethod
+    def kst_now():
+        now = datetime.utcnow()
+        KST = timezone('Asia/Seoul')
+        return KST.localize(now)
 
 
 class AccountResource(BaseResource):

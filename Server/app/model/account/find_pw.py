@@ -1,4 +1,3 @@
-from datetime import datetime
 from uuid import uuid4
 
 from app.extension import db
@@ -10,7 +9,7 @@ class FindPWModel(db.Model, BaseMixin):
     __tablename__ = 'find_pw'
     id = db.Column(db.String, primary_key=True, default=str(uuid4()))
     student = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'))
-    date = db.Column(db.DateTime, default=datetime.now())
+    date = db.Column(db.DateTime, default=BaseMixin.kst_now())
 
     def __init__(self, student):
         self.student = student

@@ -4,6 +4,13 @@ from hashlib import sha3_512
 
 from dateutil.parser import parse
 from flask import request, abort, current_app
+from pytz import timezone
+
+
+def kst_now():
+    now = datetime.utcnow()
+    KST = timezone('Asia/Seoul')
+    return KST.localize(now)
 
 
 def check_secret_header():
@@ -25,5 +32,5 @@ def check_secret_header():
     h = sha3_512(b64encode(key)).hexdigest()
     request_date = parse(date)
 
-    if not (request_date <= datetime.now() <= request_date + timedelta(seconds=30) and h == secret):
+    if not (request_date <= kst_now() <= request_date + timedelta(seconds=30) and h == secret):
         abort(418)

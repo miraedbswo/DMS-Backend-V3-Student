@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from flasgger import swag_from
 from flask import request, Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
@@ -30,7 +28,7 @@ class BugReportView(ReportResource):
             channel='#bug-report',
             text='제보자: {}\n제보시간: {}\n플랫폼: {}\n내용: {}'.format(
                 student_name,
-                datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                self.kst_now().strftime('%Y-%m-%d %H:%M:%S'),
                 self.PLATFORM_TYPES[int(platform)],
                 request.json['content']
             )
