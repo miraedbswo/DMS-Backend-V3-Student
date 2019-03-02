@@ -5,6 +5,11 @@ from app.exception import NoContentException
 from app.extension import db
 from app.model.mixin import BaseMixin
 
+goingout_status_message = [
+    '외출 전',
+    '외출 중',
+    '복귀'
+]
 
 class GoingoutApplyModel(db.Model, BaseMixin):
     __tablename__ = 'goingout'
@@ -13,6 +18,8 @@ class GoingoutApplyModel(db.Model, BaseMixin):
     go_out_date: datetime = db.Column(db.DateTime)
     return_date: datetime = db.Column(db.DateTime)
     reason: str = db.Column(db.String)
+    # 0: 외출 전. 1: 외출 중, 2: 복귀 완
+    goingout_status: int = db.Column(db.Integer, default=0)
 
     def __init__(self, student_id: str, go_out_date: datetime, return_date: datetime, reason: str):
         self.student_id = student_id
@@ -44,7 +51,8 @@ class GoingoutApplyModel(db.Model, BaseMixin):
                 'go_out_date': datetime.strftime(apply.go_out_date, "%Y-%m-%d %H:%M"),
                 'id': apply.id,
                 'return_date': datetime.strftime(apply.return_date, "%Y-%m-%d %H:%M"),
-                'reason': apply.reason
+                'reason': apply.reason,
+                'goingout_status': goingout_status_message[apply.goingout_status]
             }
 
             if date <= 4:
