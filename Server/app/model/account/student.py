@@ -1,7 +1,7 @@
 import re
 from typing import Union
 
-import bcrypt
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from app.exception import NoContentException, ResetContentException, WrongAuthException, ForbiddenException
 from app.extension import db
@@ -19,7 +19,7 @@ class StudentModel(db.Model, BaseMixin):
 
     def __init__(self, id: str, pw: str, name: str, number: int, email: str):
         self.id = id
-        self.pw = bcrypt.hashpw(pw.encode('utf-8'), bcrypt.gensalt()).decode()
+        self.pw = generate_password_hash(pw)
         self.name = name
         self.number = number
         self.email = email
@@ -49,7 +49,7 @@ class StudentModel(db.Model, BaseMixin):
     @staticmethod
     def login(id: str, pw: str) -> Union[None, 'StudentModel']:
         student: StudentModel = StudentModel.get_student_by_id(id)
-        if not student or not bcrypt.checkpw(pw.encode('utf-8'), student.pw.encode('utf-8')):
+        if not student or not check_password_hash(student.pw, pw):
             raise NoContentException()
         return student
 
@@ -59,19 +59,19 @@ class StudentModel(db.Model, BaseMixin):
         if student is None:
             raise WrongAuthException()
 
-        if not bcrypt.checkpw(current_pw.encode(), student.pw.encode()):
+        if not check_password_hash(student.pw, current_pw):
             raise ForbiddenException()
 
-        if bcrypt.checkpw(new_pw.encode(), student.pw.encode()):
+        if check_password_hash(student.pw.encode(), new_pw.encode()):
             raise ResetContentException()
 
-        student.pw = bcrypt.hashpw(new_pw.encode(), bcrypt.gensalt()).decode()
+        student.pw = generate_password_hash(new_pw)
         db.session.commit()
 
     @staticmethod
     def reset_pw(id: str):
         student: StudentModel = StudentModel.get_student_by_id(id)
-        student.pw = bcrypt.hashpw('1234'.encode(), bcrypt.gensalt()).decode()
+        student.pw = generate_password_hash('1234')
         db.session.commit()
 
     @db.validates('id')
