@@ -1,6 +1,4 @@
-from datetime import datetime
-
-from pytz import timezone
+from datetime import datetime, timedelta
 
 from app.extension import db
 
@@ -18,6 +16,4 @@ class BaseMixin:
 
     @staticmethod
     def kst_now():
-        now = datetime.utcnow()
-        KST = timezone('Asia/Seoul')
-        return KST.localize(now)
+        return datetime.utcnow() + timedelta(hours=9)
