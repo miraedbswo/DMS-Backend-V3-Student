@@ -4,13 +4,10 @@ from hashlib import sha3_512
 
 from dateutil.parser import parse
 from flask import request, abort, current_app
-from pytz import timezone
 
 
 def kst_now():
-    now = datetime.utcnow()
-    KST = timezone('Asia/Seoul')
-    return KST.localize(now)
+        return datetime.utcnow() + timedelta(hours=9)
 
 
 def check_secret_header():

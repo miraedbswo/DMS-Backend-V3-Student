@@ -28,7 +28,7 @@ class Config:
     }
 
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:root@dms.istruly.sexy/dms-test'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:root@ec2.istruly.sexy/dms-test'
 
     MAIL_SERVER = 'smtp.mailgun.org'
     MAIL_ID = 'dms@istruly.sexy'
