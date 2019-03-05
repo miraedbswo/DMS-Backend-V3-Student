@@ -10,7 +10,7 @@ type_list = ['breakfast', 'lunch', 'dinner']
 class MealModel(db.Model, BaseMixin):
     __tablename__ = 'meal'
     date: Date = db.Column(db.Date, primary_key=True)
-    type: int = db.Column(db.Integer)
+    type: int = db.Column(db.Integer, primary_key=True)  # type (0: 아침, 1: 점심, 2: 저녁)
     meal: str = db.Column(db.String)  # ||로 구분하여 입력
 
     def __init__(self, date: Date, type: int, meal: str):
@@ -38,5 +38,5 @@ class MealModel(db.Model, BaseMixin):
 
     @db.validates('type')
     def validate_type(self, key, type):
-        self.assert_validation(type in [1, 2, 3])
+        self.assert_validation(type in [0, 1, 2])
         return type
