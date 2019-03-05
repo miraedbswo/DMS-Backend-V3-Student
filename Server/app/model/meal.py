@@ -38,5 +38,5 @@ class MealModel(db.Model, BaseMixin):
 
     @db.validates('type')
     def validate_type(self, key, type):
-        assert type in [1, 2, 3]
+        self.assert_validation(type in [1, 2, 3])
         return type

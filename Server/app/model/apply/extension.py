@@ -84,15 +84,15 @@ class ExtensionApplyModel(db.Model, BaseMixin):
 
     @db.validates('time')
     def validate_time(self, key, time):
-        assert time in (11, 12)
+        self.assert_validation(time in (11, 12))
         return time
 
     @db.validates('class_')
     def validate_class_(self, key, class_):
-        assert 1 <= class_ <= 8
+        self.assert_validation(1 <= class_ <= 8)
         return class_
 
     @db.validates('seat')
     def validate_seat(self, key, seat):
-        assert 1 <= seat <= seat_count[self.class_]
+        self.assert_validation(1 <= seat <= seat_count[self.class_])
         return seat

@@ -20,5 +20,5 @@ class FacilityReportModel(db.Model, BaseMixin):
 
     @db.validates('room')
     def validate_room(self, key, room):
-        assert 201 <= room <= 518
+        self.assert_validation(201 <= room <= 518)
         return room

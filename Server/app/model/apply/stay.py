@@ -30,5 +30,5 @@ class StayApplyModel(db.Model, BaseMixin):
 
     @db.validates('value')
     def validate_value(self, key, value):
-        assert 1 <= value <= 4
+        self.assert_validation(1 <= value <= 4)
         return value

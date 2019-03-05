@@ -72,5 +72,5 @@ class MusicApplyModel(db.Model, BaseMixin):
 
     @db.validates('day')
     def validate_day(self, key, day):
-        assert day in week
+        self.assert_validation(day in week)
         return day

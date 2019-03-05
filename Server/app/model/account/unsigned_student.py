@@ -42,13 +42,13 @@ class UnsignedStudentModel(db.Model, BaseMixin):
         class_ = number // 100 % 10
         number_ = number % 100
 
-        assert grade in (1, 2, 3)
-        assert class_ in (1, 2, 3, 4)
-        assert number_ in range(1, 21)
+        self.assert_validation(grade in (1, 2, 3))
+        self.assert_validation(class_ in (1, 2, 3, 4))
+        self.assert_validation(number_ in range(1, 21))
 
         return number
 
     @db.validates('email')
     def validate_email(self, key, email):
-        assert re.match(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@dsm.hs.kr$", email) is not None
+        self.assert_validation(re.match(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@dsm.hs.kr$", email) is not None)
         return email
