@@ -62,7 +62,7 @@ class StudentModel(db.Model, BaseMixin):
         if not check_password_hash(student.pw, current_pw):
             raise ForbiddenException()
 
-        if check_password_hash(student.pw.encode(), new_pw.encode()):
+        if check_password_hash(student.pw, new_pw):
             raise ResetContentException()
 
         student.pw = generate_password_hash(new_pw)
