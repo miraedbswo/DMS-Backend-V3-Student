@@ -7,7 +7,7 @@ from flask import request, abort, current_app
 
 
 def kst_now():
-        return datetime.utcnow() + timedelta(hours=9)
+    return datetime.utcnow() + timedelta(hours=9)
 
 
 def check_secret_header():

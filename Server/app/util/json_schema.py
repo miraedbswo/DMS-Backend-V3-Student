@@ -11,6 +11,9 @@ def json_type_validate(json_schema: dict):
         @wraps(fn)
         def wrapper(*args, **kwargs):
             json: dict = request.json
+            if not json:
+                raise BadRequestException()
+
             for key, type_ in json_schema.items():
                 value = json.get(key)
                 if type(value) is not type_:
