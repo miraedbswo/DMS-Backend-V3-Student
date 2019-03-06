@@ -11,6 +11,7 @@ goingout_status_message = [
     '복귀'
 ]
 
+
 class GoingoutApplyModel(db.Model, BaseMixin):
     __tablename__ = 'goingout'
     id: int = db.Column(db.Integer, primary_key=True)
