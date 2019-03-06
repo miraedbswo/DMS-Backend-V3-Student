@@ -1,4 +1,6 @@
 from flask import Flask, jsonify
+from jwt.exceptions import PyJWTError
+from flask_jwt_extended.exceptions import JWTExtendedException
 
 from app.view import Router
 from config import config
@@ -10,6 +12,7 @@ def register_extension(flask_app: Flask):
     extension.jwt.init_app(flask_app)
     extension.jwt.invalid_token_loader(wrong_token_handler)
     extension.jwt.expired_token_loader(wrong_token_handler)
+
     extension.swag.init_app(flask_app)
     extension.swag.template = flask_app.config['SWAGGER_TEMPLATE']
     extension.cors.init_app(flask_app)
@@ -18,11 +21,8 @@ def register_extension(flask_app: Flask):
 def register_hook(flask_app: Flask):
     from app import exception
     from app.hook.exception_handler import http_exception_handler
-    flask_app.register_error_handler(exception.NoContentException, http_exception_handler)
-    flask_app.register_error_handler(exception.ResetContentException, http_exception_handler)
-    flask_app.register_error_handler(exception.WrongAuthException, http_exception_handler)
-    flask_app.register_error_handler(exception.ApplyTimeException, http_exception_handler)
-    flask_app.register_error_handler(exception.BadRequestException, http_exception_handler)
+    flask_app.register_error_handler(JWTExtendedException, jwt_handle)
+    flask_app.register_error_handler(PyJWTError, jwt_handle)
 
     from app.hook.after_request import new_access_token
     flask_app.after_request(new_access_token)
@@ -48,3 +48,7 @@ def wrong_token_handler(wrong_token: str):
         'sub_status': 42,
         'msg': 'Wrong Token'
     }), 403
+
+
+def jwt_handle(e: Exception):
+    return str(e), 403

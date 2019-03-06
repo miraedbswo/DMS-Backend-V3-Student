@@ -36,6 +36,7 @@ class Config:
     MAIL_PORT = 587
 
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=10)
+    PROPAGATE_EXCEPTIONS = True
 
 
 class DevelopmentConfig(Config):
