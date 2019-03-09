@@ -29,5 +29,5 @@ def check_secret_header():
     h = sha3_512(b64encode(key)).hexdigest()
     request_date = parse(date)
 
-    if not (request_date <= kst_now() <= request_date + timedelta(seconds=30) and h == secret):
+    if not (kst_now() - timedelta(minutes=1) <= request_date <= kst_now() + timedelta(minutes=1) and h == secret):
         abort(418)
