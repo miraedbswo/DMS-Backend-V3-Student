@@ -24,7 +24,7 @@ class MealModel(db.Model, BaseMixin):
 
         return {
             str(date): {
-                type_list[meal.type]: [menu.split('||') for menu in meal.meal if '||' in menu]
+                type_list[meal.type]: [meal.meal.split('||')]
                 for meal in meal_list
             }
         }
