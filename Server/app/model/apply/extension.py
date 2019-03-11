@@ -41,6 +41,17 @@ class ExtensionApplyModel(db.Model, BaseMixin):
         }
 
     @staticmethod
+    def get_extension_apply_by_class_num(class_: int, time: int) -> dict:
+        extension_list = ExtensionApplyModel.query.filter_by(class_=class_, time=time).all()
+
+        extension_dict = {
+            apply.seat: StudentModel.get_student_by_id(apply.student_id).name
+            for apply in extension_list
+        }
+
+        return extension_dict
+
+    @staticmethod
     def post_extension_apply(student_id: str, time: int, class_: int, seat: int):
         extension = ExtensionApplyModel.get_extension_apply_by_seat(class_, seat, time)
         if extension is not None:
@@ -62,25 +73,23 @@ class ExtensionApplyModel(db.Model, BaseMixin):
 
     @staticmethod
     def get_extension_map(class_num: int, time: int) -> dict:
+        apply_list = ExtensionApplyModel.get_extension_apply_by_class_num(class_num, time)
         seat_count = 1
 
         chart = get_map_chart(class_num)
+
         for i, row in enumerate(chart):
             for j, seat in enumerate(row):
-                if chart[i][j]:
-                    apply = ExtensionApplyModel.get_extension_apply_by_seat(class_num, seat_count, time)
-
+                if seat:
+                    apply = apply_list.get(seat_count, False)
                     if apply:
-                        student = StudentModel.get_student_by_id(apply.student_id)
-                        chart[i][j] = student.name
+                        chart[i][j] = apply
                     else:
                         chart[i][j] = seat_count
 
                     seat_count += 1
 
-        map_ = {'map': chart}
-
-        return map_
+        return {'map': chart}
 
     @db.validates('time')
     def validate_time(self, key, time):

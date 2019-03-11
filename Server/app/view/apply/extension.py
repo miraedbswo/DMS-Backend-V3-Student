@@ -54,4 +54,4 @@ class ExtensionMapView(ApplyResource):
     @swag_from(EXTENSION_MAP_GET)
     def get(self, class_num, time):
         map_ = ExtensionApplyModel.get_extension_map(class_num, time)
-        return self.unicode_safe_json_dumps(map_)
+        return jsonify(map_)
