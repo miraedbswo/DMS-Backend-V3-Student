@@ -16,7 +16,11 @@ class SignupView(AccountResource):
 
         id = request.json['id']
         pw = request.json['password']
-        StudentModel.signup(id, pw, unsigned_student)
+
+        student = StudentModel.signup(id, pw, unsigned_student)
+        if student is None:
+            return Response('', 205)
+
         PointStatusModel(id).save()
         unsigned_student.delete()
 
