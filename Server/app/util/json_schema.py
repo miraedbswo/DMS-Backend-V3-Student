@@ -39,7 +39,7 @@ GOINGOUT_DELETE_JSON = dict(applyId=int)
 GOINGOUT_POST_JSON = dict(date=str, reason=str)
 GOINGOUT_PATCH_JSON = dict(applyId=int, date=str, reason=str)
 MUSIC_POST_JSON = dict(day=int, singer=str, musicName=str)
-MUSIC_DELETE_JSON = dict(appyId=int)
+MUSIC_DELETE_JSON = dict(applyId=int)
 STAY_POST_JSON = dict(value=int)
 
 # Report
