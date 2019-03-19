@@ -6,7 +6,7 @@
     "project_name": "dms-backend-student",
     "runtime": "python3.6",
     "s3_bucket": "zappa-dms-student",
-    "certificate_arn": "arn:aws:acm:us-east-1:025238967697:certificate/c5edd383-f38c-4822-ba20-db7caeda9fd9",
+    "certificate_arn": "arn:aws:acm:us-east-1:324223366295:certificate/3ae07664-4dfb-406d-b41a-a4ca4372a13b",
     "exclude": [
       "*.gz",
       "*.rar",
@@ -24,10 +24,10 @@
   },
   "dev": {
     "extends": "common",
-    "domain": "dms-api.dev.istruly.sexy"
+    "domain": "dev.api.dms.istruly.sexy"
   },
   "production": {
     "extends": "common",
-    "domain": "dms-api.istruly.sexy"
+    "domain": "api.dms.istruly.sexy"
   }
 }
