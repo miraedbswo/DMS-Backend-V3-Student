@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import List
 
-from app.exception import ResetContentException, NoContentException, ForbiddenException
+from app.exception import ResetContentException, NoContentException, ForbiddenException, AlreadyApplyMusic
 from app.extension import db
 from app.model import StudentModel
 from app.model.mixin import BaseMixin
@@ -26,6 +26,10 @@ class MusicApplyModel(db.Model, BaseMixin):
         self.singer = singer
         self.song_name = song_name
         self.apply_date = self.kst_now()
+
+    @staticmethod
+    def get_music_apply_by_id(student_id: str):
+        return MusicApplyModel.query.filter_by(student_id=student_id).first()
 
     @staticmethod
     def get_music_apply() -> List['MusicApplyModel']:
@@ -59,6 +63,12 @@ class MusicApplyModel(db.Model, BaseMixin):
     def post_music_apply(day: int, student_id: str, singer: str, song_name: str):
         if len(MusicApplyModel.query.filter_by(day=day).all()) >= 5:
             raise ResetContentException()
+
+        already_exist_apply = MusicApplyModel.get_music_apply_by_id(student_id)
+
+        if already_exist_apply is not None:
+            raise AlreadyApplyMusic
+
         MusicApplyModel(day, student_id, singer, song_name).save()
 
     @staticmethod

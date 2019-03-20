@@ -5,6 +5,11 @@ class DMSException(HTTPException):
     pass
 
 
+class AlreadyApplyMusic(DMSException):
+    code = 202
+    description = 'already exist apply'
+
+
 class NoContentException(DMSException):
     code = 204
     description = 'No Content'
