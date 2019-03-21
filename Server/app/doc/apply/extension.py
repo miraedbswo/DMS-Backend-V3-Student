@@ -84,6 +84,9 @@ EXTENSION_DELETE = {
         '200': {
             'description': '연장신청 취소 성공'
         },
+        '204': {
+            'description': '연장신청 취소 실패(연장 신청이 존재하지 않음)'
+        },
         '403': {
             'description': '권한 없음'
         },
