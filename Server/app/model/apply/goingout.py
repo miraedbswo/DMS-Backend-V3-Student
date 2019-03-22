@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import List
 
-from app.exception import NoContentException
+from app.exception import NoContentException, ApplyTimeException
 from app.extension import db
 from app.model.mixin import BaseMixin
 
@@ -51,7 +51,10 @@ class GoingoutApplyModel(db.Model, BaseMixin):
 
     @staticmethod
     def get_goingout_apply(student_id: str) -> dict:
-        applies: List['GoingoutApplyModel'] = GoingoutApplyModel.query.filter_by(student_id=student_id).all()
+        applies: List['GoingoutApplyModel'] = GoingoutApplyModel.query.filter(
+            GoingoutApplyModel.student_id == student_id,
+            GoingoutApplyModel.return_date > datetime.now()
+        ).all()
 
         if not applies:
             raise NoContentException
@@ -87,9 +90,14 @@ class GoingoutApplyModel(db.Model, BaseMixin):
 
     @staticmethod
     def post_goingout_apply(student_id: str, date: str, reason: str):
+        now = GoingoutApplyModel.kst_now()
+
         date_dict = str_to_datetime(date)
-        go_out_date = date_dict.get('go_out_date')
-        return_date = date_dict.get('return_date')
+        go_out_date: datetime = date_dict.get('go_out_date')
+        return_date: datetime = date_dict.get('return_date')
+
+        if not -7 <= go_out_date.date() - now.date() <= 7:
+            raise ApplyTimeException
 
         GoingoutApplyModel(student_id, go_out_date, return_date, reason).save()
 
