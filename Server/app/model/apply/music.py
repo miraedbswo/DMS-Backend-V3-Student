@@ -67,7 +67,7 @@ class MusicApplyModel(db.Model, BaseMixin):
         already_exist_apply = MusicApplyModel.get_music_apply_by_id(student_id)
 
         if already_exist_apply is not None:
-            raise AlreadyApplyMusic
+            raise AlreadyApplyMusic()
 
         MusicApplyModel(day, student_id, singer, song_name).save()
 
