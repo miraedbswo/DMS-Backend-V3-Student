@@ -14,8 +14,11 @@ goingout_status_message = [
 
 def str_to_datetime(string) -> dict:
     day = string[:6]
-    go_out_date: datetime = datetime.strptime(day + string[6:11], '%m-%d %H:%M')
-    return_date: datetime = datetime.strptime(day + string[-5:], '%m-%d %H:%M')
+    now = datetime.now()
+    year = str(now.year) + '-'
+
+    go_out_date: datetime = datetime.strptime(year + day + string[6:11], '%Y-%m-%d %H:%M')
+    return_date: datetime = datetime.strptime(year + day + string[-5:], '%Y-%m-%d %H:%M')
 
     return {
         'go_out_date': go_out_date,
