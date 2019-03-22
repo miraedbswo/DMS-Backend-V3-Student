@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import List
 
 from app.exception import NoContentException, ApplyTimeException
@@ -96,7 +96,9 @@ class GoingoutApplyModel(db.Model, BaseMixin):
         go_out_date: datetime = date_dict.get('go_out_date')
         return_date: datetime = date_dict.get('return_date')
 
-        if not -7 <= go_out_date.date() - now.date() <= 7:
+        limit_apply_time = go_out_date.date() - now.date()
+
+        if not timedelta(days=0) <= limit_apply_time <= timedelta(days=7):
             raise ApplyTimeException
 
         GoingoutApplyModel(student_id, go_out_date, return_date, reason).save()
