@@ -63,11 +63,11 @@ GOINGOUT_POST = {
         '201': {
             'description': '외출신청 성공'
         },
-        '204': {
-            'description': '외출신청 실패(신청 가능 시간 아님)'
-        },
         '403': {
             'description': '권한 없음'
+        },
+        '409': {
+            'description': '외출신청 실패(신청 가능 시간 아님)'
         }
     }
 }
