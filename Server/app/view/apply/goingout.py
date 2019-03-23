@@ -24,9 +24,12 @@ class GoingOutView(ApplyResource):
     @swag_from(GOINGOUT_POST)
     @jwt_required
     def post(self):
-        request_time = self.kst_now()
-        if not (request_time.weekday() <= 4 or request_time.hour <= 22):
+        apply_time = self.kst_now()
+        # 금요일 22:30 ~ 토요일 23:59
+        if (apply_time.weekday() == 4 and (apply_time.hour >= 22 and apply_time.minute > 30)) or \
+                (apply_time.weekday() == 5):
             raise ApplyTimeException()
+
         student_id = get_jwt_identity()
 
         date = request.json['date']
