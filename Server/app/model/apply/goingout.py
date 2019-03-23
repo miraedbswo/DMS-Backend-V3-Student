@@ -96,9 +96,9 @@ class GoingoutApplyModel(db.Model, BaseMixin):
         go_out_date: datetime = date_dict.get('go_out_date')
         return_date: datetime = date_dict.get('return_date')
 
-        limit_apply_time = go_out_date.date() - now.date()
+        difference_time = go_out_date - now
 
-        if not timedelta(days=0) <= limit_apply_time <= timedelta(days=7):
+        if not timedelta(days=1) <= difference_time <= timedelta(days=7):
             raise ApplyTimeException
 
         GoingoutApplyModel(student_id, go_out_date, return_date, reason).save()
