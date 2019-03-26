@@ -45,6 +45,7 @@ class StudentModel(db.Model, BaseMixin):
             raise ResetContentException()
 
         StudentModel(id, pw, name, number, email).save()
+        unsigned_student.delete()
 
     @staticmethod
     def login(id: str, pw: str) -> Union[None, 'StudentModel']:
