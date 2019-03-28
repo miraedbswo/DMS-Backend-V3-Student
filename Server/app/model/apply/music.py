@@ -46,6 +46,8 @@ class MusicApplyModel(db.Model, BaseMixin):
         if music_apply is not None:
             for apply in music_apply:
                 student = StudentModel.get_student_by_id(apply.student_id)
+                if len(status[weekday[apply.day]]) > 3:
+                    continue
                 status[weekday[apply.day]].append(
                     {
                         'id': apply.id,
