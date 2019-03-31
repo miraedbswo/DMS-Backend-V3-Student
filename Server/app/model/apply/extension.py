@@ -98,7 +98,7 @@ class ExtensionApplyModel(db.Model, BaseMixin):
 
     @db.validates('class_')
     def validate_class_(self, key, class_):
-        self.assert_validation(1 <= class_ <= 10)
+        self.assert_validation(1 <= class_ <= 11)
         return class_
 
     @db.validates('seat')
