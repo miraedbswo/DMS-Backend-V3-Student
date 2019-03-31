@@ -10,12 +10,19 @@ _url_base = \
     'https://stu.dje.go.kr/sts_sci_md00_001.do?schulCode=G100000170&schulCrseScCode=4&schulKndScScore=04&schYm={}{:0>2}'
 
 database = {
-    'host': 'ec2.istruly.sexy',
-    'dbname': 'dms-test',
-    'user': 'postgres',
-    'password': 'root'
+    'host': '52.199.207.14',
+    'database': 'dms',
+    'user': 'dms',
+    'password': 'root',
+    'port': 5432
 }
 
+# database = {
+#     'host': 'ec2.istruly.sexy',
+#     'database': 'dms-test',
+#     'user': 'postgres',
+#     'password': 'root'
+# }
 conn = psycopg2.connect(**database)
 cursor = conn.cursor()
 
@@ -29,6 +36,7 @@ class Meal:
         self.date = date
         self.type = type
         self.meal = meal
+        print(date, type)
 
     def insert_into_database(self):
         cursor.execute(
@@ -74,7 +82,7 @@ def insert_one_day_menus(meal_list_filtered_with_regex: list, year: int, month: 
             dict_['type'] = meal_type.index(menu[2:4])
             dict_['meal'] = menu[6:]
 
-        Meal(**dict_).insert_into_database()
+            Meal(**dict_).insert_into_database()
 
 
 def insert_meal_into_database_with_crawling(year: int, month: int):
@@ -98,9 +106,8 @@ def insert_meal_into_database_with_crawling(year: int, month: int):
         insert_one_day_menus(meal_list_filtered_with_regex, year, month, day)
 
     conn.commit()
-
-
-insert_meal_into_database_with_crawling(2019, 3)
+print(conn)
+insert_meal_into_database_with_crawling(2019, 4)
 
 conn.close()
 cursor.close()
