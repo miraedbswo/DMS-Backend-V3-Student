@@ -3,6 +3,7 @@ from flask import request, Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
 from app.doc.apply.music import MUSIC_GET, MUSIC_POST, MUSIC_DELETE
+from app.exception import ApplyTimeException
 from app.model import MusicApplyModel
 from app.util.json_schema import json_type_validate, MUSIC_POST_JSON, MUSIC_DELETE_JSON
 from app.view.base_resource import ApplyResource
@@ -18,6 +19,12 @@ class MusicView(ApplyResource):
     @swag_from(MUSIC_POST)
     @jwt_required
     def post(self):
+        apply_time = self.kst_now()
+
+        if (apply_time.weekday() == 5) or \
+                (apply_time.weekday() == 6 and apply_time.hour <= 9 and apply_time.minute <= 30):
+            raise ApplyTimeException
+
         student_id = get_jwt_identity()
         day = request.json['day']
         singer = request.json['singer']
