@@ -17,12 +17,6 @@ database = {
     'port': 5432
 }
 
-# database = {
-#     'host': 'ec2.istruly.sexy',
-#     'database': 'dms-test',
-#     'user': 'postgres',
-#     'password': 'root'
-# }
 conn = psycopg2.connect(**database)
 cursor = conn.cursor()
 
@@ -36,7 +30,6 @@ class Meal:
         self.date = date
         self.type = type
         self.meal = meal
-        print(date, type)
 
     def insert_into_database(self):
         cursor.execute(
@@ -57,13 +50,17 @@ def insert_one_day_menus(meal_list_filtered_with_regex: list, year: int, month: 
     }
 
     for meal in meal_list_filtered_with_regex:
+        a = meal.find('밥') if meal[-1] != '밥' else -1
+        if not a == -1:
+            menu += '||' + meal[:a+1] + '||' + meal[a+1:]
+            continue
+
         if re.match('[조중석]식', meal):
             counter += 1
 
         if counter == 2:
             dict_['type'] = meal_type.index(menu[2:4])
             dict_['meal'] = menu[6:]
-
             Meal(**dict_).insert_into_database()
 
             menu = ''
@@ -102,11 +99,11 @@ def insert_meal_into_database_with_crawling(year: int, month: int):
         # 빈 td를 날짜로 계산하지 않게 하기 위해서 빈 td의 개수만큼 빼줌
         day = day_count - non_exist_day
         meal_list_filtered_with_regex = re.findall('\[?(\/?[가-힣]+(?:\([가-힣]*\))*)(?:\*|[0-9]|\.)*\]?', today_menus)
-
         insert_one_day_menus(meal_list_filtered_with_regex, year, month, day)
 
     conn.commit()
-print(conn)
+
+
 insert_meal_into_database_with_crawling(2019, 4)
 
 conn.close()
