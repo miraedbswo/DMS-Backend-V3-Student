@@ -1,0 +1,6 @@
+{
+  "description": "Apex Deployment",
+  "hooks":{
+    "build": "pip3.6 install -r requirements.txt -t ."
+  }
+}

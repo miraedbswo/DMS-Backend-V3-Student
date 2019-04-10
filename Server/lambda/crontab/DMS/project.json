@@ -1,0 +1,9 @@
+{
+  "name": "DMS",
+  "description": "DMS",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::324223366295:role/DMS_lambda_function",
+  "handler": "main.lambda_handler",
+  "environment": {}
+}
