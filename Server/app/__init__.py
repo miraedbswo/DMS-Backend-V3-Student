@@ -2,7 +2,6 @@ from flask import Flask, jsonify
 from jwt.exceptions import PyJWTError
 from flask_jwt_extended.exceptions import JWTExtendedException
 
-from app.view import Router
 from config import config
 
 
@@ -31,13 +30,34 @@ def register_hook(flask_app: Flask):
     flask_app.before_request(check_secret_header)
 
 
+def register_blueprint(flask_app: Flask):
+    from app.view.account import account_blueprint, info_blueprint
+    flask_app.register_blueprint(account_blueprint)
+    flask_app.register_blueprint(info_blueprint)
+
+    from app.view.apply import apply_blueprint
+    flask_app.register_blueprint(apply_blueprint)
+
+    from app.view.meal import meal_blueprint
+    flask_app.register_blueprint(meal_blueprint)
+
+    from app.view.notice import notice_blueprint
+    flask_app.register_blueprint(notice_blueprint)
+
+    from app.view.report import report_blueprint
+    flask_app.register_blueprint(report_blueprint)
+
+    from app.view.survey import survey_blueprint
+    flask_app.register_blueprint(survey_blueprint)
+
+
 def create_app(config_name: str) -> Flask:
     flask_app = Flask(__name__)
     flask_app.config.from_object(config[config_name])
 
     register_extension(flask_app)
     register_hook(flask_app)
-    Router(flask_app).register_blueprint()
+    register_blueprint(flask_app)
 
     return flask_app
 
