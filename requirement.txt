@@ -6,4 +6,4 @@ flasgger
 bcrypt
 freezegun
 slacker
-psycopg2
+psycopg2-binary
