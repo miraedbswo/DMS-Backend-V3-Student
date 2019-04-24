@@ -29,18 +29,22 @@ class ManagePasswordView(AccountResource):
         id = request.json['id']
         email = request.json['email']
         student = StudentModel.get_student_by_id_email(id, email)
-        find_pw = FindPWModel(student.id)
 
-        smtp = smtplib.SMTP(current_app.config.MAIL_SERVER, current_app.config.MAIL_PORT)
+        find_pw = FindPWModel(student=student.id)
+
+        mail_id = current_app.config['MAIL_ID']
+        mail_pw = current_app.config['MAIL_PW']
+
+        smtp = smtplib.SMTP(current_app.config['MAIL_SERVER'], current_app.config['MAIL_PORT'])
         smtp.starttls()
-        smtp.login(current_app.config.MAIL_ID, current_app.config.MAIL_PW)
+        smtp.login(mail_id, mail_pw)
 
         msg = MIMEText(f'http://dms.istruly.sexy/account/pw/{find_pw.id}')
         msg['Subject'] = 'dms 비밀번호 초기화 링크'
-        msg['To'] = student.email
-        msg['From'] = current_app.config.MAIL_ID
+        msg['To'] = 'miraedbswo@gmail.com'
+        msg['From'] = mail_id
 
-        smtp.sendmail(current_app.config.MAIL_ID, student.email, msg)
+        smtp.sendmail(mail_id, 'miraedbswo@gmail.com', bytes(msg))
 
         return Response('', 201)
 
