@@ -5,7 +5,7 @@ from app.exception import NoContentException, ApplyTimeException
 from app.extension import db
 from app.model.mixin import BaseMixin
 
-goingout_status_message = [
+going_out_status_message = [
     '외출 전',
     '외출 중',
     '복귀'
@@ -33,7 +33,7 @@ def datetime_to_str(go_out_date: datetime, return_date: datetime) -> str:
     return go_out_date + ' ~ ' + return_date
 
 
-class GoingoutApplyModel(db.Model, BaseMixin):
+class GoingOutApplyModel(db.Model, BaseMixin):
     __tablename__ = 'goingout'
     id: int = db.Column(db.Integer, primary_key=True)
     student_id: str = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'))
@@ -41,7 +41,7 @@ class GoingoutApplyModel(db.Model, BaseMixin):
     return_date: datetime = db.Column(db.DateTime)
     reason: str = db.Column(db.String)
     # 0: 외출 전. 1: 외출 중, 2: 복귀 완료
-    goingout_status: int = db.Column(db.Integer, default=0)
+    going_out_status: int = db.Column(db.Integer, default=0)
 
     def __init__(self, student_id: str, go_out_date: datetime, return_date: datetime, reason: str):
         self.student_id = student_id
@@ -54,12 +54,17 @@ class GoingoutApplyModel(db.Model, BaseMixin):
         applies: List['GoingoutApplyModel'] = GoingoutApplyModel.query.filter(
             GoingoutApplyModel.student_id == student_id,
             GoingoutApplyModel.return_date > datetime.now()
+    @staticmethod
+    def get_going_out_apply(student_id: str) -> dict:
+        applies: List['GoingOutApplyModel'] = GoingOutApplyModel.query.filter(
+            GoingOutApplyModel.student_id == student_id,
+            GoingOutApplyModel.return_date > datetime.now()
         ).all()
 
         if not applies:
             raise NoContentException
 
-        goingout_data = {
+        going_out_data = {
             'workday': [],
             'saturday': [],
             'sunday': []
@@ -74,23 +79,23 @@ class GoingoutApplyModel(db.Model, BaseMixin):
                 'date': date,
                 'id': apply.id,
                 'reason': apply.reason,
-                'goingoutStatus': goingout_status_message[apply.goingout_status]
+                'goingoutStatus': going_out_status_message[apply.goingout_status]
             }
 
             if days_of_week <= 4:
-                goingout_data['workday'].append(apply)
+                going_out_data['workday'].append(apply)
 
             elif days_of_week == 5:
-                goingout_data['saturday'].append(apply)
+                going_out_data['saturday'].append(apply)
 
             else:
-                goingout_data['sunday'].append(apply)
+                going_out_data['sunday'].append(apply)
 
-        return goingout_data
+        return going_out_data
 
     @staticmethod
-    def post_goingout_apply(student_id: str, date: str, reason: str):
-        now = GoingoutApplyModel.kst_now()
+    def post_going_out_apply(student_id: str, date: str, reason: str):
+        now = GoingOutApplyModel.kst_now()
 
         date_dict = str_to_datetime(date)
         go_out_date: datetime = date_dict.get('go_out_date')
@@ -115,7 +120,7 @@ class GoingoutApplyModel(db.Model, BaseMixin):
         db.session.commit()
 
     @staticmethod
-    def delete_goingout_apply(apply_id: int, student_id: str):
+    def delete_going_out_apply(apply_id: int, student_id: str):
         apply: 'GoingoutApplyModel' = GoingoutApplyModel.query.filter_by(id=apply_id, student_id=student_id).first()
 
         if apply is None:
