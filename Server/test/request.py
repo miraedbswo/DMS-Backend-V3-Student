@@ -64,14 +64,14 @@ class ApplyRequest:
         )
         return rv
 
-    def request_goingout_get(self, jwt: str) -> Response:
+    def request_going_out_get(self, jwt: str) -> Response:
         rv = self.client.get(
             '/apply/goingout',
             headers={'Authorization': jwt}
         )
         return rv
 
-    def request_goingout_post(self, jwt: str, go_out_date: str, return_date: str, reason: str) -> Response:
+    def request_going_out_post(self, jwt: str, go_out_date: str, return_date: str, reason: str) -> Response:
         rv = self.client.post(
             '/apply/goingout',
             headers={'Authorization': jwt},

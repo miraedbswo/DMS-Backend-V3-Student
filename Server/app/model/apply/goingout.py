@@ -50,10 +50,18 @@ class GoingOutApplyModel(db.Model, BaseMixin):
         self.reason = reason
 
     @staticmethod
-    def get_goingout_apply(student_id: str) -> dict:
-        applies: List['GoingoutApplyModel'] = GoingoutApplyModel.query.filter(
-            GoingoutApplyModel.student_id == student_id,
-            GoingoutApplyModel.return_date > datetime.now()
+    def check_going_out_apply_time(now: datetime, go_out_date: datetime, return_date: datetime):
+        if (now.weekday() in {4, 5}) and (now.hour >= 22 and now.minute >= 30):
+            if now.date() + timedelta(days=1) == go_out_date.date():
+                raise ApplyTimeException
+
+        if go_out_date.date() != return_date.date():
+            raise ApplyTimeException
+
+        difference_time = go_out_date - now
+        if not difference_time <= timedelta(days=7):
+            raise ApplyTimeException
+
     @staticmethod
     def get_going_out_apply(student_id: str) -> dict:
         applies: List['GoingOutApplyModel'] = GoingOutApplyModel.query.filter(
@@ -101,27 +109,28 @@ class GoingOutApplyModel(db.Model, BaseMixin):
         go_out_date: datetime = date_dict.get('go_out_date')
         return_date: datetime = date_dict.get('return_date')
 
-        difference_time = go_out_date - now
-
-        if not timedelta(days=1) <= difference_time <= timedelta(days=7):
-            raise ApplyTimeException
-
-        GoingoutApplyModel(student_id, go_out_date, return_date, reason).save()
+        GoingOutApplyModel.check_going_out_apply_time(now, go_out_date, return_date)
+        GoingOutApplyModel(student_id, go_out_date, return_date, reason).save()
 
     @staticmethod
-    def patch_goingout_apply(apply_id: int, student_id: str, date: str, reason: str):
-        apply: 'GoingoutApplyModel' = GoingoutApplyModel.query.filter_by(id=apply_id, student_id=student_id).first()
-        date_dict = str_to_datetime(date)
+    def patch_going_out_apply(apply_id: int, student_id: str, date: str, reason: str):
+        now = GoingOutApplyModel.kst_now()
+        apply: 'GoingOutApplyModel' = GoingOutApplyModel.query.filter_by(id=apply_id, student_id=student_id).first()
 
-        apply.go_out_date = date_dict.get('go_out_date')
-        apply.return_date = date_dict.get('return_date')
+        date_dict = str_to_datetime(date)
+        go_out_date = date_dict.get('go_out_date')
+        return_date = date_dict.get('return_date')
+
+        GoingOutApplyModel.check_going_out_apply_time(now, go_out_date, return_date)
+        apply.go_out_date = go_out_date
+        apply.return_date = return_date
         apply.reason = reason
 
         db.session.commit()
 
     @staticmethod
     def delete_going_out_apply(apply_id: int, student_id: str):
-        apply: 'GoingoutApplyModel' = GoingoutApplyModel.query.filter_by(id=apply_id, student_id=student_id).first()
+        apply: 'GoingOutApplyModel' = GoingOutApplyModel.query.filter_by(id=apply_id, student_id=student_id).first()
 
         if apply is None:
             raise NoContentException()
