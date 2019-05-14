@@ -11,11 +11,11 @@ from app.model.mixin import BaseMixin
 
 class StudentModel(db.Model, BaseMixin):
     __tablename__ = 'student'
-    id = db.Column(db.String, primary_key=True)
-    pw = db.Column(db.String)
-    name = db.Column(db.String)
-    number = db.Column(db.Integer)
-    email = db.Column(db.String)
+    id: str = db.Column(db.String, primary_key=True)
+    pw: str = db.Column(db.String)
+    name: str = db.Column(db.String)
+    number: int = db.Column(db.Integer)
+    email: str = db.Column(db.String)
 
     def __init__(self, id: str, pw: str, name: str, number: int, email: str):
         self.id = id
