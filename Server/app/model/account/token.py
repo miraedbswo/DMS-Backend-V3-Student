@@ -22,6 +22,10 @@ class TokenModel(db.Model, BaseMixin):
         self.user_agent: str = user_agent
 
     @classmethod
+    def find_refresh_token(cls, owner: str, user_agent: str):
+        return TokenModel.query.filter_by(owner=owner, user_agent=user_agent).first()
+
+    @classmethod
     def _verify_refresh_token(cls, refresh_token, user_agent):
         token = TokenModel.query.filter_by(
             owner=get_jwt_identity(),
@@ -35,6 +39,10 @@ class TokenModel(db.Model, BaseMixin):
     def create_new_token(cls, owner: str, user_agent: str) -> dict:
         new_access_token = create_access_token(owner)
         new_refresh_token = create_refresh_token(owner)
+
+        exist_token = cls.find_refresh_token(owner, user_agent)
+        if exist_token:
+            exist_token.delete()
 
         TokenModel(
             owner=owner,
