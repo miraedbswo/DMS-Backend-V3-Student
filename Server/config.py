@@ -36,6 +36,7 @@ class Config:
     MAIL_PORT = 587
 
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=10)
+    JWT_REFRESH_TOKEN_EXPIRES = timedelta(weeks=2)
     PROPAGATE_EXCEPTIONS = True
 
 
