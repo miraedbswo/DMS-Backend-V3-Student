@@ -11,3 +11,4 @@ from .point.history import PointHistoryModel
 from .point.item import PointItemModel
 from .point.status import PointStatusModel
 from .report import FacilityReportModel
+from app.model.account.token import TokenModel
