@@ -2,7 +2,7 @@ from flasgger import swag_from
 from flask import current_app, request, jsonify
 from flask_jwt_extended import jwt_refresh_token_required
 
-from app.doc.account.auth import AUTH_POST
+from app.doc.account.auth import AUTH_POST, REFRESH_POST
 from app.model import StudentModel, TokenModel
 from app.util.json_schema import json_type_validate, AUTH_POST_JSON
 from app.view.base_resource import AccountResource
