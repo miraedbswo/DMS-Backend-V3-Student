@@ -7,9 +7,10 @@ account_api = Api(account_blueprint)
 info_blueprint = Blueprint('info', __name__, url_prefix='/info')
 info_api = Api(info_blueprint)
 
-from .auth import AuthView
+from .auth import Auth, Refresh
 
-account_api.add_resource(AuthView, '/auth')
+account_api.add_resource(Auth, '/auth')
+account_api.add_resource(Refresh, '/refresh')
 
 from .info import ApplyInfoView, BasicInfoView, PointInfoView
 
