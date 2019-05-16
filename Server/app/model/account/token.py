@@ -6,6 +6,8 @@ from flask_jwt_extended import (
     decode_token,
     get_jwt_identity
 )
+
+from app.exception import ForbiddenException
 from app.extension import db
 from app.model.mixin import BaseMixin
 
@@ -32,6 +34,9 @@ class TokenModel(db.Model, BaseMixin):
             refresh_token=refresh_token,
             user_agent=user_agent
         ).first()
+
+        if not token:
+            raise ForbiddenException()
 
         return token
 
