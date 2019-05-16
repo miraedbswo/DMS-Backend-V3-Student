@@ -44,16 +44,11 @@ class TokenModel(db.Model, BaseMixin):
     def create_new_token(cls, owner: str, user_agent: str) -> dict:
         new_access_token = create_access_token(owner)
         new_refresh_token = create_refresh_token(owner)
-
         exist_token = cls.find_refresh_token(owner, user_agent)
         if exist_token:
             exist_token.delete()
 
-        TokenModel(
-            owner=owner,
-            refresh_token=new_refresh_token,
-            user_agent=user_agent
-        ).save()
+        TokenModel(owner, new_refresh_token, user_agent).save()
 
         return {
             'accessToken': new_access_token,
@@ -66,12 +61,12 @@ class TokenModel(db.Model, BaseMixin):
         token = cls._verify_refresh_token(refresh_token, user_agent)
         token_data = decode_token(refresh_token)
 
-        new_access_token = create_access_token(token_data.identity)
+        new_access_token = create_access_token(token_data.get('identity'))
         new_token['accessToken'] = new_access_token
 
         # refresh token 의 유효 기간이 3일 미만일 경우 refresh_token 또한 재발급.
-        if (time() - token_data.get('exp')) < 259200:
-            new_refresh_token = create_refresh_token(token_data.identity)
+        if (token_data.get('exp') - time()) < 259200:
+            new_refresh_token = create_refresh_token(token_data.get('identity'))
             token.refresh_token = new_refresh_token
             new_token['refreshToken'] = new_refresh_token
 
