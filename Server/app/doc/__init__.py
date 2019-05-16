@@ -16,6 +16,14 @@ JWT_ACCESS_TOKEN = {
     'required': 'true'
 }
 
+JWT_REFRESH_TOKEN = {
+    'name': 'Authorization',
+    'description': 'jwt refresh token',
+    'in': 'header',
+    'type': 'str',
+    'required': 'true'
+}
+
 SAMPLE_OBJECT_IDS = [
     '5acddc2bc2a93f68ce96f5c4',
     '5acddc2bc2a93f68ce96f5c9',

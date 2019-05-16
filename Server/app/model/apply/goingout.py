@@ -41,7 +41,7 @@ class GoingOutApplyModel(db.Model, BaseMixin):
     return_date: datetime = db.Column(db.DateTime)
     reason: str = db.Column(db.String)
     # 0: 외출 전. 1: 외출 중, 2: 복귀 완료
-    going_out_status: int = db.Column(db.Integer, default=0)
+    goingout_status: int = db.Column(db.Integer, default=0)
 
     def __init__(self, student_id: str, go_out_date: datetime, return_date: datetime, reason: str):
         self.student_id = student_id
