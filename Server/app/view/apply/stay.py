@@ -9,7 +9,7 @@ from app.util.json_schema import json_type_validate, STAY_POST_JSON
 from app.view.base_resource import ApplyResource
 
 
-class StayView(ApplyResource):
+class Stay(ApplyResource):
     @swag_from(STAY_GET)
     @jwt_required
     def get(self):

@@ -8,7 +8,7 @@ from app.model import (StudentModel, PointStatusModel, ExtensionApplyModel,
 from app.view.base_resource import AccountResource
 
 
-class ApplyInfoView(AccountResource):
+class ApplyInfo(AccountResource):
     @swag_from(APPLY_INFO_GET)
     @jwt_required
     def get(self):
@@ -23,7 +23,7 @@ class ApplyInfoView(AccountResource):
         return jsonify(apply_info)
 
 
-class BasicInfoView(AccountResource):
+class BasicInfo(AccountResource):
     @swag_from(BASIC_INFO_GET)
     @jwt_required
     def get(self):
@@ -37,7 +37,7 @@ class BasicInfoView(AccountResource):
         return jsonify(info)
 
 
-class PointInfoView(AccountResource):
+class PointInfo(AccountResource):
     @swag_from(POINT_HISTORY_GET)
     @jwt_required
     def get(self):

@@ -12,17 +12,17 @@ from .auth import Auth, Refresh
 account_api.add_resource(Auth, '/auth')
 account_api.add_resource(Refresh, '/refresh')
 
-from .info import ApplyInfoView, BasicInfoView, PointInfoView
+from .info import ApplyInfo, BasicInfo, PointInfo
 
-info_api.add_resource(ApplyInfoView, '/apply')
-info_api.add_resource(BasicInfoView, '/basic')
-info_api.add_resource(PointInfoView, '/point')
+info_api.add_resource(ApplyInfo, '/apply')
+info_api.add_resource(BasicInfo, '/basic')
+info_api.add_resource(PointInfo, '/point')
 
-from .manage import ManagePasswordView, FindPWGetView
+from .manage import ManagePassword, FindPWGet
 
-account_api.add_resource(ManagePasswordView, '/pw')
-account_api.add_resource(FindPWGetView, '/pw/<uuid>')
+account_api.add_resource(ManagePassword, '/pw')
+account_api.add_resource(FindPWGet, '/pw/<uuid>')
 
-from .signup import SignupView
+from .signup import Signup
 
-account_api.add_resource(SignupView, '/signup')
+account_api.add_resource(Signup, '/signup')

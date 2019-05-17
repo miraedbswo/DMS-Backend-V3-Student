@@ -7,7 +7,7 @@ from app.util.json_schema import json_type_validate, SIGNUP_POST_JSON
 from app.view.base_resource import AccountResource
 
 
-class SignupView(AccountResource):
+class Signup(AccountResource):
     @json_type_validate(SIGNUP_POST_JSON)
     @swag_from(SIGNUP_POST)
     def post(self):

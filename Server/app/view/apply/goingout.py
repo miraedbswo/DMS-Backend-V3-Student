@@ -11,7 +11,7 @@ from app.util.json_schema import json_type_validate, GOINGOUT_POST_JSON, GOINGOU
 from app.view.base_resource import ApplyResource
 
 
-class GoingOutView(ApplyResource):
+class GoingOut(ApplyResource):
     @swag_from(GOINGOUT_GET)
     @jwt_required
     def get(self):

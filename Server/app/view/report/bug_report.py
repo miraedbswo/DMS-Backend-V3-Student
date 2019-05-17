@@ -9,7 +9,7 @@ from app.util.json_schema import json_type_validate, BUG_POST_JSON
 from app.view.base_resource import ReportResource
 
 
-class BugReportView(ReportResource):
+class BugReport(ReportResource):
     slack_bot = Slacker('xoxb-324577197473-BWb8rsUFqLezjczj0g6mWn1I')
     PLATFORM_TYPES = {
         1: 'Web',

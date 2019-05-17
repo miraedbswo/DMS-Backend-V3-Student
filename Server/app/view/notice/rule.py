@@ -6,13 +6,13 @@ from app.model import RuleModel
 from app.view.base_resource import NoticeResource
 
 
-class RuleListView(NoticeResource):
+class RuleList(NoticeResource):
     @swag_from(RULE_LIST_GET)
     def get(self):
         return jsonify(RuleModel.get_rule_list())
 
 
-class RuleView(NoticeResource):
+class Rule(NoticeResource):
     @swag_from(RULE_GET)
     def get(self, rule_id):
         return jsonify(RuleModel.get_rule(rule_id))

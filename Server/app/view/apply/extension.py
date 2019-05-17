@@ -14,7 +14,7 @@ extension_apply_start = {11: Time(17, 30), 12: Time(17, 30)}
 extension_apply_end = {11: Time(20, 30), 12: Time(22, 30)}
 
 
-class ExtensionView(ApplyResource):
+class Extension(ApplyResource):
     @swag_from(EXTENSION_GET)
     @jwt_required
     def get(self, time: int):
@@ -50,7 +50,7 @@ class ExtensionView(ApplyResource):
         return Response('', 200)
 
 
-class ExtensionMapView(ApplyResource):
+class ExtensionMap(ApplyResource):
     @swag_from(EXTENSION_MAP_GET)
     def get(self, class_num, time):
         map_ = ExtensionApplyModel.get_extension_map(class_num, time)

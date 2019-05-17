@@ -8,7 +8,7 @@ from app.model import MealModel
 from app.view.base_resource import BaseResource
 
 
-class MealView(BaseResource):
+class Meal(BaseResource):
     @swag_from(MEAL_GET)
     def get(self, day: str):
         try:

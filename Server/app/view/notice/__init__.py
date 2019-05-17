@@ -4,12 +4,12 @@ from flask_restful import Api
 notice_blueprint = Blueprint('notice', __name__)
 api = Api(notice_blueprint)
 
-from .notice import NoticeListView, NoticeView
+from .notice import NoticeList, Notice
 
-api.add_resource(NoticeListView, '/notice')
-api.add_resource(NoticeView, '/notice/<notice_id>')
+api.add_resource(NoticeList, '/notice')
+api.add_resource(Notice, '/notice/<notice_id>')
 
-from .rule import RuleListView, RuleView
+from .rule import RuleList, Rule
 
-api.add_resource(RuleListView, '/rule')
-api.add_resource(RuleView, '/rule/<rule_id>')
+api.add_resource(RuleList, '/rule')
+api.add_resource(Rule, '/rule/<rule_id>')

@@ -5,7 +5,7 @@ from app.doc.survey.question import QUESTION_POST
 from app.view.base_resource import SurveyResource
 
 
-class QuestionView(SurveyResource):
+class Question(SurveyResource):
     @swag_from(QUESTION_POST)
     @jwt_required
     def post(self, question_id):

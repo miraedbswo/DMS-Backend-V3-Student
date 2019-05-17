@@ -9,7 +9,7 @@ from app.util.json_schema import json_type_validate, MUSIC_POST_JSON, MUSIC_DELE
 from app.view.base_resource import ApplyResource
 
 
-class MusicView(ApplyResource):
+class Music(ApplyResource):
     @swag_from(MUSIC_GET)
     @jwt_required
     def get(self):

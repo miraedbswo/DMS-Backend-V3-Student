@@ -11,7 +11,7 @@ from app.util.json_schema import json_type_validate, PW_PATCH_JSON, PW_POST_JSON
 from app.view.base_resource import AccountResource
 
 
-class ManagePasswordView(AccountResource):
+class ManagePassword(AccountResource):
     @json_type_validate(PW_PATCH_JSON)
     @swag_from(CHANGE_PW_PATCH)
     @jwt_required
@@ -49,7 +49,7 @@ class ManagePasswordView(AccountResource):
         return Response('', 201)
 
 
-class FindPWGetView(AccountResource):
+class FindPWGet(AccountResource):
     def get(self, uuid: str):
         FindPWModel.check_uuid(uuid=uuid)
 
