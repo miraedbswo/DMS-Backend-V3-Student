@@ -1,9 +1,0 @@
-Flask
-flask_restful
-flask_jwt_extended
-Flask-SQLAlchemy
-flasgger
-bcrypt
-freezegun
-slacker
-psycopg2-binary
