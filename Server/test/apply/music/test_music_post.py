@@ -11,7 +11,7 @@ tomorrow = str(date.today() + timedelta(1))
 
 class TestPostMusic(TCBase, ApplyRequest):
     @check_status_code(201)
-    def test_post_music_apply_status(self) -> Response:
+    def test_success(self) -> Response:
         test_music_apply_data = {
             'singer': '아이유',
             'song_name': '삐삐',
@@ -36,7 +36,7 @@ class TestPostMusic(TCBase, ApplyRequest):
         return rv
 
     @check_status_code(205)
-    def test_apply_music_data_completed(self):
+    def test_apply_music_completed(self):
         for _ in range(5):
             MusicApplyModel.post_music_apply(0, 'test', 'singer', 'song')
 

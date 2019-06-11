@@ -7,14 +7,14 @@ from test.request import ApplyRequest
 
 class TestGetExtension(TCBase, ApplyRequest):
     @check_status_code(204)
-    def test_extension_default_status(self) -> Response:
+    def test_get_default_extension_status(self) -> Response:
         rv: Response = self.request_extension_get(self.access_token, 11)
 
         return rv
 
     @check_status_code(200)
-    def test_get_extension_successful(self) -> Response:
-        extension_data = {
+    def test_success_get_extension(self) -> Response:
+        apply = {
             'classNum': 1,
             'seatNum': 16
         }
@@ -22,11 +22,11 @@ class TestGetExtension(TCBase, ApplyRequest):
         ExtensionApplyModel.post_extension_apply(
             student_id='test',
             time=11,
-            class_=extension_data['classNum'],
-            seat=extension_data['seatNum']
+            class_=apply.get('classNum'),
+            seat=apply.get('seatNum'),
         )
 
         rv: Response = self.request_extension_get(self.access_token, 11)
-        self.assertDictEqual(extension_data, rv.json)
+        self.assertDictEqual(apply, rv.json)
 
         return rv

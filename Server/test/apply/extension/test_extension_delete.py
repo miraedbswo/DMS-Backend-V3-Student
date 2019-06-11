@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date
 
 from flask import Response
 from freezegun import freeze_time
@@ -7,7 +7,7 @@ from app.model.apply import ExtensionApplyModel
 from test import TCBase, check_status_code
 from test.request import ApplyRequest
 
-tomorrow = str(date.today() + timedelta(1))
+today = str(date.today())
 
 
 class TestDeleteExtension(TCBase, ApplyRequest):
@@ -28,24 +28,24 @@ class TestDeleteExtension(TCBase, ApplyRequest):
             seat=16
         ).save()
 
-    @freeze_time(f"{tomorrow} 19:30:00")
+    @freeze_time(f"{today} 19:30")
     @check_status_code(200)
-    def test_delete_extension_successful(self) -> Response:
+    def test_success_delete_extension(self) -> Response:
         rv: Response = self.request_extension_delete(self.access_token, 11)
 
         self.assertIsNone(ExtensionApplyModel.get_extension_apply_status('test', 11))
         return rv
 
-    @freeze_time(f"{tomorrow} 21:00")
+    @freeze_time(f"{today} 21:00")
     @check_status_code(409)
-    def test_delete_11_extension_outside_time(self) -> Response:
+    def test_extension11_in_overtime(self) -> Response:
         rv: Response = self.request_extension_delete(self.access_token, 11)
 
         return rv
 
-    @freeze_time(f"{tomorrow} 22:30")
+    @freeze_time(f"{today} 22:30")
     @check_status_code(409)
-    def test_delete_12_extension_outside_time(self) -> Response:
+    def test_extension12_in_overtime(self) -> Response:
         rv: Response = self.request_extension_delete(self.access_token, 12)
 
         return rv
