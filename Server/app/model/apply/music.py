@@ -61,7 +61,7 @@ class MusicApplyModel(db.Model, BaseMixin):
 
     @staticmethod
     def post_music_apply(day: int, student_id: str, singer: str, song_name: str):
-        if len(MusicApplyModel.query.filter_by(day=day).all()) >= 5:
+        if len(MusicApplyModel.query.filter_by(day=day).all()) >= 3:
             raise ResetContentException()
 
         already_exist_apply = MusicApplyModel.get_music_apply_by_id(student_id)
