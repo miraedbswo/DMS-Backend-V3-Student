@@ -23,9 +23,6 @@ def register_hook(flask_app: Flask):
     flask_app.register_error_handler(JWTExtendedException, jwt_handle)
     flask_app.register_error_handler(PyJWTError, jwt_handle)
 
-    from app.hook.after_request import new_access_token
-    flask_app.after_request(new_access_token)
-
     from app.hook.before_request import check_secret_header
     flask_app.before_request(check_secret_header)
 
