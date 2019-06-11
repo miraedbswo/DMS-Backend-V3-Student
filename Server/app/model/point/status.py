@@ -4,7 +4,7 @@ from app.extension import db
 from app.model.mixin import BaseMixin
 
 
-message_dict = {
+message = {
     0: [
         "이 또한 지나가리 -손승용",
         "아니ㅜㅜ 라면 좀 먹고 살아라ㅠ",
@@ -63,7 +63,7 @@ def get_advice(bad_point: int):
     else:
         advice_num = 5
 
-    advice = random.choice(message_dict[advice_num])
+    advice = random.choice(message[advice_num])
     return advice
 
 
