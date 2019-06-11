@@ -32,10 +32,10 @@ class TestSignup(TCBase, AccountRequest):
         ).save()
 
     @check_status_code(201)
-    def test_signup_successful(self) -> Response:
+    def test_signup_success(self) -> Response:
         """
         성공적으로 가입 했다면 UnsignedStudentModel 안의 test 계정 값이 삭제됨
-        그러므로 test 계정을 회원가입 시키고 UnsignedStudentModel 내에 test 계정이 있는지 검증
+        그러므로 test 계정을 회원가입 시키고 UnsignedStudentModel 내에 test 계정이 존재하지 않는지 검증
         get_unsigned_student 함수 내부에서 값이 존재하지 않는다면 NoContentException 발생
         NoContentException 이 발생하는지 check 해줌
         """
@@ -47,7 +47,7 @@ class TestSignup(TCBase, AccountRequest):
         return rv
 
     @check_status_code(204)
-    def test_Invalid_uuid(self) -> Response:
+    def test_invalid_uuid(self) -> Response:
         rv: Response = self.request_signup(uuid='invalid_uuid')
 
         return rv

@@ -35,7 +35,7 @@ class TestSignedAccountAuth(TCBase, AccountRequest):
         return rv
 
     @check_status_code(200)
-    def test_login_success(self) -> Response:
+    def test_success_login(self) -> Response:
         # 맞는 id & pw 200 success
         rv: Response = self.request_auth()
         rv_data = rv.json

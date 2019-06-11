@@ -14,13 +14,8 @@ class TestPointInfo(TCBase, InfoRequest):
 
         return rv
 
-    @check_status_code(200)
-    def test_set_point_status(self) -> Response:
-        # point setup 기능은 Admin 권한만 가능함.
-        pass
-
     @check_status_code(403)
-    def test_point_info_forbidden(self) -> Response:
+    def test_validate_wrong_tokenpoint_info(self) -> Response:
         rv: Response = self.request_point_info('fake_jwt_token')
 
         return rv

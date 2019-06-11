@@ -1,51 +1,29 @@
 from datetime import datetime
 
-from app.model import ExtensionApplyModel, GoingoutApplyModel, StayApplyModel
+from flask import Response
+
+from app.model import ExtensionApplyModel, GoingOutApplyModel, StayApplyModel
 from test import TCBase, check_status_code
 from test.request import InfoRequest
 
 
-class TestApplyInfo(TCBase, InfoRequest):
+class TestGetApplyInfo(TCBase, InfoRequest):
     @check_status_code(200)
-    def test_extension_default_status(self):
-        """
-        default status 검증
-        {
-            'extension11': None
-            'extension12': None,
-            'goingOut': [None],
-            'stay': 4
-        }
-        """
-        default_data = {
-            "extension11": None,
-            "extension12": None,
-            "goingOut": None,
-            "stay": 4
-        }
-
-        rv = self.request_apply_info(self.access_token)
-
-        self.assertDictEqual(default_data, rv.json)
-        return rv
-
-    # extension11, 12, goingOut, stay 설정 후 assertEqual
-    @check_status_code(200)
-    def test_set_extension11_status(self):
-        extension11_test_data = {
+    def test_success_get_extension11_info(self) -> Response:
+        apply = {
             'classNum': 2,
             'seatNum': 12
         }
 
         ExtensionApplyModel.post_extension_apply('test', 11, 2, 12)
-        rv = self.request_apply_info(self.access_token)
+        rv: Response = self.request_apply_info(self.access_token)
 
-        self.assertDictEqual(extension11_test_data, rv.json['extension11'])
+        self.assertDictEqual(apply, rv.json['extension11'])
         return rv
 
     @check_status_code(200)
-    def test_set_extension12_status(self):
-        extension12_test_data = {
+    def test_success_get_extension12_info(self):
+        apply = {
             'classNum': 2,
             'seatNum': 12
         }
@@ -53,12 +31,12 @@ class TestApplyInfo(TCBase, InfoRequest):
         ExtensionApplyModel.post_extension_apply('test', 12, 2, 12)
         rv = self.request_apply_info(self.access_token)
 
-        self.assertDictEqual(extension12_test_data, rv.json['extension12'])
+        self.assertDictEqual(apply, rv.json['extension12'])
         return rv
 
     @check_status_code(200)
-    def test_set_goingout_status(self):
-        goingout_test_data = [
+    def test_success_get_going_out_info(self):
+        apply = [
             {
                 'goOutDate': '2019-01-01 12:30:00',
                 'returnDate': '2019-01-01 17:30:00',
@@ -66,7 +44,7 @@ class TestApplyInfo(TCBase, InfoRequest):
             }
         ]
 
-        GoingoutApplyModel.post_goingout_apply(
+        GoingOutApplyModel.post_goingout_apply(
             'test',
             datetime(2019, 1, 1, 12, 30),
             datetime(2019, 1, 1, 17, 30),
@@ -74,20 +52,20 @@ class TestApplyInfo(TCBase, InfoRequest):
         )
         rv = self.request_apply_info(self.access_token)
 
-        self.assertListEqual(goingout_test_data, rv.json['goingOut'])
+        self.assertListEqual(apply, rv.json['goingOut'])
         return rv
 
     @check_status_code(200)
-    def test_set_stay_status(self):
-        stay_test_data = 1
+    def test_success_get_stay_info(self):
+        apply = 1
 
         StayApplyModel.post_stay_apply('test', 1)
-        rv = self.request_apply_info(self.access_token)
-        self.assertEqual(stay_test_data, rv.json['stay'])
+        rv: Response = self.request_apply_info(self.access_token)
+        self.assertEqual(apply, rv.json['stay'])
         return rv
 
     @check_status_code(403)
-    def test_apply_info_forbidden(self):
-        rv = self.request_apply_info('fake_jwt_token')
+    def test_validate_wrong_token(self):
+        rv: Response = self.request_apply_info('fake_jwt_token')
 
         return rv
