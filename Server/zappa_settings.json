@@ -2,11 +2,11 @@
   "common": {
     "app_function": "lambda.app.app",
     "aws_region": "ap-northeast-2",
-    "profile_name": "default",
     "project_name": "dms-backend-student",
     "runtime": "python3.6",
-    "s3_bucket": "zappa-dms-student-bucket",
-    "certificate_arn": "arn:aws:acm:us-east-1:324223366295:certificate/3ae07664-4dfb-406d-b41a-a4ca4372a13b",
+    "s3_bucket": "dms-student-bucket",
+    "certificate_arn": "arn:aws:acm:us-east-1:718436679669:certificate/12a3f68b-ca33-4a69-9147-a1673d35db4a",
+    "cors": true,
     "exclude": [
       "*.gz",
       "*.rar",
@@ -24,10 +24,13 @@
   },
   "dev": {
     "extends": "common",
-    "domain": "dev.api.dms.istruly.sexy"
+    "domain": "dev.api.dsm-dms.com"
   },
   "production": {
     "extends": "common",
-    "domain": "api.dms.istruly.sexy"
+    "domain": "api.dsm-dms.com",
+    "log_level": "DEBUG",
+    "memory_size": 256,
+    "timeout_seconds": 30
   }
 }
