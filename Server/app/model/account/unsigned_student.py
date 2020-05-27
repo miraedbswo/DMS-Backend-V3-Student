@@ -8,10 +8,10 @@ from app.model.mixin import BaseMixin
 
 class UnsignedStudentModel(db.Model, BaseMixin):
     __tablename__ = 'unsigned_student'
-    uuid: str = db.Column(db.String, primary_key=True)
-    name: str = db.Column(db.String)
+    uuid: str = db.Column(db.String(6), primary_key=True)
+    name: str = db.Column(db.String(20))
     number: int = db.Column(db.Integer)
-    email: str = db.Column(db.String)
+    email: str = db.Column(db.String(50), nullable=True)
 
     def __init__(self, name: str, number: int, email: str, uuid=None):
         self.uuid: str = UnsignedStudentModel.generate_uuid(email) if uuid is None else uuid

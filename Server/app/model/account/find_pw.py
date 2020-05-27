@@ -7,8 +7,8 @@ from app.model.mixin import BaseMixin
 
 class FindPWModel(db.Model, BaseMixin):
     __tablename__ = 'find_pw'
-    id = db.Column(db.String, primary_key=True, default=str(uuid4()))
-    student = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'))
+    id = db.Column(db.String(32), primary_key=True, default=str(uuid4()))
+    student = db.Column(db.String(20), db.ForeignKey('student.id', ondelete='CASCADE'))
     date = db.Column(db.DateTime, default=BaseMixin.kst_now())
 
     def __init__(self, student):

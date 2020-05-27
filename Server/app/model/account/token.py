@@ -14,9 +14,9 @@ from app.model.mixin import BaseMixin
 
 class TokenModel(db.Model, BaseMixin):
     __tablename__ = 'token'
-    owner: str = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'))
-    refresh_token: str = db.Column(db.String, primary_key=True)
-    user_agent: str = db.Column(db.String, primary_key=True)
+    owner: str = db.Column(db.String(20), db.ForeignKey('student.id', ondelete='CASCADE'))
+    refresh_token: str = db.Column(db.String(500), primary_key=True)
+    user_agent: str = db.Column(db.String(200), primary_key=True)
 
     def __init__(self, owner: str, refresh_token: str, user_agent: str):
         self.owner: str = owner

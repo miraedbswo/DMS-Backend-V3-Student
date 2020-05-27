@@ -11,7 +11,7 @@ class MealModel(db.Model, BaseMixin):
     __tablename__ = 'meal'
     date: Date = db.Column(db.Date, primary_key=True)
     type: int = db.Column(db.Integer, primary_key=True)  # type (0: 아침, 1: 점심, 2: 저녁)
-    meal: str = db.Column(db.String)  # ||로 구분하여 입력
+    meal: str = db.Column(db.String(300))  # ||로 구분하여 입력
 
     def __init__(self, date: Date, type: int, meal: str):
         self.date = date

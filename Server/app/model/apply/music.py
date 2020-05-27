@@ -15,9 +15,9 @@ class MusicApplyModel(db.Model, BaseMixin):
     id: int = db.Column(db.Integer, primary_key=True)
     # (0 = 월요일, 1 = 화요일, 2 = 수요일, 3 = 목요일, 4 = 금요일)
     day: int = db.Column(db.Integer)
-    student_id: str = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'))
-    singer: str = db.Column(db.String)
-    song_name: str = db.Column(db.String)
+    student_id: str = db.Column(db.String(20), db.ForeignKey('student.id', ondelete='CASCADE'))
+    singer: str = db.Column(db.String(20))
+    song_name: str = db.Column(db.String(50))
     apply_date: datetime = db.Column(db.DateTime)
 
     def __init__(self, day: int, student_id: str, singer: str, song_name: str):

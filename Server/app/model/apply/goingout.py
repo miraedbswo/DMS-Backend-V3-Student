@@ -36,10 +36,10 @@ def datetime_to_str(go_out_date: datetime, return_date: datetime) -> str:
 class GoingOutApplyModel(db.Model, BaseMixin):
     __tablename__ = 'goingout'
     id: int = db.Column(db.Integer, primary_key=True)
-    student_id: str = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'))
+    student_id: str = db.Column(db.String(20), db.ForeignKey('student.id', ondelete='CASCADE'))
     go_out_date: datetime = db.Column(db.DateTime)
     return_date: datetime = db.Column(db.DateTime)
-    reason: str = db.Column(db.String)
+    reason: str = db.Column(db.String(100))
     # 0: 외출 전. 1: 외출 중, 2: 복귀 완료
     goingout_status: int = db.Column(db.Integer, default=0)
 

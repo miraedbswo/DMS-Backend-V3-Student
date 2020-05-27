@@ -4,7 +4,7 @@ from app.model.mixin import BaseMixin
 
 class StayApplyModel(db.Model, BaseMixin):
     __tablename__ = 'stay_apply'
-    student_id: str = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'), primary_key=True)
+    student_id: str = db.Column(db.String(20), db.ForeignKey('student.id', ondelete='CASCADE'), primary_key=True)
     value: int = db.Column(db.Integer)
 
     def __init__(self, student_id: str, value: int):

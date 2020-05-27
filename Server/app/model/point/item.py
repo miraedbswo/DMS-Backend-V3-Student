@@ -6,7 +6,7 @@ class PointItemModel(db.Model, BaseMixin):
     __tablename__ = 'point_item'
 
     id = db.Column(db.Integer, primary_key=True)
-    reason: str = db.Column(db.String)
+    reason: str = db.Column(db.String(100))
     point: int = db.Column(db.Integer)
     type: bool = db.Column(db.Boolean)
 

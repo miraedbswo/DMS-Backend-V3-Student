@@ -5,9 +5,9 @@ from app.model.mixin import BaseMixin
 class FacilityReportModel(db.Model, BaseMixin):
     __tablename__ = 'facility_report'
     id: int = db.Column(db.Integer, primary_key=True)
-    student_id: str = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'))
+    student_id: str = db.Column(db.String(20), db.ForeignKey('student.id', ondelete='CASCADE'))
     room: int = db.Column(db.Integer)
-    content: str = db.Column(db.String)
+    content: str = db.Column(db.String(100))
 
     def __init__(self, student_id: str, room: int, content: str):
         self.student_id: str = student_id

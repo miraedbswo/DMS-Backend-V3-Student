@@ -70,7 +70,7 @@ def get_advice(bad_point: int):
 class PointStatusModel(db.Model, BaseMixin):
     __tablename__ = 'point_status'
 
-    student_id: str = db.Column(db.String, db.ForeignKey('student.id', ondelete='CASCADE'), primary_key=True)
+    student_id: str = db.Column(db.String(20), db.ForeignKey('student.id', ondelete='CASCADE'), primary_key=True)
     good_point: int = db.Column(db.Integer, default=0)
     bad_point: int = db.Column(db.Integer, default=0)
     penalty_level: int = db.Column(db.Integer, default=0)

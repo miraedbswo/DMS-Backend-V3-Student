@@ -10,8 +10,8 @@ class NoticeModel(db.Model, BaseMixin):
 
     id: int = db.Column(db.Integer, primary_key=True)
     post_date: datetime = db.Column(db.DateTime)
-    title: str = db.Column(db.String)
-    content: str = db.Column(db.String)
+    title: str = db.Column(db.String(50))
+    content: str = db.Column(db.String(2000))
 
     def __init__(self, title: str, content: str):
         self.post_date: datetime = self.kst_now()
@@ -47,8 +47,8 @@ class RuleModel(db.Model, BaseMixin):
 
     id: int = db.Column(db.Integer, primary_key=True)
     post_date: datetime = db.Column(db.DateTime)
-    title: str = db.Column(db.String)
-    content: str = db.Column(db.String)
+    title: str = db.Column(db.String(50))
+    content: str = db.Column(db.String(200))
 
     def __init__(self, title: str, content: str):
         self.post_date: datetime = BaseMixin.kst_now()
