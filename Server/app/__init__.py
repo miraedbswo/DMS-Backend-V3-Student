@@ -23,9 +23,6 @@ def register_hook(flask_app: Flask):
     flask_app.register_error_handler(JWTExtendedException, jwt_handle)
     flask_app.register_error_handler(PyJWTError, jwt_handle)
 
-    from app.hook.before_request import check_secret_header
-    flask_app.before_request(check_secret_header)
-
 
 def register_blueprint(flask_app: Flask):
     from app.view.account import account_blueprint, info_blueprint

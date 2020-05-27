@@ -1,3 +1,5 @@
+import logging
+
 from base64 import b64encode
 from datetime import timedelta, datetime
 from hashlib import sha3_512
@@ -11,6 +13,7 @@ def kst_now():
 
 
 def check_secret_header():
+    # DEPRECATED
     if current_app.config['TESTING']:
         return
     if request.method == 'OPTIONS':
