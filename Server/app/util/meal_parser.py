@@ -1,7 +1,8 @@
 import re
 import ssl
+import os
 
-import psycopg2
+import pymysql
 from datetime import datetime, timedelta
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
@@ -10,15 +11,15 @@ _url_base = \
     'https://stu.dje.go.kr/sts_sci_md00_001.do?schulCode=G100000170&schulCrseScCode=4&schulKndScScore=04&schYm={}{:0>2}'
 
 database = {
-    'host': '52.199.207.14',
-    'database': 'dms',
-    'user': 'dms',
-    'password': 'root',
-    'port': 5432
+    'host': os.getenv('DATABASE_URL'),
+    'database': os.getenv('DATABASE'),
+    'user': os.getenv('DATABASE_USER'),
+    'password': os.getenv('DATABASE_PASSWORD'),
+    'port': os.getenv('DATABASE_PORT'),
 }
 
-conn = psycopg2.connect(**database)
-cursor = conn.cursor()
+conn = pymysql.connect(**database)
+cursor = conn.cursor(pymysql.cursors.DictCursor)
 
 meal_type = ['조식', '중식', '석식']
 
@@ -104,7 +105,7 @@ def insert_meal_into_database_with_crawling(year: int, month: int):
     conn.commit()
 
 
-insert_meal_into_database_with_crawling(2019, 4)
+insert_meal_into_database_with_crawling(2020, 6)
 
 conn.close()
 cursor.close()

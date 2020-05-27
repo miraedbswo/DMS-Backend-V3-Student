@@ -17,7 +17,7 @@ class Config:
         'basePath': '/',
     }
 
-    SECRET_KEY = os.getenv('SECRET_KEY', 'Nerd-Bear')
+    SECRET_KEY = os.getenv('SECRET_KEY')
 
     JSON_AS_ASCII = False
 
@@ -27,8 +27,8 @@ class Config:
         ]
     }
 
-    SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://dms:root@52.199.207.14/dms'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
 
     MAIL_SERVER = 'smtp.mailgun.org'
     MAIL_ID = 'dms@istruly.sexy'

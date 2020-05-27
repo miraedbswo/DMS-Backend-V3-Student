@@ -30,4 +30,3 @@ class Refresh(AccountResource):
 
         return jsonify(token)
 
-
