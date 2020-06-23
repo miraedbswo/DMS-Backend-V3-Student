@@ -81,6 +81,10 @@ class ExtensionApplyModel(db.Model, BaseMixin):
         for i, row in enumerate(chart):
             for j, seat in enumerate(row):
                 if seat:
+                    if seat == -1:
+                        chart[i][j] = seat
+                        continue
+
                     apply = apply_list.get(seat_count, False)
                     if apply:
                         chart[i][j] = apply
