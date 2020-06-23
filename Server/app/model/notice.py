@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from sqlalchemy import desc
+
 from app.exception import NoContentException
 from app.extension import db
 from app.model.mixin import BaseMixin
@@ -26,7 +28,7 @@ class NoticeModel(db.Model, BaseMixin):
                     'id': notice.id,
                     'postDate': str(notice.post_date),
                     'title': notice.title
-                } for notice in NoticeModel.query.all()
+                } for notice in NoticeModel.query.order_by(desc(NoticeModel.post_date)).all()
             ]
         }
 
