@@ -86,10 +86,10 @@ class StudentModel(db.Model, BaseMixin):
         class_ = number // 100 % 10
         number_ = number % 100
 
-        self.assert_validation(1 <= grade <= 3 and 1 <= class_ <= 4 and 1 <= number_ <= 21)
+        self.assert_validation(1 <= grade <= 3 and 1 <= class_ <= 4 and 1 <= number_ <= 22)
         return number
 
-    @db.validates('email')
-    def validate_email(self, key, email):
-        self.assert_validation(re.match(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@dsm.hs.kr$", email) is not None)
-        return email
+    # @db.validates('email')
+    # def validate_email(self, key, email):
+    #     self.assert_validation(re.match(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@dsm.hs.kr$", email) is not None)
+    #     return email
