@@ -10,7 +10,7 @@ from app.view.base_resource import ReportResource
 
 
 class BugReport(ReportResource):
-    slack_bot = Slacker('xoxb-324577197473-BWb8rsUFqLezjczj0g6mWn1I')
+    slack_bot = Slacker('xoxb-323597966326-1158056204727-dNnaFC2q10RAv9fJG0aChVvd')
     PLATFORM_TYPES = {
         1: 'Web',
         2: 'Android',
