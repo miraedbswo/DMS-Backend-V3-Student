@@ -30,7 +30,7 @@
     "extends": "common",
     "domain": "api.dsm-dms.com",
     "log_level": "DEBUG",
-    "memory_size": 256,
+    "memory_size": 512,
     "timeout_seconds": 30
   }
 }
