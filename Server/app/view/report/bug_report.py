@@ -5,7 +5,7 @@ from slacker import Slacker
 
 from app.doc.report.bug_report import BUG_REPORT_POST
 from app.model import StudentModel
-from app.util.json_schema import json_type_validate, BUG_POST_JSON
+from app.util.validate import data_type_validate, BUG_POST_JSON
 from app.view.base_resource import ReportResource
 
 
@@ -17,7 +17,7 @@ class BugReport(ReportResource):
         3: 'iOS'
     }
 
-    @json_type_validate(BUG_POST_JSON)
+    @data_type_validate(BUG_POST_JSON)
     @swag_from(BUG_REPORT_POST)
     @jwt_required
     def post(self, platform: int):

@@ -7,7 +7,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from app.doc.apply.goingout import GOINGOUT_GET, GOINGOUT_POST, GOINGOUT_PATCH, GOINGOUT_DELETE
 from app.exception import ApplyTimeException
 from app.model import GoingOutApplyModel
-from app.util.json_schema import json_type_validate, GOINGOUT_POST_JSON, GOINGOUT_PATCH_JSON, GOINGOUT_DELETE_JSON
+from app.util.validate import data_type_validate, GOINGOUT_POST_JSON, GOINGOUT_PATCH_JSON, GOINGOUT_DELETE_JSON
 from app.view.base_resource import ApplyResource
 
 
@@ -20,7 +20,7 @@ class GoingOut(ApplyResource):
 
         return jsonify(going_out_applies)
 
-    @json_type_validate(GOINGOUT_POST_JSON)
+    @data_type_validate(GOINGOUT_POST_JSON)
     @swag_from(GOINGOUT_POST)
     @jwt_required
     def post(self):
@@ -31,7 +31,7 @@ class GoingOut(ApplyResource):
         GoingOutApplyModel.post_going_out_apply(student_id, date, reason)
         return Response('', 201)
 
-    @json_type_validate(GOINGOUT_PATCH_JSON)
+    @data_type_validate(GOINGOUT_PATCH_JSON)
     @swag_from(GOINGOUT_PATCH)
     @jwt_required
     def patch(self):
@@ -52,7 +52,7 @@ class GoingOut(ApplyResource):
         GoingOutApplyModel.patch_going_out_apply(apply_id, student_id, date, reason)
         return Response('', 201)
 
-    @json_type_validate(GOINGOUT_DELETE_JSON)
+    @data_type_validate(GOINGOUT_DELETE_JSON)
     @swag_from(GOINGOUT_DELETE)
     @jwt_required
     def delete(self):

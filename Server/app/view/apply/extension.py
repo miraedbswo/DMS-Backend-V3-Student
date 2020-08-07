@@ -7,7 +7,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from app.doc.apply.extension import EXTENSION_GET, EXTENSION_POST, EXTENSION_DELETE, EXTENSION_MAP_GET
 from app.exception import NoContentException, ApplyTimeException
 from app.model import ExtensionApplyModel
-from app.util.json_schema import json_type_validate, EXTENSION_POST_JSON
+from app.util.validate import data_type_validate, EXTENSION_POST_JSON
 from app.view.base_resource import ApplyResource
 
 extension_apply_start = {11: Time(17, 30), 12: Time(17, 30)}
@@ -26,7 +26,7 @@ class Extension(ApplyResource):
 
         return jsonify(extension_apply)
 
-    @json_type_validate(EXTENSION_POST_JSON)
+    @data_type_validate(EXTENSION_POST_JSON)
     @swag_from(EXTENSION_POST)
     @jwt_required
     def post(self, time):

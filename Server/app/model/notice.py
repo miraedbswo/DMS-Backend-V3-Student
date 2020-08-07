@@ -44,7 +44,6 @@ class NoticeModel(db.Model, BaseMixin):
 
 class RuleModel(db.Model, BaseMixin):
     __tablename__ = 'rule'
-
     id: int = db.Column(db.Integer, primary_key=True)
     post_date: datetime = db.Column(db.DateTime)
     title: str = db.Column(db.String(50))

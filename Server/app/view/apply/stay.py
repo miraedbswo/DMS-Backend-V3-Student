@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.doc.apply.stay import STAY_GET, STAY_POST
 from app.exception import ApplyTimeException
 from app.model import StayApplyModel
-from app.util.json_schema import json_type_validate, STAY_POST_JSON
+from app.util.validate import data_type_validate, STAY_POST_JSON
 from app.view.base_resource import ApplyResource
 
 
@@ -16,7 +16,7 @@ class Stay(ApplyResource):
         student_id = get_jwt_identity()
         return jsonify(StayApplyModel.get_stay_apply_status(student_id))
 
-    @json_type_validate(STAY_POST_JSON)
+    @data_type_validate(STAY_POST_JSON)
     @swag_from(STAY_POST)
     @jwt_required
     def post(self):

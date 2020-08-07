@@ -4,12 +4,12 @@ from flask_jwt_extended import jwt_refresh_token_required
 
 from app.doc.account.auth import AUTH_POST, REFRESH_POST
 from app.model import StudentModel, TokenModel
-from app.util.json_schema import json_type_validate, AUTH_POST_JSON
+from app.util.validate import data_type_validate, AUTH_POST_JSON
 from app.view.base_resource import AccountResource
 
 
 class Auth(AccountResource):
-    @json_type_validate(AUTH_POST_JSON)
+    @data_type_validate(AUTH_POST_JSON)
     @swag_from(AUTH_POST)
     def post(self):
         student = StudentModel.login(request.json['id'], request.json['password'])
