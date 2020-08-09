@@ -30,6 +30,11 @@ class ForbiddenException(DMSException):
     description = 'Forbidden'
 
 
+class NotFoundException(DMSException):
+    code = 404
+    description = 'Element Not Found'
+
+
 class ApplyTimeException(DMSException):
     code = 409
     description = 'Can\'t Apply Time'
