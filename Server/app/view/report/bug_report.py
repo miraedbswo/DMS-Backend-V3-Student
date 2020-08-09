@@ -6,7 +6,7 @@ from slacker import Slacker
 from app.doc.report.bug_report import BUG_REPORT_POST
 from app.model import StudentModel
 from app.util.validate import data_type_validate, BUG_POST_JSON
-from app.view.base_resource import ReportResource
+from app.view.base import ReportResource
 
 
 class BugReport(ReportResource):

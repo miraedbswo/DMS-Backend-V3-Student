@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.doc.report.facility_report import FACILITY_REPORT_POST
 from app.model import FacilityReportModel
 from app.util.validate import data_type_validate, FACILITY_POST_JSON
-from app.view.base_resource import ReportResource
+from app.view.base import ReportResource
 
 
 class FacilityReport(ReportResource):

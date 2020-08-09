@@ -2,7 +2,7 @@ from datetime import date
 from typing import List
 
 from app.extension import db
-from app.model.mixin import BaseMixin
+from app.model.base import BaseMixin
 from app.model.point.item import PointItemModel
 
 

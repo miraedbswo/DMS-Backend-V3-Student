@@ -2,7 +2,7 @@ from datetime import datetime
 
 from app.exception import NoContentException
 from app.extension import db
-from app.model.mixin import BaseMixin
+from app.model.base import BaseMixin
 
 
 class NoticeModel(db.Model, BaseMixin):
@@ -50,7 +50,7 @@ class RuleModel(db.Model, BaseMixin):
     content: str = db.Column(db.String(200))
 
     def __init__(self, title: str, content: str):
-        self.post_date: datetime = BaseMixin.kst_now()
+        self.post_date: datetime = self.kst_now()
         self.title: str = title
         self.content: str = content
 

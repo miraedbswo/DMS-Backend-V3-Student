@@ -6,7 +6,7 @@ from app.doc.apply.stay import STAY_GET, STAY_POST
 from app.exception import ApplyTimeException
 from app.model import StayApplyModel
 from app.util.validate import data_type_validate, STAY_POST_JSON
-from app.view.base_resource import ApplyResource
+from app.view.base import ApplyResource
 
 
 class Stay(ApplyResource):

@@ -3,7 +3,7 @@ from typing import Union
 from app.exception import NoContentException, ResetContentException
 from app.extension import db
 from app.model.account.student import StudentModel
-from app.model.mixin import BaseMixin
+from app.model.base import BaseMixin
 from app.util.extension_map import *
 
 seat_count = [0, 20, 20, 20, 20, 23, 24, 20, 24, 20, 49, 8]

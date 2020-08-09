@@ -1,7 +1,7 @@
 import random
 
 from app.extension import db
-from app.model.mixin import BaseMixin
+from app.model.base import BaseMixin
 
 
 message = {

@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app.exception import NoContentException, ResetContentException, WrongAuthException, ForbiddenException
 from app.extension import db
 from app.model.account.unsigned_student import UnsignedStudentModel
-from app.model.mixin import BaseMixin
+from app.model.base import BaseMixin
 
 
 class StudentModel(db.Model, BaseMixin):

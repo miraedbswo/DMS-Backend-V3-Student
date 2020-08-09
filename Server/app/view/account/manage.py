@@ -8,7 +8,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from app.doc.account.manage import CHANGE_PW_PATCH, FIND_PW_POST
 from app.model import StudentModel, FindPWModel
 from app.util.validate import data_type_validate, PW_PATCH_JSON, PW_POST_JSON
-from app.view.base_resource import AccountResource
+from app.view.base import AccountResource
 
 
 class ManagePassword(AccountResource):

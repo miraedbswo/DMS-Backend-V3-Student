@@ -8,7 +8,7 @@ from app.doc.apply.extension import EXTENSION_GET, EXTENSION_POST, EXTENSION_DEL
 from app.exception import NoContentException, ApplyTimeException
 from app.model import ExtensionApplyModel
 from app.util.validate import data_type_validate, EXTENSION_POST_JSON
-from app.view.base_resource import ApplyResource
+from app.view.base import ApplyResource
 
 extension_apply_start = {11: Time(17, 30), 12: Time(17, 30)}
 extension_apply_end = {11: Time(20, 30), 12: Time(22, 30)}

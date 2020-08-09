@@ -9,9 +9,10 @@ from .extension import Extension, ExtensionMap
 api.add_resource(Extension, '/extension/<int:time>')
 api.add_resource(ExtensionMap, '/extension/map/<int:time>/<int:class_num>')
 
-from .goingout import GoingOut
+from .goingout import GoingOut, GoingOutDetail
 
 api.add_resource(GoingOut, '/goingout')
+api.add_resource(GoingOutDetail, '/goingout/<apply_id>')
 
 from .music import Music
 
