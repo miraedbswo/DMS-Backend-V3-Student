@@ -5,7 +5,6 @@ from app.exception import BadRequestException
 
 
 class BaseMixin:
-
     def save(self):
         db.session.add(self)
         db.session.commit()
@@ -23,3 +22,11 @@ class BaseMixin:
     def assert_validation(validate_result: bool):
         if not validate_result:
             raise BadRequestException()
+
+
+class BaseModel(db.Model):
+    __abstract__ = True
+
+    created_at = db.Column(db.DateTime, default=BaseMixin.kst_now())
+    updated_at = db.Column(db.DateTime, default=BaseMixin.kst_now(), onupdate=BaseMixin.kst_now())
+
