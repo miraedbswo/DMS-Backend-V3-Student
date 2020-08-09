@@ -2,17 +2,19 @@ from flasgger import swag_from
 from flask import current_app, request, jsonify
 from flask_jwt_extended import jwt_refresh_token_required
 
+from app.context import context_property
 from app.doc.account.auth import AUTH_POST, REFRESH_POST
 from app.model import StudentModel, TokenModel
 from app.util.validate import data_type_validate, AUTH_POST_JSON
-from app.view.base_resource import AccountResource
+from app.view.base import AccountResource
 
 
 class Auth(AccountResource):
     @data_type_validate(AUTH_POST_JSON)
     @swag_from(AUTH_POST)
     def post(self):
-        student = StudentModel.login(request.json['id'], request.json['password'])
+        payload = context_property.request_payload
+        student = StudentModel.login(payload.get('id'), payload.get('password'))
         user_agent = request.headers.get('user-agent')
         token = TokenModel.create_new_token(student.id, user_agent)
 

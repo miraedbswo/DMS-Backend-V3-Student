@@ -3,6 +3,7 @@ from flask import request, Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from slacker import Slacker
 
+from app.context import context_property
 from app.doc.report.bug_report import BUG_REPORT_POST
 from app.model import StudentModel
 from app.util.validate import data_type_validate, BUG_POST_JSON
@@ -21,6 +22,7 @@ class BugReport(ReportResource):
     @swag_from(BUG_REPORT_POST)
     @jwt_required
     def post(self, platform: int):
+        payload = context_property.request_payload
         student_id = get_jwt_identity()
         student_name = StudentModel.get_student_by_id(student_id).name
 
@@ -30,7 +32,7 @@ class BugReport(ReportResource):
                 student_name,
                 self.kst_now().strftime('%Y-%m-%d %H:%M:%S'),
                 self.PLATFORM_TYPES[int(platform)],
-                request.json['content']
+                payload.get('content')
             )
         )
 

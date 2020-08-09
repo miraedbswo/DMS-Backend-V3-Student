@@ -2,6 +2,7 @@ from flasgger import swag_from
 from flask import request, Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
+from app.context import context_property
 from app.doc.apply.music import MUSIC_GET, MUSIC_POST, MUSIC_DELETE
 from app.exception import ApplyTimeException
 from app.model import MusicApplyModel
@@ -19,6 +20,7 @@ class Music(ApplyResource):
     @swag_from(MUSIC_POST)
     @jwt_required
     def post(self):
+        payload = context_property.request_payload
         apply_time = self.kst_now()
 
         if (apply_time.weekday() == 5) or \
@@ -26,9 +28,9 @@ class Music(ApplyResource):
             raise ApplyTimeException
 
         student_id = get_jwt_identity()
-        day = request.json['day']
-        singer = request.json['singer']
-        song_name = request.json['musicName']
+        day = payload.get('day')
+        singer = payload.get('singer')
+        song_name = payload.get('musicName')
 
         MusicApplyModel.post_music_apply(day, student_id, singer, song_name)
         return Response('', 201)
@@ -37,8 +39,10 @@ class Music(ApplyResource):
     @swag_from(MUSIC_DELETE)
     @jwt_required
     def delete(self):
+        payload = context_property.request_payload
         student_id = get_jwt_identity()
-        apply_id = request.json['applyId']
+
+        apply_id = payload.get('apply_id')
 
         MusicApplyModel.delete_music_apply(student_id, apply_id)
         return Response('', 200)
