@@ -6,8 +6,7 @@ from flask import jsonify
 
 from app.doc.meal.meal import MEAL_GET
 from app.model import MealModel
-from app.model.meal import type_list
-from app.view.base_resource import BaseResource
+from app.view.base import BaseResource
 
 
 class Meal(BaseResource):

@@ -2,7 +2,7 @@ from datetime import date as Date
 from typing import List
 
 from app.extension import db
-from app.model.mixin import BaseMixin
+from app.model.base import BaseMixin
 
 type_list = ['breakfast', 'lunch', 'dinner']
 

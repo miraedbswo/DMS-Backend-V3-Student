@@ -2,7 +2,7 @@ from flasgger import swag_from
 from flask_jwt_extended import jwt_required
 
 from app.doc.survey.survey import SURVEY_LIST_GET, SURVEY_GET
-from app.view.base_resource import SurveyResource
+from app.view.base import SurveyResource
 
 
 class SurveyList(SurveyResource):

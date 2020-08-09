@@ -4,11 +4,12 @@ from flasgger import swag_from
 from flask import jsonify, Response, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
+from app.context import context_property
 from app.doc.apply.extension import EXTENSION_GET, EXTENSION_POST, EXTENSION_DELETE, EXTENSION_MAP_GET
 from app.exception import NoContentException, ApplyTimeException
 from app.model import ExtensionApplyModel
-from app.util.json_schema import json_type_validate, EXTENSION_POST_JSON
-from app.view.base_resource import ApplyResource
+from app.util.validate import data_type_validate, EXTENSION_POST_JSON
+from app.view.base import ApplyResource
 
 extension_apply_start = {11: Time(17, 30), 12: Time(17, 30)}
 extension_apply_end = {11: Time(20, 30), 12: Time(22, 30)}
@@ -26,7 +27,7 @@ class Extension(ApplyResource):
 
         return jsonify(extension_apply)
 
-    @json_type_validate(EXTENSION_POST_JSON)
+    @data_type_validate(EXTENSION_POST_JSON)
     @swag_from(EXTENSION_POST)
     @jwt_required
     def post(self, time):
@@ -34,8 +35,11 @@ class Extension(ApplyResource):
             raise ApplyTimeException()
 
         id: str = get_jwt_identity()
-        class_num = request.json['classNum']
-        seat_num = request.json['seatNum']
+
+        payload = context_property.request_payload
+        class_num = payload.get('class_num')
+        seat_num = payload.get('seat_num')
+
         ExtensionApplyModel.post_extension_apply(id, time, class_num, seat_num)
         return Response('', 201)
 

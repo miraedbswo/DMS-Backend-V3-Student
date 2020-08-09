@@ -2,7 +2,7 @@ from uuid import uuid4
 
 from app.extension import db
 from app.model.account.student import StudentModel
-from app.model.mixin import BaseMixin
+from app.model.base import BaseMixin
 
 
 class FindPWModel(db.Model, BaseMixin):

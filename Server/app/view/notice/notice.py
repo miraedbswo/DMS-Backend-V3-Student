@@ -3,7 +3,7 @@ from flask import jsonify
 
 from app.doc.notice.notice import NOTICE_LIST_GET, NOTICE_GET
 from app.model import NoticeModel
-from app.view.base_resource import NoticeResource
+from app.view.base import NoticeResource
 
 
 class NoticeList(NoticeResource):

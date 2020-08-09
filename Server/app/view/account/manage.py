@@ -5,29 +5,34 @@ from flasgger import swag_from
 from flask import request, Response, current_app
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
+from app.context import context_property
 from app.doc.account.manage import CHANGE_PW_PATCH, FIND_PW_POST
 from app.model import StudentModel, FindPWModel
-from app.util.json_schema import json_type_validate, PW_PATCH_JSON, PW_POST_JSON
-from app.view.base_resource import AccountResource
+from app.util.validate import data_type_validate, PW_PATCH_JSON, PW_POST_JSON
+from app.view.base import AccountResource
 
 
 class ManagePassword(AccountResource):
-    @json_type_validate(PW_PATCH_JSON)
+    @data_type_validate(PW_PATCH_JSON)
     @swag_from(CHANGE_PW_PATCH)
     @jwt_required
     def patch(self):
+        payload = context_property.request_payload
         id = get_jwt_identity()
-        cur_pw = request.json['currentPassword']
-        new_pw = request.json['newPassword']
+
+        cur_pw = payload.get('currentPassword')
+        new_pw = payload.get('newPassword')
 
         StudentModel.change_pw(id, cur_pw, new_pw)
         return Response('', 201)
 
-    @json_type_validate(PW_POST_JSON)
+    @data_type_validate(PW_POST_JSON)
     @swag_from(FIND_PW_POST)
     def post(self):
-        id = request.json['id']
-        email = request.json['email']
+        payload = context_property.request_payload
+
+        id = payload.get('id')
+        email = payload.get('email')
         student = StudentModel.get_student_by_id_email(id, email)
 
         find_pw = FindPWModel(student=student.id)

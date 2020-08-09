@@ -9,7 +9,7 @@ from flask_jwt_extended import (
 
 from app.exception import ForbiddenException
 from app.extension import db
-from app.model.mixin import BaseMixin
+from app.model.base import BaseMixin
 
 
 class TokenModel(db.Model, BaseMixin):

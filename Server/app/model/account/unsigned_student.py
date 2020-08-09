@@ -3,7 +3,7 @@ import re
 
 from app.exception import NoContentException
 from app.extension import db
-from app.model.mixin import BaseMixin
+from app.model.base import BaseMixin
 
 
 class UnsignedStudentModel(db.Model, BaseMixin):
