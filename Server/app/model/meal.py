@@ -19,15 +19,8 @@ class MealModel(db.Model, BaseMixin):
         self.meal = meal
 
     @staticmethod
-    def get_meal(date: Date) -> dict:
-        meal_list: List['MealModel'] = MealModel.query.filter_by(date=date).order_by('type')
-
-        return {
-            str(date): {
-                type_list[meal.type]: meal.meal.split('||')
-                for meal in meal_list
-            }
-        }
+    def get_meal(date: Date) -> List['MealModel']:
+        return MealModel.query.filter_by(date=date).order_by('type')
 
     @staticmethod
     def save_meal(date: Date, type: int, meal: str):
