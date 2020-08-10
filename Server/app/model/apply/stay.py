@@ -3,7 +3,7 @@ from app.model.base import BaseMixin
 
 
 class StayApplyModel(db.Model, BaseMixin):
-    __tablename__ = 'stay_apply'
+    __tablename__ = 'stay'
     student_id: str = db.Column(db.String(20), db.ForeignKey('student.id', ondelete='CASCADE'), primary_key=True)
     value: int = db.Column(db.Integer)
 

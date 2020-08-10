@@ -2,10 +2,11 @@ from datetime import datetime
 from http import HTTPStatus
 
 from flasgger import swag_from
-from flask import jsonify
 
 from app.doc.meal.meal import MEAL_GET
+from app.exception import BadRequestException
 from app.model import MealModel
+from app.model.meal import type_list
 from app.view.base import BaseResource
 
 
@@ -13,13 +14,13 @@ class Meal(BaseResource):
     @swag_from(MEAL_GET)
     def get(self, day: str):
         try:
-            date = datetime.strptime(day, '%Y-%m-%d').date()
+            date = datetime.strptime(day, '%Y-%m-%d')
         except ValueError:
-            return '', 205
+            raise BadRequestException()
 
-        meals = MealModel.get_meal(date)
+        meals = MealModel.get_meal_by_date(date)
 
         return {
-            type_list[meal.type]: meal.meal.split('||')
-            for meal in meals
+            meal_type: meals[idx].menu.split('||')
+            for idx, meal_type in enumerate(type_list)
         }, HTTPStatus.OK
