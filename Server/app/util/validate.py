@@ -56,6 +56,7 @@ GOINGOUT_PATCH_JSON = dict(applyId=int, date=str, reason=str)
 MUSIC_POST_JSON = dict(day=int, singer=str, musicName=str)
 MUSIC_DELETE_JSON = dict(applyId=int)
 STAY_POST_JSON = dict(value=int)
+REST_PATCH_JSON = dict(morning=bool, afternoon=bool)
 
 # Report
 BUG_POST_JSON = dict(content=str)
